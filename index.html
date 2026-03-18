@@ -436,8 +436,8 @@ function renderOverview(){
 function renderDetail(fw){
   const secTabs = [
     {id:'doc', label:'📄 Document'},
-    {id:'img', label:'🖼️ Image'},
-    {id:'code', label:'💻 Code'}
+    {id:'img', label:'🖼️ Image'}
+  //  {id:'code', label:'💻 Code'}
   ];
 
   const secTabsHtml = secTabs.map(s=>`
@@ -479,7 +479,7 @@ function renderDetail(fw){
       </div>
     </div>`;
 
-  const codeSection = `
+/*  const codeSection = `
     <div class="content-section ${currentSection==='code'?'visible':''}">
       <div class="card-grid">
         <div class="content-card">
@@ -492,7 +492,7 @@ function renderDetail(fw){
         </div>
       </div>
     </div>`;
-
+*/
   return `
     <button class="back-btn" onclick="showTab('overview')">← Back to Overview</button>
     <div class="fw-detail-header">
