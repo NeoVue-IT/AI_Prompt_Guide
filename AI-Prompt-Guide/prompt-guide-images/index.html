@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Prompt Framework Guide — 14 Frameworks Complete Offline Guide</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f1f5f9;color:#1e293b;min-height:100vh}
+.header{background:linear-gradient(135deg,#1e3a5f 0%,#2563eb 50%,#7c3aed 100%);color:#fff;padding:40px 24px;text-align:center}
+.header h1{font-size:clamp(1.5rem,4vw,2.5rem);font-weight:800;letter-spacing:-0.5px}
+.header p{color:rgba(255,255,255,0.8);margin-top:8px;font-size:1rem}
+.nav{background:#fff;border-bottom:2px solid #e2e8f0;padding:0 16px;overflow-x:auto;white-space:nowrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+.nav::-webkit-scrollbar{height:4px}.nav::-webkit-scrollbar-track{background:#f1f5f9}.nav::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:2px}
+.nav-inner{display:inline-flex;gap:2px;padding:8px 0}
+.tab-btn{padding:8px 14px;border:none;background:none;cursor:pointer;font-size:0.82rem;font-weight:600;color:#64748b;border-radius:8px;transition:all 0.2s;white-space:nowrap}
+.tab-btn:hover{background:#f1f5f9;color:#1e293b}
+.tab-btn.active{background:#2563eb;color:#fff;box-shadow:0 2px 8px rgba(37,99,235,0.3)}
+.main{max-width:1200px;margin:0 auto;padding:32px 16px}
+
+/* Overview Grid */
+.overview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+.fw-card{background:#fff;border-radius:16px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,0.06);border:1px solid #e2e8f0;cursor:pointer;transition:all 0.2s}
+.fw-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.12);border-color:#2563eb}
+.fw-card .badge-row{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.badge{padding:3px 10px;border-radius:20px;font-size:0.72rem;font-weight:700;letter-spacing:0.3px}
+.badge-id{background:#dbeafe;color:#1d4ed8}
+.badge-easy{background:#d1fae5;color:#065f46}
+.badge-medium{background:#fef3c7;color:#92400e}
+.badge-intermediate{background:#ede9fe;color:#5b21b6}
+.badge-advanced{background:#fee2e2;color:#991b1b}
+.fw-card h3{font-size:1.1rem;font-weight:700;color:#1e293b;margin-bottom:4px}
+.fw-card .fullname{font-size:0.78rem;color:#64748b;margin-bottom:10px}
+.fw-card p{font-size:0.83rem;color:#475569;line-height:1.6}
+.fw-card .strengths{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.strength-tag{padding:2px 8px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;font-size:0.72rem;color:#64748b}
+.fw-card .view-btn{margin-top:16px;width:100%;padding:8px;background:#2563eb;color:#fff;border:none;border-radius:8px;font-weight:600;font-size:0.82rem;cursor:pointer;transition:background 0.2s}
+.fw-card .view-btn:hover{background:#1d4ed8}
+
+/* Framework Detail */
+.fw-detail-header{background:#fff;border-radius:16px;padding:28px;margin-bottom:24px;box-shadow:0 1px 4px rgba(0,0,0,0.06);border:1px solid #e2e8f0}
+.fw-detail-header .top-row{display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.fw-icon{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#2563eb,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:800;color:#fff;flex-shrink:0}
+.fw-detail-header h2{font-size:1.6rem;font-weight:800;color:#1e293b}
+.fw-detail-header .sub{color:#64748b;font-size:0.9rem;margin-top:2px}
+.fw-detail-header .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.fw-detail-header .desc{margin-top:16px;color:#475569;line-height:1.7;font-size:0.9rem}
+.fw-detail-header .strengths{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+
+.section-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.sec-tab{padding:10px 20px;border:2px solid #e2e8f0;background:#fff;border-radius:10px;font-weight:600;font-size:0.85rem;cursor:pointer;transition:all 0.2s;color:#64748b}
+.sec-tab.active{border-color:#2563eb;background:#eff6ff;color:#2563eb}
+
+.content-section{display:none}
+.content-section.visible{display:block;animation:fadeIn 0.3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:700px){.card-grid{grid-template-columns:1fr}}
+
+.content-card{background:#fff;border-radius:14px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,0.06);border:1px solid #e2e8f0}
+.content-card h4{font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:#94a3b8;margin-bottom:12px}
+.prompt-box{background:#0f172a;color:#e2e8f0;border-radius:10px;padding:16px;font-family:'Courier New',monospace;font-size:0.8rem;line-height:1.7;white-space:pre-wrap;word-break:break-word}
+.result-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:16px;font-size:0.85rem;line-height:1.7;color:#475569;white-space:pre-wrap;word-break:break-word;min-height:120px}
+.img-wrap{border-radius:12px;overflow:hidden;background:#f1f5f9;border:1px solid #e2e8f0}
+.img-wrap img{width:100%;height:280px;object-fit:cover;display:block}
+.img-desc{padding:14px;background:#faf5ff;border-top:1px solid #ede9fe;font-size:0.82rem;color:#5b21b6;line-height:1.6;font-style:italic}
+
+.back-btn{padding:10px 20px;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:8px;font-weight:600;font-size:0.85rem;cursor:pointer;color:#475569;margin-bottom:20px;transition:all 0.2s}
+.back-btn:hover{background:#e2e8f0;color:#1e293b}
+
+/* Comparison Table */
+.comparison-table{background:#fff;border-radius:16px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,0.06);border:1px solid #e2e8f0;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:0.82rem}
+th{background:#f8fafc;padding:12px 10px;text-align:left;font-weight:700;color:#374151;border-bottom:2px solid #e2e8f0;white-space:nowrap}
+td{padding:11px 10px;border-bottom:1px solid #f1f5f9;vertical-align:top;line-height:1.5}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#f8fafc}
+.diff-badge{padding:2px 8px;border-radius:12px;font-size:0.72rem;font-weight:600;white-space:nowrap}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🤖 AI Prompt Framework Complete Guide</h1>
+  <p>14 Frameworks · Difficulty Sorted · Document / Image / Code Examples · 100% Offline</p>
+</div>
+
+<nav class="nav">
+  <div class="nav-inner" id="nav-tabs"></div>
+</nav>
+
+<main class="main" id="main-content"></main>
+
+<script>
+const FW = [{
+  id:"RTF",
+  name:"RTF",
+  fullName:"Role \u00b7 Task \u00b7 Format",
+  difficulty:"easy",
+  diffLabel:"\u2b50 Easy",
+  category:"\uae30\ubcf8 \uad6c\uc870\ud615",
+  focus:"\uc5ed\ud560\u00b7\uc791\uc5c5\u00b7\ucd9c\ub825\ud615\uc2dd \uba85\ud655\ud654",
+  strengths:["\ube60\ub978 \ud559\uc2b5", "\ubc94\uc6a9\uc131 \ub192\uc74c", "\uc9c1\uad00\uc801 \uad6c\uc870"],
+  desc:"AI\uc5d0\uac8c \uc5ed\ud560(Role)\uc744 \ubd80\uc5ec\ud558\uace0, \uc218\ud589\ud560 \uc791\uc5c5(Task)\uc744 \uba85\uc2dc\ud558\uba70, \uc6d0\ud558\ub294 \ucd9c\ub825 \ud615\uc2dd(Format)\uc744 \uc9c0\uc815\ud558\ub294 \uac00\uc7a5 \uae30\ucd08\uc801\uc778 3\ub2e8\uacc4 \ud504\ub808\uc784\uc6cc\ud06c\uc785\ub2c8\ub2e4.",
+  docPrompt:"[Role] \ub2f9\uc2e0\uc740 10\ub144 \uacbd\ub825\uc758 \uc2dc\ub2c8\uc5b4 \uce74\ud53c\ub77c\uc774\ud130\uc785\ub2c8\ub2e4.\n[Task] 20-30\ub300\ub97c \ud0c0\uac9f\uc73c\ub85c \ud55c \uce5c\ud658\uacbd \ud140\ube14\ub7ec \uad11\uace0 \uce74\ud53c\ub97c \uc791\uc131\ud558\uc138\uc694.\n[Format]\n- \ud5e4\ub4dc\ub77c\uc778: 1\uc904 (20\uc790 \uc774\ub0b4)\n- \uc11c\ube0c\uce74\ud53c: 2\uc904\n- \ud574\uc2dc\ud0dc\uadf8: 5\uac1c",
+  docResult:"\ud5e4\ub4dc\ub77c\uc778: \uc9c0\uad6c\ub97c \ub2f4\uc740 \ud55c \ubaa8\uae08\n\uc11c\ube0c\uce74\ud53c: \ub9e4\uc77c \uc4f0\ub294 \ud140\ube14\ub7ec \ud558\ub098\ub85c \ud558\ub8e8 500ml\uc758 \ud50c\ub77c\uc2a4\ud2f1\uc744 \uc904\uc774\uc138\uc694. \uc791\uc740 \uc120\ud0dd\uc774 \uc9c0\uad6c\ub97c \ubc14\uafc9\ub2c8\ub2e4.\n\ud574\uc2dc\ud0dc\uadf8: #\uce5c\ud658\uacbd\ud140\ube14\ub7ec #\uc81c\ub85c\uc6e8\uc774\uc2a4\ud2b8 #\uc9c0\uc18d\uac00\ub2a5\ud55c\ub77c\uc774\ud504 #\uc5d0\ucf54\ub77c\uc774\ud504 #\uadf8\ub9b0\ucc4c\ub9b0\uc9c0",
+  imgPromptEn:"Soft sunlight filtering through a lush green forest, a matte tumbler placed on a moss-covered rock. Background is dreamy and misty, only the tumbler in sharp focus. Editorial-style eco product photography.",
+  imgPromptKo:"[Role] \uc0c1\uc5c5 \uc0ac\uc9c4 \uc804\ubb38\uac00\n[Task] \uce5c\ud658\uacbd \ud140\ube14\ub7ec \uc5d0\ub514\ud1a0\ub9ac\uc5bc \uc81c\ud488 \uc0ac\uc9c4\n[Format] 16:9 \uac00\ub85c\ud615, \uc790\uc5f0\uad11, \ubcf4\ucf00 \ubc30\uacbd",
+  imgDesc:"\ubd80\ub4dc\ub7ec\uc6b4 \ud587\uc0b4\uc774 \uc2a4\uba70\ub4dc\ub294 \ucd08\ub85d \uc232\uc18d, \uc774\ub07c \ub080 \ubc14\uc704 \uc704\uc5d0 \uc62c\ub824\uc9c4 \ubb34\uad11 \ud140\ube14\ub7ec. \ubc30\uacbd\uc740 \ubabd\ud658\uc801\uc778 \uc548\uac1c\ub85c \ud750\ub9bf\ud558\uace0 \uc804\uba74 \ud140\ube14\ub7ec\ub9cc \uc120\uba85\ud558\uac8c \ucd08\uc810\uc774 \ub9de\ucdb0\uc9c4 \uc5d0\ub514\ud1a0\ub9ac\uc5bc \uac10\uc131\uc758 \uc81c\ud488 \uc0ac\uc9c4.",
+  codePrompt:"[Role] Python \uc2dc\ub2c8\uc5b4 \uac1c\ubc1c\uc790\n[Task] CSV \ud30c\uc77c\uc744 \uc77d\uc5b4 \uacb0\uce21\uac12\uc744 \ucc98\ub9ac\ud558\ub294 \uc7ac\uc0ac\uc6a9 \uac00\ub2a5\ud55c \ud568\uc218\ub97c \uc791\uc131\ud558\uc138\uc694\n[Format]\n- \ud568\uc218 \ub2e8\uc704\ub85c \ubd84\ub9ac\n- \uac01 \ub2e8\uacc4 \uc8fc\uc11d \ud3ec\ud568\n- if __name__ == \"__main__\": \uc2e4\ud589 \uc608\uc2dc \ud3ec\ud568",
+  codeResult:"import pandas as pd\n\ndef handle_missing_values(filepath: str, strategy: str = 'mean') -> pd.DataFrame:\n    \"\"\"\n    CSV \ud30c\uc77c\uc744 \uc77d\uc5b4 \uacb0\uce21\uac12\uc744 \ucc98\ub9ac\ud558\ub294 \ud568\uc218\n    Args:\n        filepath: CSV \ud30c\uc77c \uacbd\ub85c\n        strategy: \uacb0\uce21\uac12 \ucc98\ub9ac \uc804\ub7b5 ('mean', 'median', 'drop')\n    Returns:\n        \ucc98\ub9ac\ub41c DataFrame\n    \"\"\"\n    # 1\ub2e8\uacc4: CSV \ud30c\uc77c \ub85c\ub4dc\n    df = pd.read_csv(filepath)\n    print(f\"\uc6d0\ubcf8 \ub370\uc774\ud130: {df.shape}, \uacb0\uce21\uac12: {df.isnull().sum().sum()}\uac1c\")\n\n    # 2\ub2e8\uacc4: \uc804\ub7b5\uc5d0 \ub530\ub978 \uacb0\uce21\uac12 \ucc98\ub9ac\n    if strategy == 'mean':\n        df = df.fillna(df.mean(numeric_only=True))\n    elif strategy == 'median':\n        df = df.fillna(df.median(numeric_only=True))\n    elif strategy == 'drop':\n        df = df.dropna()\n\n    print(f\"\ucc98\ub9ac \ud6c4: {df.shape}, \uacb0\uce21\uac12: {df.isnull().sum().sum()}\uac1c\")\n    return df\n\nif __name__ == \"__main__\":\n    result = handle_missing_values(\"data.csv\", strategy=\"mean\")\n    print(result.head())",
+  imgData:"RTF.webp"
+},
+{
+  id:"TAG",
+  name:"TAG",
+  fullName:"Task \u00b7 Action \u00b7 Goal",
+  difficulty:"easy",
+  diffLabel:"\u2b50 Easy",
+  category:"\ubaa9\ud45c \uc9c0\ud5a5\ud615",
+  focus:"\uc791\uc5c5\u00b7\ud589\ub3d9\u00b7\ubaa9\ud45c \uc5f0\uacb0",
+  strengths:["\ubaa9\ud45c \uba85\ud655", "\ud589\ub3d9 \uc9c0\ud5a5", "\ub2e8\uc21c \uad6c\uc870"],
+  desc:"\uc218\ud589\ud560 \uc791\uc5c5(Task), \uad6c\uccb4\uc801\uc778 \ud589\ub3d9(Action), \ub2ec\uc131\ud560 \ubaa9\ud45c(Goal)\ub97c \uc21c\uc11c\ub300\ub85c \uae30\uc220\ud558\uc5ec AI\uac00 \ubaa9\uc801\uc5d0 \ub9de\ub294 \uacb0\uacfc\ub97c \uc0dd\uc131\ud558\ub3c4\ub85d \uc720\ub3c4\ud558\ub294 \ud504\ub808\uc784\uc6cc\ud06c\uc785\ub2c8\ub2e4.",
+  docPrompt:"[Task] Python\uc73c\ub85c CSV \ud30c\uc77c\uc744 \uc77d\uc5b4\uc11c \uacb0\uce21\uac12\uc744 \ucc98\ub9ac\ud558\ub294 \ucf54\ub4dc\ub97c \uc791\uc131\ud558\uc138\uc694.\n[Action] pandas \ub77c\uc774\ube0c\ub7ec\ub9ac\ub97c \uc0ac\uc6a9\ud558\uc5ec \uad6c\ud604\ud558\uace0, \uac01 \ub2e8\uacc4\ub9c8\ub2e4 \uc8fc\uc11d\uc744 \ub2ec\uc544\uc8fc\uc138\uc694.\n[Goal] \ucd08\ubcf4\uc790\ub3c4 \uc774\ud574\ud560 \uc218 \uc788\ub3c4\ub85d \uba85\ud655\ud558\uace0 \uac00\ub3c5\uc131 \ub192\uc740 \ucf54\ub4dc\ub97c \uc791\uc131\ud558\ub294 \uac83\uc785\ub2c8\ub2e4.",
+  docResult:"\ubaa9\ud45c \uc9c0\ud5a5\uc801\uc774\uace0 \ub2e8\uacc4\ubcc4 \ud589\ub3d9\uc774 \uba85\ud655\ud55c \uacb0\uacfc\ubb3c\uc774 \uc0dd\uc131\ub429\ub2c8\ub2e4. \uac01 \uc561\uc158\uc774 \ucd5c\uc885 \ubaa9\ud45c\uc640 \uc9c1\uc811 \uc5f0\uacb0\ub418\uc5b4 \uc77c\uad00\uc131 \uc788\ub294 \ucd9c\ub825\uc774 \ub098\uc635\ub2c8\ub2e4.",
+  imgPromptEn:"Isometric view of a code editor and data charts floating on purple-teal background. Code snippets, pie charts, and bar graphs hovering in mid-air representing data processing. 3D tech illustration style.",
+  imgPromptKo:"[Task] \ub370\uc774\ud130 \ucc98\ub9ac \uacfc\uc815\uc744 \uc2dc\uac01\ud654\ud558\ub294 3D \ud14c\ud06c \uc77c\ub7ec\uc2a4\ud2b8 \uc0dd\uc131\n[Action] \uc544\uc774\uc18c\uba54\ud2b8\ub9ad \ubdf0, \ubcf4\ub77c-\uccad\ub85d \ubc30\uacbd, \ucf54\ub4dc\uc640 \ucc28\ud2b8 \uc694\uc18c \ubc30\uce58\n[Goal] \uac1c\ubc1c\uc790 \uce5c\ud654\uc801\uc774\uace0 \ud604\ub300\uc801\uc778 \uae30\uc220 \uac10\uc131\uc758 \uc77c\ub7ec\uc2a4\ud2b8",
+  imgDesc:"\ubcf4\ub77c-\uccad\ub85d \ubc30\uacbd \uc704\uc5d0 \uc544\uc774\uc18c\uba54\ud2b8\ub9ad \uc2dc\uc810\uc73c\ub85c \ud3bc\uccd0\uc9c4 \ucf54\ub4dc \uc5d0\ub514\ud130\uc640 \ub370\uc774\ud130 \ucc28\ud2b8. \ucf54\ub4dc \uc870\uac01\uacfc \ud30c\uc774 \ucc28\ud2b8, \ub9c9\ub300 \uadf8\ub798\ud504\uac00 \uacf5\uc911\uc5d0 \ub5a0 \uc788\uc5b4 \ub370\uc774\ud130 \ucc98\ub9ac \uacfc\uc815\uc744 \uc2dc\uac01\uc801\uc73c\ub85c \ud45c\ud604\ud55c 3D \ud14c\ud06c \uc77c\ub7ec\uc2a4\ud2b8.",
+  codePrompt:"[Task] \uc0ac\uc6a9\uc790\uc758 \uc774\ub984\u00b7\uc774\uba54\uc77c\u00b7\ub098\uc774\ub97c \uc785\ub825\ubc1b\uc544 \uc720\ud6a8\uc131\uc744 \uac80\uc0ac\ud558\ub294 \ud568\uc218\ub97c \uc791\uc131\ud558\uc138\uc694\n[Action] \uc815\uaddc\uc2dd(regex)\uc73c\ub85c \uc774\uba54\uc77c \ud615\uc2dd \uac80\uc0ac, \ub098\uc774\ub294 1-120 \ubc94\uc704 \ud655\uc778\n[Goal] \uac01 \ud56d\ubaa9\uc758 \uc720\ud6a8\uc131 \uacb0\uacfc\ub97c \ub515\uc154\ub108\ub9ac\ub85c \ubc18\ud658\ud558\uc5ec \uc5b4\ub5a4 \ud56d\ubaa9\uc774 \ud2c0\ub838\ub294\uc9c0 \uba85\ud655\ud788 \uc804\ub2ec",
+  codeResult:"import re\n\ndef validate_user_input(name: str, email: str, age: int) -> dict:\n    \"\"\"\uc0ac\uc6a9\uc790 \uc785\ub825\uac12 \uc720\ud6a8\uc131 \uac80\uc0ac\"\"\"\n    results = {}\n\n    # \uc774\ub984 \uac80\uc0ac: 2\uc790 \uc774\uc0c1\n    results['name'] = {\n        'valid': len(name.strip()) >= 2,\n        'message': '\uc774\ub984\uc740 2\uc790 \uc774\uc0c1\uc774\uc5b4\uc57c \ud569\ub2c8\ub2e4.' if len(name.strip()) < 2 else '\uc720\ud6a8\ud569\ub2c8\ub2e4.'\n    }\n\n    # \uc774\uba54\uc77c \uac80\uc0ac: \uc815\uaddc\uc2dd\n    email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'\n    results['email'] = {\n        'valid': bool(re.match(email_pattern, email)),\n        'message': '\uc62c\ubc14\ub978 \uc774\uba54\uc77c \ud615\uc2dd\uc774 \uc544\ub2d9\ub2c8\ub2e4.' if not re.match(email_pattern, email) else '\uc720\ud6a8\ud569\ub2c8\ub2e4.'\n    }\n\n    # \ub098\uc774 \uac80\uc0ac: 1-120\n    results['age'] = {\n        'valid': 1 <= age <= 120,\n        'message': '\ub098\uc774\ub294 1~120 \uc0ac\uc774\uc5ec\uc57c \ud569\ub2c8\ub2e4.' if not (1 <= age <= 120) else '\uc720\ud6a8\ud569\ub2c8\ub2e4.'\n    }\n\n    return results",
+  imgData:"TAG.webp"
+},
+{
+  id:"PAS",
+  name:"PAS",
+  fullName:"Problem \u00b7 Agitate \u00b7 Solution",
+  difficulty:"easy",
+  diffLabel:"\u2b50 Easy",
+  category:"\uac10\uc815 \uc124\ub4dd\ud615",
+  focus:"\ubb38\uc81c \uacf5\uac10 \u2192 \uac10\uc815 \uc2ec\ud654 \u2192 \ud574\uacb0\ucc45 \uc81c\uc2dc",
+  strengths:["\uac15\ud55c \uc124\ub4dd\ub825", "\uac10\uc815 \uacf5\uba85", "\ub9c8\ucf00\ud305 \ucd5c\uc801"],
+  desc:"\ubb38\uc81c(Problem)\ub97c \uc81c\uc2dc\ud558\uace0, \uadf8 \ubb38\uc81c\ub97c \uac10\uc815\uc801\uc73c\ub85c \uc2ec\ud654(Agitate)\uc2dc\ud0a8 \ub4a4, \ud574\uacb0\ucc45(Solution)\uc744 \uc81c\uacf5\ud558\ub294 \ub9c8\ucf00\ud305 \uce74\ud53c\ub77c\uc774\ud305\uc5d0\uc11c \uac80\uc99d\ub41c \uc124\ub4dd \uad6c\uc870\uc785\ub2c8\ub2e4.",
+  docPrompt:"[Problem] \ubc24\ub9c8\ub2e4 \uba38\ub9bf\uc18d\uc5d0 \uc313\uc778 \ud560 \uc77c\ub4e4 \ub54c\ubb38\uc5d0 \uc7a0\uc744 \ubabb \uc774\ub8e8\ub294 \uc9c1\uc7a5\uc778\uc758 \ubb38\uc81c\ub97c \ubb18\uc0ac\ud558\uc138\uc694.\n[Agitate] \uc774 \ubb38\uc81c\uac00 \uacc4\uc18d\ub420 \uacbd\uc6b0 \ub098\ud0c0\ub098\ub294 \ubd80\uc815\uc801 \uacb0\uacfc\ub97c \uac10\uc815\uc801\uc73c\ub85c \uc2ec\ud654\uc2dc\ud0a4\uc138\uc694.\n[Solution] AI \uc5c5\ubb34 \uc815\ub9ac \uc571\uc744 \ud1b5\ud574 5\ubd84 \ub9cc\uc5d0 \ud574\uacb0\ub418\ub294 \uacfc\uc815\uc744 \ud76c\ub9dd\uc801\uc73c\ub85c \uc81c\uc2dc\ud558\uc138\uc694.",
+  docResult:"\ubc24 11\uc2dc, \uce68\ub300\uc5d0 \ub204\uc6e0\uc9c0\ub9cc \uba38\ub9bf\uc18d\uc740 \uc774\ubbf8 \ub0b4\uc77c\uc758 \ud68c\uc758, \ub2f5\uc7a5 \ubabb \ud55c \uc774\uba54\uc77c, \ubbf8\ub904\ub454 \ubcf4\uace0\uc11c\ub4e4\ub85c \uac00\ub4dd\ud569\ub2c8\ub2e4... (\uac10\uc815\uc801\uc73c\ub85c \uae4a\uc774 \uacf5\uac10\ud55c \ub4a4 AI \uc571 \uc194\ub8e8\uc158\uc744 \ud76c\ub9dd\uc801\uc73c\ub85c \uc81c\uc2dc)",
+  imgPromptEn:"Split illustration: left panel shows a cold dark chaotic bedroom with stressed person awake, right panel shows the same person peacefully sleeping under warm moonlight. A glowing app screen on the nightstand symbolizes the 5-minute miracle.",
+  imgPromptKo:"[Problem] \ubd88\uba74\uc99d\uc5d0 \uc2dc\ub2ec\ub9ac\ub294 \uc9c1\uc7a5\uc778\n[Agitate] \uc5b4\ub461\uace0 \ucc28\uac00\uc6b4 \ud63c\ub3c8\uc758 \uce68\uc2e4\n[Solution] \ub530\ub73b\ud55c \ub2ec\ube5b \uc544\ub798 \ud3c9\uc628\ud558\uac8c \uc7a0\ub4e0 \ubd84\ud560 \uc77c\ub7ec\uc2a4\ud2b8",
+  imgDesc:"\uc67c\ucabd\uc740 \ucc28\uac11\uace0 \uc5b4\ub450\uc6b4 \uc0c9\uac10\uc758 \ud63c\ub3c8\uc2a4\ub7ec\uc6b4 \uce68\uc2e4, \uc624\ub978\ucabd\uc740 \ub530\ub73b\ud55c \ub2ec\ube5b \uc544\ub798 \ud3c9\uc628\ud558\uac8c \uc7a0\ub4e0 \uc778\ubb3c. \ud0c1\uc790 \uc704 \uc571 \ud654\uba74\ub9cc \uc740\uc740\ud558\uac8c \ube5b\ub098\uba70 '5\ubd84\uc758 \uae30\uc801'\uc744 \uc0c1\uc9d5\ud558\ub294 \uac10\uc131\uc801\uc778 \ubd84\ud560 \uc77c\ub7ec\uc2a4\ud2b8.",
+  codePrompt:"[Problem] \uc0ac\uc6a9\uc790 \ub85c\uadf8\uc778 \uc2dc \uc5d0\ub7ec \uba54\uc2dc\uc9c0\uac00 \ubd88\uba85\ud655\ud558\uc5ec \uc5b4\ub5a4 \ubb38\uc81c\uc778\uc9c0 \uc54c \uc218 \uc5c6\uc2b5\ub2c8\ub2e4\n[Agitate] \uc774 \uc0c1\ud0dc\uac00 \uc9c0\uc18d\ub418\uba74 \uc0ac\uc6a9\uc790 \uc774\ud0c8\ub85c \uc774\uc5b4\uc9c0\uace0 \uace0\uac1d\uc13c\ud130 \ubb38\uc758\uac00 \uae09\uc99d\ud569\ub2c8\ub2e4\n[Solution] \uc5d0\ub7ec \ud0c0\uc785\ubcc4 \uba85\ud655\ud55c \uba54\uc2dc\uc9c0\ub97c \ubc18\ud658\ud558\ub294 \ub85c\uadf8\uc778 \ud568\uc218\ub97c \uc791\uc131\ud558\uc138\uc694",
+  codeResult:"def login(username: str, password: str) -> dict:\n    \"\"\"\uba85\ud655\ud55c \uc5d0\ub7ec \uba54\uc2dc\uc9c0\ub97c \ud3ec\ud568\ud55c \ub85c\uadf8\uc778 \ud568\uc218\"\"\"\n    user = db.get_user(username)\n\n    if not user:\n        return {'success': False, 'error': 'USER_NOT_FOUND',\n                'message': '\ub4f1\ub85d\ub418\uc9c0 \uc54a\uc740 \uc774\uba54\uc77c\uc785\ub2c8\ub2e4. \ud68c\uc6d0\uac00\uc785\uc744 \uc9c4\ud589\ud574\uc8fc\uc138\uc694.'}\n\n    if not user.is_active:\n        return {'success': False, 'error': 'ACCOUNT_DISABLED',\n                'message': '\ube44\ud65c\uc131\ud654\ub41c \uacc4\uc815\uc785\ub2c8\ub2e4. \uace0\uac1d\uc13c\ud130(1234-5678)\ub85c \ubb38\uc758\ud574\uc8fc\uc138\uc694.'}\n\n    if not verify_password(password, user.hashed_password):\n        remaining = 5 - user.failed_attempts\n        return {'success': False, 'error': 'WRONG_PASSWORD',\n                'message': f'\ube44\ubc00\ubc88\ud638\uac00 \ud2c0\ub838\uc2b5\ub2c8\ub2e4. {remaining}\ud68c \ub354 \uc2e4\ud328 \uc2dc \uacc4\uc815\uc774 \uc7a0\uae41\ub2c8\ub2e4.'}\n\n    return {'success': True, 'token': generate_jwt(user.id), 'user': user.to_dict()}",
+  imgData:"PAS.webp"
+},
+{
+  id:"CARE",
+  name:"CARE",
+  fullName:"Context \u00b7 Action \u00b7 Result \u00b7 Example",
+  difficulty:"medium",
+  diffLabel:"\u2b50\u2b50 Medium",
+  category:"\ub9e5\ub77d \uacb0\uacfc\ud615",
+  focus:"\uc0c1\ud669 \u2192 \ud589\ub3d9 \u2192 \uae30\ub300\uacb0\uacfc \u2192 \ucc38\uace0\uc608\uc2dc",
+  strengths:["\ub9e5\ub77d \ud48d\ubd80", "\uc608\uc2dc \ud559\uc2b5", "\uc77c\uad00\uc131 \uc720\uc9c0"],
+  desc:"\ub9e5\ub77d(Context)\uc744 \ucda9\ubd84\ud788 \uc81c\uacf5\ud558\uace0, \uc6d0\ud558\ub294 \ud589\ub3d9(Action)\uc744 \uc9c0\uc2dc\ud558\uba70, \uae30\ub300\ud558\ub294 \uacb0\uacfc(Result)\uc640 \ucc38\uace0\ud560 \uc608\uc2dc(Example)\ub97c \ud568\uaed8 \uc81c\uc2dc\ud558\ub294 \ud504\ub808\uc784\uc6cc\ud06c\uc785\ub2c8\ub2e4.",
+  docPrompt:"[Context] \uc800\ub294 \ud604\uc7ac \uc911\uc694\ud55c \ud504\ub85c\uc81d\ud2b8\uc758 \ub9c8\uac10 \uae30\ud55c \uc5f0\uc7a5\uc744 \uc694\uccad\ud574\uc57c \ud558\ub294 \uc0c1\ud669\uc785\ub2c8\ub2e4.\n\ud504\ub85c\uc81d\ud2b8\ub294 75% \uc644\ub8cc\ub418\uc5c8\uace0, \uc608\uc0c1\uce58 \ubabb\ud55c \uae30\uc220\uc801 \uc774\uc288\uac00 \ubc1c\uc0dd\ud588\uc2b5\ub2c8\ub2e4.\n[Action] \uc0c1\uc0ac\uc5d0\uac8c \ubcf4\ub0b4\ub294 \uc815\uc911\ud558\uace0 \uc124\ub4dd\ub825 \uc788\ub294 \uc774\uba54\uc77c\uc744 \uc791\uc131\ud558\uc138\uc694.\n[Result] \uc0c1\uc0ac\uac00 3\uc77c \uc5f0\uc7a5\uc744 \uc2b9\uc778\ud558\ub3c4\ub85d \uc124\ub4dd\ud558\ub294 \uac83\uc774 \ubaa9\ud45c\uc785\ub2c8\ub2e4.\n[Example] \uc804\ubb38\uc801\uc774\uace0 \ucc45\uc784\uac10 \uc788\ub294 \uc5b4\uc870\ub85c, \ubb38\uc81c \uc6d0\uc778\uacfc \ud574\uacb0 \uacc4\ud68d\uc744 \ud3ec\ud568\ud558\uc138\uc694.",
+  docResult:"\uc548\ub155\ud558\uc138\uc694 \ud300\uc7a5\ub2d8, \ud604\uc7ac \uc9c4\ud589 \uc911\uc778 [\ud504\ub85c\uc81d\ud2b8\uba85]\uacfc \uad00\ub828\ud558\uc5ec \ub9d0\uc500\ub4dc\ub9b4 \uc0ac\ud56d\uc774 \uc788\uc5b4 \uc5f0\ub77d\ub4dc\ub9bd\ub2c8\ub2e4. \ud604\uc7ac \uc804\uccb4 \uc791\uc5c5\uc758 75%\uac00 \uc644\ub8cc\ub41c \uc0c1\ud0dc\uc774\ub098, \uc608\uc0c1\uce58 \ubabb\ud55c API \uc5f0\ub3d9 \uc774\uc288\uac00 \ubc1c\uc0dd\ud558\uc5ec...",
+  imgPromptEn:"Professional person focused on writing an email on a laptop under warm office lighting. Background is softly blurred bokeh. Photorealistic business photography, shallow depth of field.",
+  imgPromptKo:"[Context] \uc911\uc694\ud55c \uc5c5\ubb34 \uc774\uba54\uc77c\uc744 \uc791\uc131\ud558\ub294 \uc9c1\uc7a5\uc778\n[Action] \ub530\ub73b\ud55c \uc0ac\ubb34\uc2e4 \uc870\uba85, \ub178\ud2b8\ubd81\uc5d0 \uc9d1\uc911\ud558\ub294 \uc778\ubb3c\n[Result] \ubcf4\ucf00 \ubc30\uacbd\uc758 \ud3ec\ud1a0\ub9ac\uc5bc\ub9ac\uc2a4\ud2f1 \ube44\uc988\ub2c8\uc2a4 \uc0ac\uc9c4",
+  imgDesc:"\ub530\ub73b\ud55c \uc0ac\ubb34\uc2e4 \uc870\uba85 \uc544\ub798 \ub178\ud2b8\ubd81 \ud654\uba74\uc5d0 \uc9d1\uc911\ud558\uba70 \uc774\uba54\uc77c\uc744 \uc791\uc131\ud558\ub294 \uc804\ubb38\uc9c1 \uc778\ubb3c. \ubc30\uacbd\uc740 \ud750\ub9bf\ud55c \ubcf4\ucf00 \ucc98\ub9ac\ub85c \uc778\ubb3c\uc5d0 \uc2dc\uc120\uc774 \uc9d1\uc911\ub418\ub294 \ud3ec\ud1a0\ub9ac\uc5bc\ub9ac\uc2a4\ud2f1 \ube44\uc988\ub2c8\uc2a4 \uc0ac\uc9c4.",
+  codePrompt:"[Context] \ud604\uc7ac \ucf54\ub4dc\uc5d0 SQL \uc778\uc81d\uc158 \ucde8\uc57d\uc810\uc774 \uc788\uc2b5\ub2c8\ub2e4\n[Action] \ud30c\ub77c\ubbf8\ud130 \ubc14\uc778\ub529 \ubc29\uc2dd\uc73c\ub85c \uc548\uc804\ud55c DB \ucffc\ub9ac \ud568\uc218\ub85c \uad50\uccb4\ud558\uc138\uc694\n[Result] OWASP Top 10 \ubcf4\uc548 \uac00\uc774\ub4dc\ub77c\uc778\uc744 \ucda9\uc871\ud558\ub294 \ucf54\ub4dc\n[Example] psycopg2 \uacf5\uc2dd \ubb38\uc11c\uc758 parameterized query \ud328\ud134\uc744 \ucc38\uace0\ud558\uc138\uc694",
+  codeResult:"import psycopg2\nfrom contextlib import contextmanager\n\n@contextmanager\ndef get_db_connection():\n    conn = psycopg2.connect(DATABASE_URL)\n    try:\n        yield conn\n    finally:\n        conn.close()\n\n# \ucde8\uc57d\ud55c \ucf54\ub4dc (SQL Injection \uc704\ud5d8)\n# query = f\"SELECT * FROM users WHERE email = '{email}'\"\n\n# \uc548\uc804\ud55c \ucf54\ub4dc (\ud30c\ub77c\ubbf8\ud130 \ubc14\uc778\ub529)\ndef get_user_by_email(email: str) -> dict:\n    \"\"\"OWASP \uac00\uc774\ub4dc\ub77c\uc778 \uc900\uc218 - \ud30c\ub77c\ubbf8\ud130 \ubc14\uc778\ub529 \uc0ac\uc6a9\"\"\"\n    query = \"SELECT id, name, email FROM users WHERE email = %s AND is_active = %s\"\n    with get_db_connection() as conn:\n        with conn.cursor() as cur:\n            cur.execute(query, (email, True))  # \ud30c\ub77c\ubbf8\ud130\ub294 \ud29c\ud50c\ub85c \uc804\ub2ec\n            row = cur.fetchone()\n            return {'id': row[0], 'name': row[1], 'email': row[2]} if row else None",
+  imgData:"CARE.webp"
+},
+{
+  id:"APE",
+  name:"APE",
+  fullName:"Action \u00b7 Purpose \u00b7 Expectation",
+  difficulty:"medium",
+  diffLabel:"\u2b50\u2b50 Medium",
+  category:"\ud589\ub3d9 \ubaa9\uc801\ud615",
+  focus:"\ud589\ub3d9\u00b7\ubaa9\uc801\u00b7\uae30\ub300\uce58 \uc124\uc815",
+  strengths:["\ubaa9\uc801 \uba85\ud655", "\uae30\ub300\uce58 \uc124\uc815", "\uacb0\uacfc \uc608\uce21"],
+  desc:"\uc218\ud589\ud560 \ud589\ub3d9(Action), \uadf8 \ud589\ub3d9\uc758 \ubaa9\uc801(Purpose), \uae30\ub300\ud558\ub294 \uacb0\uacfc(Expectation)\ub97c \uba85\uc2dc\ud558\uc5ec AI\uac00 \uc758\ub3c4\uc5d0 \ub9de\ub294 \uacb0\uacfc\ub97c \uc0dd\uc131\ud558\ub3c4\ub85d \uc720\ub3c4\ud569\ub2c8\ub2e4.",
+  docPrompt:"[Ask] \uc6b0\ub9ac \uc11c\ube44\uc2a4\uc758 \uc8fc\uc694 \uacbd\uc7c1\uc0ac 3\uacf3\uc744 \ube44\uad50 \ubd84\uc11d\ud574\uc8fc\uc138\uc694.\n[Plan] \uac00\uaca9 \uc815\ucc45, \ud575\uc2ec \uae30\ub2a5, UX/UI \ud3b8\uc758\uc131, \uace0\uac1d \uc9c0\uc6d0 \ud488\uc9c8 \uae30\uc900\uc73c\ub85c \ube44\uad50\ud45c \uc791\uc131\n[Execute] \uc704 \uacc4\ud68d\uc5d0 \ub530\ub77c \ube44\uad50\ud45c\ub97c \ub9cc\ub4e4\uace0, \uac01 \uacbd\uc7c1\uc0ac\uc758 \uac15\uc810\u00b7\uc57d\uc810\uc744 \uc694\uc57d\ud558\uc138\uc694.",
+  docResult:"\uacbd\uc7c1\uc0ac \ube44\uad50 \ubd84\uc11d\ud45c\uac00 \uccb4\uacc4\uc801\uc73c\ub85c \uc0dd\uc131\ub429\ub2c8\ub2e4. \uac01 \uae30\uc900\ubcc4\ub85c \uc815\ub7c9/\uc815\uc131 \ud3c9\uac00\uac00 \ud3ec\ud568\ub418\uace0 \uac15\uc810\u00b7\uc57d\uc810 \uc694\uc57d\uc774 \uba85\ud655\ud558\uac8c \uc81c\uc2dc\ub429\ub2c8\ub2e4.",
+  imgPromptEn:"Top-down view of a glowing digital chess board. A golden king piece stands taller than the surrounding silver and white pieces, symbolizing competitive advantage. Blue ambient lighting, bokeh background, luxurious and strategic atmosphere.",
+  imgPromptKo:"[Action] \ub514\uc9c0\ud138 \uccb4\uc2a4\ud310 \uc704\uc5d0\uc11c \ub0b4\ub824\ub2e4\ubcf8 \uad6c\ub3c4 \uc0dd\uc131\n[Purpose] \ud669\uae08 \ud0b9\uc774 \uacbd\uc7c1 \uc6b0\uc704\ub97c \uc0c1\uc9d5\n[Expectation] \ud30c\ub780 \uc570\ube44\uc5b8\ud2b8 \uc870\uba85\uc758 \uace0\uae09\uc2a4\ub7ec\uc6b4 \uc804\ub7b5\uc801 \ubd84\uc704\uae30",
+  imgDesc:"\ube5b\ub098\ub294 \ub514\uc9c0\ud138 \uccb4\uc2a4\ud310\uc744 \uc704\uc5d0\uc11c \ub0b4\ub824\ub2e4\ubcf8 \uad6c\ub3c4. \ud669\uae08\uc0c9 \ud0b9\uc774 \ub098\uba38\uc9c0 \uc740\uc0c9\u00b7\ud770\uc0c9 \ub9d0\ub4e4\ubcf4\ub2e4 \ub192\uac8c \uc19f\uc544 \uc788\uc5b4 \uacbd\uc7c1 \uc6b0\uc704\ub97c \uc0c1\uc9d5. \ud30c\ub780 \uc570\ube44\uc5b8\ud2b8 \uc870\uba85\uacfc \ubcf4\ucf00 \ubc30\uacbd\uc774 \uace0\uae09\uc2a4\ub7ec\uc6b4 \uc804\ub7b5\uc801 \ubd84\uc704\uae30\ub97c \uc5f0\ucd9c.",
+  codePrompt:"[Ask] \ub300\uc6a9\ub7c9 \ub85c\uadf8 \ud30c\uc77c\uc5d0\uc11c \uc5d0\ub7ec \ud328\ud134\uc744 \ubd84\uc11d\ud558\ub294 \uc2a4\ud06c\ub9bd\ud2b8\n[Plan] \ud30c\uc77c \uc2a4\ud2b8\ub9ac\ubc0d \uc77d\uae30 \u2192 \uc815\uaddc\uc2dd\uc73c\ub85c \uc5d0\ub7ec \ub808\ubca8 \ubd84\ub958 \u2192 Counter \uc9d1\uacc4 \u2192 \uc0c1\uc704 10\uac1c \ucd9c\ub825\n[Execute] \uc704 \uacc4\ud68d\ub300\ub85c Python \uc2a4\ud06c\ub9bd\ud2b8\ub97c \uad6c\ud604\ud558\uc138\uc694",
+  codeResult:"import re\nfrom collections import Counter\nfrom pathlib import Path\n\ndef analyze_log_errors(log_path: str, top_n: int = 10):\n    \"\"\"\ub300\uc6a9\ub7c9 \ub85c\uadf8 \ud30c\uc77c \uc2a4\ud2b8\ub9ac\ubc0d \ubd84\uc11d\"\"\"\n    pattern = re.compile(r'(ERROR|WARN|INFO).*?:\\s+(.+?)$', re.MULTILINE)\n    error_counter = Counter()\n\n    # \uc2a4\ud2b8\ub9ac\ubc0d \uc77d\uae30\ub85c \uba54\ubaa8\ub9ac \ud6a8\uc728 \ud655\ubcf4\n    with open(log_path, 'r', encoding='utf-8') as f:\n        for line in f:\n            match = pattern.search(line)\n            if match:\n                level, message = match.group(1), match.group(2)\n                if level == 'ERROR':\n                    # \uba54\uc2dc\uc9c0 \uc815\uaddc\ud654 (\uc22b\uc790 ID \uc81c\uac70)\n                    normalized = re.sub(r'\\d+', 'N', message[:100])\n                    error_counter[normalized] += 1\n\n    print(f\"\\n\uc0c1\uc704 {top_n}\uac1c \uc5d0\ub7ec \ud328\ud134:\")\n    for pattern_str, count in error_counter.most_common(top_n):\n        print(f\"  [{count:5d}\ud68c] {pattern_str}\")\n\nanalyze_log_errors(\"app.log\", top_n=10)",
+  imgData:"APE.webp"
+},
+{
+  id:"AIDA",
+  name:"AIDA",
+  fullName:"Attention \u00b7 Interest \u00b7 Desire \u00b7 Action",
+  difficulty:"medium",
+  diffLabel:"\u2b50\u2b50 Medium",
+  category:"\ub9c8\ucf00\ud305 \uc804\ud658\ud615",
+  focus:"\uc8fc\ubaa9 \u2192 \ud765\ubbf8 \u2192 \uc695\uad6c \u2192 \ud589\ub3d9 \uc720\ub3c4",
+  strengths:["\uc804\ud658\uc728 \uadf9\ub300\ud654", "\ub9c8\ucf00\ud305 \uac80\uc99d", "\uac10\uc815 \uc790\uadf9"],
+  desc:"\uc8fc\ubaa9(Attention) \ud68d\ub4dd \u2192 \ud765\ubbf8(Interest) \uc720\ubc1c \u2192 \uc695\uad6c(Desire) \uc790\uadf9 \u2192 \ud589\ub3d9(Action) \uc720\ub3c4\uc758 4\ub2e8\uacc4\ub85c \uad6c\uc131\ub41c \uace0\uc804\uc801\uc778 \ub9c8\ucf00\ud305 \uae54\ub54c\uae30 \ud504\ub808\uc784\uc6cc\ud06c\uc785\ub2c8\ub2e4.",
+  docPrompt:"[Attention] 30\ub300 \uc9c1\uc7a5 \uc5ec\uc131\uc758 \uc2dc\uc120\uc744 \uc989\uc2dc \uc0ac\ub85c\uc7a1\ub294 \uccab \ubb38\uc7a5\uc744 \uc791\uc131\ud558\uc138\uc694.\n[Interest] AI \ub2e4\uc774\uc5b4\ud2b8 \ucf54\uce58 \uc571\uc758 \ucc28\ubcc4\uc810\uc744 2-3\uac00\uc9c0 \uad6c\uccb4\uc801\uc73c\ub85c \uc124\uba85\ud558\uc138\uc694.\n[Desire] \uc2e4\uc81c \uc0ac\uc6a9\uc790 \ud6c4\uae30\ub97c \ubc14\ud0d5\uc73c\ub85c \uac16\uace0 \uc2f6\ub2e4\ub294 \uac10\uc815\uc744 \uc790\uadf9\ud558\uc138\uc694.\n[Action] \uc9c0\uae08 \ubc14\ub85c \ud589\ub3d9\ud558\uac8c \ub9cc\ub4dc\ub294 CTA 3\uac00\uc9c0\ub97c \uc791\uc131\ud558\uc138\uc694.",
+  docResult:"\"\ub2f9\uc2e0\uc758 \uc2dd\ub2e8, \uc774\uc81c AI\uac00 \ucc45\uc784\uc9d1\ub2c8\ub2e4\" \u2014 30\ub300 \uc9c1\uc7a5 \uc5ec\uc131\uc774 \uc989\uac01 \uacf5\uac10\ud558\ub294 \ud5e4\ub4dc\ub77c\uc778\ubd80\ud130 \uc2dc\uc791\ud558\uc5ec \uc571\uc758 \ucc28\ubcc4\uc810, \ud6c4\uae30, CTA\uae4c\uc9c0 \uc644\uc131\ub41c \ub9c8\ucf00\ud305 \uce74\ud53c\uac00 \uc0dd\uc131\ub429\ub2c8\ub2e4.",
+  imgPromptEn:"A happy woman standing on a scale under golden lighting, surrounded by floating healthy food icons and AI app UI elements. Pink and gold color palette expressing diet success joy and futuristic AI aesthetics.",
+  imgPromptKo:"[Attention] \ud669\uae08\ube5b \uc870\uba85 \uc544\ub798 \uccb4\uc911\uacc4 \uc704\uc5d0 \ud658\ud558\uac8c \uc6c3\ub294 \uc5ec\uc131\n[Interest] \uac74\uac15 \uc2dd\ud488 \uc544\uc774\ucf58\uacfc AI UI \uc694\uc18c\n[Desire] \ud551\ud06c\u00b7\uace8\ub4dc \uc0c9\uc0c1\uc758 \uc131\uacf5\uc801\uc778 \ub2e4\uc774\uc5b4\ud2b8 \uc774\ubbf8\uc9c0",
+  imgDesc:"\ud669\uae08\ube5b \uc870\uba85 \uc544\ub798 \uccb4\uc911\uacc4 \uc704\uc5d0 \ud658\ud558\uac8c \uc6c3\uc73c\uba70 \uc11c \uc788\ub294 \uc5ec\uc131. \uc8fc\ubcc0\uc73c\ub85c \uac74\uac15 \uc2dd\ud488 \uc544\uc774\ucf58\uacfc AI UI \uc694\uc18c\uac00 \ub5a0 \uc788\uace0, \ud551\ud06c\u00b7\uace8\ub4dc \uc0c9\uc0c1\uc774 \uc131\uacf5\uc801\uc778 \ub2e4\uc774\uc5b4\ud2b8\uc758 \uae30\uc068\uacfc AI\uc758 \ubbf8\ub798\uc801 \uac10\uc131\uc744 \ub3d9\uc2dc\uc5d0 \ud45c\ud604.",
+  codePrompt:"[Attention] \uc774\uba54\uc77c \ub9c8\ucf00\ud305 \uc790\ub3d9\ud654 \uc2dc\uc2a4\ud15c\uc774 \ud544\uc694\ud569\ub2c8\ub2e4\n[Interest] \uc0ac\uc6a9\uc790 \ud589\ub3d9 \uae30\ubc18\uc73c\ub85c \uac1c\uc778\ud654 \uc774\uba54\uc77c\uc744 \uc790\ub3d9 \ubc1c\uc1a1\ud558\ub294 \uae30\ub2a5\n[Desire] \ubc1c\uc1a1\ub960\u00b7\uc624\ud508\uc728\u00b7\ud074\ub9ad\ub960\uc744 \ucd94\uc801\ud558\ub294 A/B \ud14c\uc2a4\ud2b8 \uae30\ub2a5\uae4c\uc9c0 \ud3ec\ud568\n[Action] Python\uc73c\ub85c \uae30\ubcf8 EmailAutomation \ud074\ub798\uc2a4\ub97c \uc791\uc131\ud574\uc8fc\uc138\uc694",
+  codeResult:"from dataclasses import dataclass\nfrom datetime import datetime\nimport random\n\n@dataclass\nclass EmailCampaign:\n    name: str\n    subject_a: str\n    subject_b: str\n    body_a: str\n    body_b: str\n\nclass EmailAutomation:\n    def __init__(self):\n        self.campaigns = {}\n        self.metrics = {}\n\n    def send_personalized(self, user_id: str, trigger: str, campaign: EmailCampaign):\n        \"\"\"\uc0ac\uc6a9\uc790 \ud2b8\ub9ac\uac70 \uae30\ubc18 \uac1c\uc778\ud654 \uc774\uba54\uc77c \ubc1c\uc1a1\"\"\"\n        # A/B \ud14c\uc2a4\ud2b8: 50/50 \ub79c\ub364 \ubd84\ubc30\n        variant = 'A' if random.random() < 0.5 else 'B'\n        subject = campaign.subject_a if variant == 'A' else campaign.subject_b\n\n        # \ubc1c\uc1a1 \uae30\ub85d\n        self.metrics[user_id] = {\n            'sent_at': datetime.now().isoformat(),\n            'trigger': trigger,\n            'variant': variant,\n            'opened': False,\n            'clicked': False\n        }\n        print(f\"\u2713 [{variant}] {user_id}\uc5d0\uac8c \ubc1c\uc1a1: {subject}\")\n        return variant\n\n    def get_ab_results(self, campaign_name: str) -> dict:\n        \"\"\"A/B \ud14c\uc2a4\ud2b8 \uacb0\uacfc \ubd84\uc11d\"\"\"\n        a_opens = sum(1 for m in self.metrics.values()\n                     if m['variant'] == 'A' and m['opened'])\n        b_opens = sum(1 for m in self.metrics.values()\n                     if m['variant'] == 'B' and m['opened'])\n        return {'variant_a_open_rate': a_opens, 'variant_b_open_rate': b_opens}",
+  imgData:"AIDA.webp"
+},
+{
+  id:"BAB",
+  name:"BAB",
+  fullName:"Before \u00b7 After \u00b7 Bridge",
+  difficulty:"medium",
+  diffLabel:"\u2b50\u2b50 Medium",
+  category:"\ubcc0\ud654 \uc804\ud658\ud615",
+  focus:"\ud604\uc7ac\uc0c1\ud0dc \u2192 \uc774\uc0c1\uc0c1\ud0dc \u2192 \uc5f0\uacb0\uace0\ub9ac",
+  strengths:["\ubcc0\ud654 \uc124\ub4dd\ub825", "\uc2a4\ud1a0\ub9ac\ud154\ub9c1", "\ube44\ud3ec\uc560\ud504\ud130 \ud6a8\uacfc"],
+  desc:"\ud604\uc7ac\uc758 \ubb38\uc81c \uc0c1\ud669(Before)\uc744 \ubb18\uc0ac\ud558\uace0, \uc774\uc0c1\uc801\uc778 \ubbf8\ub798 \uc0c1\ud0dc(After)\ub97c \uadf8\ub9b0 \ub4a4, \uadf8 \ubcc0\ud654\ub97c \uac00\ub2a5\ud558\uac8c \ud558\ub294 \uc5f0\uacb0\uace0\ub9ac(Bridge)\ub97c \uc81c\uc2dc\ud558\ub294 \uc2a4\ud1a0\ub9ac\ud154\ub9c1 \uad6c\uc870\uc785\ub2c8\ub2e4.",
+  docPrompt:"[Before] \ub9c8\ucf00\ud130\uac00 \ubc24\ub9c8\ub2e4 \uc218\ub3d9\uc73c\ub85c \ubcf4\uace0\uc11c\ub97c \uc791\uc131\ud558\ub294 \uace0\ud1b5\uc2a4\ub7ec\uc6b4 \uc0c1\ud669\uc744 \ubb18\uc0ac\ud558\uc138\uc694.\n[After] \uc790\ub3d9 \ubcf4\uace0\uc11c \uc0dd\uc131 \ub3c4\uad6c \ub3c4\uc785 \ud6c4 \ub2ec\ub77c\uc9c4 \uc5c5\ubb34 \ud658\uacbd\uc744 \uadf8\ub824\uc8fc\uc138\uc694.\n[Bridge] \uc774 \ubcc0\ud654\ub97c \uac00\ub2a5\ud558\uac8c \ud558\ub294 \ud575\uc2ec \uae30\ub2a5 3\uac00\uc9c0\ub97c \uc5f0\uacb0\uace0\ub9ac\ub85c \uc124\uba85\ud558\uc138\uc694.",
+  docResult:"Before: \ub9e4\uc77c \ubc24 11\uc2dc\uae4c\uc9c0 \uc5d1\uc140\uacfc \uc528\ub984\ud558\uba70 \ubcf4\uace0\uc11c\ub97c \ub9cc\ub4dc\ub294 \ub9c8\ucf00\ud130. After: \uc624\ud6c4 6\uc2dc\uc5d0 \ud1f4\uadfc\ud558\uace0 \ub370\uc774\ud130\ub294 \uc790\ub3d9\uc73c\ub85c \uc815\ub9ac\ub418\ub294 \ubbf8\ub798. Bridge: \uc6d0\ud074\ub9ad \uc790\ub3d9\ud654, \uc2e4\uc2dc\uac04 \ub300\uc2dc\ubcf4\ub4dc, AI \uc778\uc0ac\uc774\ud2b8 \ucd94\ucd9c.",
+  imgPromptEn:"Editorial illustration triptych: left panel shows cold exhausted office worker doing late night overtime, right panel shows warm golden hour outdoor relaxed scene, center bridge panel with connecting icons. Dramatic emotional contrast.",
+  imgPromptKo:"[Before] \ucc28\uac11\uace0 \uc9c0\uce5c \uc57c\uadfc \uc7a5\uba74\n[After] \ub530\ub73b\ud55c \uace8\ub4e0\uc544\uc6cc \uc57c\uc678 \uc7a5\uba74\n[Bridge] \uac00\uc6b4\ub370 \uc5f0\uacb0 \ud328\ub110\uc758 \ubcc0\ud658 \uc544\uc774\ucf58\ub4e4",
+  imgDesc:"\uc67c\ucabd \ud328\ub110\uc740 \ucc28\uac11\uace0 \uc9c0\uce5c \uc57c\uadfc \uc7a5\uba74, \uc624\ub978\ucabd\uc740 \ub530\ub73b\ud55c \uace8\ub4e0\uc544\uc6cc \uc57c\uc678 \uc7a5\uba74\uc73c\ub85c \uadf9\uc801 \ub300\ube44\ub97c \ud615\uc131. \uac00\uc6b4\ub370 \uc5f0\uacb0 \ud328\ub110\uc758 \uc544\uc774\ucf58\ub4e4\uc774 \ub450 \uc138\uacc4\ub97c \uc787\ub294 \ube0c\ub9bf\uc9c0 \uc5ed\ud560\uc744 \uc2dc\uac01\uc801\uc73c\ub85c \ud45c\ud604\ud55c \uc5d0\ub514\ud1a0\ub9ac\uc5bc \uc77c\ub7ec\uc2a4\ud2b8.",
+  codePrompt:"[Before] \uc911\ucca9\ub41c for\ubb38\uc73c\ub85c O(n\u00b2) \ubcf5\uc7a1\ub3c4\ub97c \uac00\uc9c4 \ube44\ud6a8\uc728\uc801\uc778 \ub450 \ubc30\uc5f4 \uad50\uc9d1\ud569 \ucf54\ub4dc\n[After] \ud574\uc2dc\uc14b\uc744 \ud65c\uc6a9\ud558\uc5ec O(n)\uc73c\ub85c \ucd5c\uc801\ud654\ub41c \ucf54\ub4dc\n[Bridge] \uc65c set()\uc774 \ube60\ub978\uc9c0 \uc6d0\ub9ac\ub97c \uc8fc\uc11d\uc73c\ub85c \uc124\uba85\ud558\uba74\uc11c \ub9ac\ud329\ud130\ub9c1\ud558\uc138\uc694",
+  codeResult:"# BEFORE: O(n\u00b2) \ube44\ud6a8\uc728\uc801\uc778 \ucf54\ub4dc\ndef intersection_slow(arr1, arr2):\n    result = []\n    for item in arr1:          # O(n)\n        if item in arr2:       # O(n) - \ub9ac\uc2a4\ud2b8 \uc120\ud615 \ud0d0\uc0c9\n            result.append(item)\n    return result  # \ucd1d O(n\u00b2)\n\n# BRIDGE: set\uc740 \ud574\uc2dc \ud14c\uc774\ube14 \uae30\ubc18 \u2192 \ud0d0\uc0c9\uc774 O(1)\n# \ub9ac\uc2a4\ud2b8\uc758 'in' \uc5f0\uc0b0: O(n) vs \uc138\ud2b8\uc758 'in' \uc5f0\uc0b0: O(1)\n\n# AFTER: O(n) \ucd5c\uc801\ud654\ub41c \ucf54\ub4dc\ndef intersection_fast(arr1, arr2):\n    \"\"\"\ud574\uc2dc\uc14b\uc744 \ud65c\uc6a9\ud55c O(n) \uad50\uc9d1\ud569\"\"\"\n    set2 = set(arr2)           # O(n) \ud574\uc2dc \ud14c\uc774\ube14 \uc0dd\uc131\n    return [x for x in arr1 if x in set2]  # O(n) \u00d7 O(1) = O(n)\n\n# \uc131\ub2a5 \ube44\uad50\nimport time\nlarge1 = list(range(10000))\nlarge2 = list(range(5000, 15000))\n\nstart = time.time(); intersection_slow(large1, large2); slow_time = time.time() - start\nstart = time.time(); intersection_fast(large1, large2); fast_time = time.time() - start\nprint(f\"\ub290\ub9b0 \ubc29\ubc95: {slow_time:.4f}s | \ube60\ub978 \ubc29\ubc95: {fast_time:.4f}s | \uc18d\ub3c4 \ud5a5\uc0c1: {slow_time/fast_time:.1f}x\")",
+  imgData:"BAB.webp"
+},
+{
+  id:"STAR",
+  name:"STAR",
+  fullName:"Situation \u00b7 Task \u00b7 Action \u00b7 Result",
+  difficulty:"medium",
+  diffLabel:"\u2b50\u2b50 Medium",
+  category:"\uc0c1\ud669 \uacb0\uacfc\ud615",
+  focus:"\uc0c1\ud669\u2192\uacfc\uc81c\u2192\ud589\ub3d9\u2192\uacb0\uacfc \uc11c\uc220",
+  strengths:["\uad6c\uc870\uc801 \uc11c\uc220", "\uc131\uacfc \uc911\uc2ec", "\uba74\uc811\u00b7\ubcf4\uace0\uc11c \ud65c\uc6a9"],
+  desc:"\uc0c1\ud669(Situation) \uc124\uba85 \u2192 \uacfc\uc81c(Task) \uc815\uc758 \u2192 \uad6c\uccb4\uc801 \ud589\ub3d9(Action) \u2192 \uacb0\uacfc(Result) \uc81c\uc2dc\uc758 \uad6c\uc870\ub85c, \uc131\uacfc \uc911\uc2ec\uc758 \uc11c\uc220\uc774 \ud544\uc694\ud55c \ubaa8\ub4e0 \uc0c1\ud669\uc5d0 \ud65c\uc6a9 \uac00\ub2a5\ud569\ub2c8\ub2e4.",
+  docPrompt:"[Situation] \uc6b0\ub9ac \uc11c\ube44\uc2a4\uc758 \uc6d4\uac04 \uc774\ud0c8\ub960\uc774 \uc9c0\ub09c \ubd84\uae30 \ub300\ube44 20% \uc0c1\uc2b9\ud55c \uc0c1\ud669\uc785\ub2c8\ub2e4.\n[Task] \uc774\ud0c8\ub960\uc744 \ub2e4\uc2dc 10% \uc774\ud558\ub85c \ub0ae\ucd94\ub294 \ub9ac\ud150\uc158 \uac1c\uc120 \uacc4\ud68d\uc744 \uc218\ub9bd\ud558\uc138\uc694.\n[Action] \uc989\uc2dc \uc2e4\ud589 \uac00\ub2a5\ud55c \uad6c\uccb4\uc801\uc778 5\uac00\uc9c0 \uc561\uc158\uc744 \uc81c\uc548\ud558\uc138\uc694.\n[Result] \uac01 \uc561\uc158\uc758 \uc608\uc0c1 \ud6a8\uacfc\ub97c \uc218\uce58\ub85c \uc81c\uc2dc\ud558\uc138\uc694.",
+  docResult:"Situation \ubd84\uc11d \u2192 Task \ubaa9\ud45c \uc124\uc815 \u2192 5\uac00\uc9c0 \uad6c\uccb4 \uc561\uc158 \ud50c\ub79c \u2192 \uac01 \uc561\uc158\ubcc4 \uc608\uc0c1 KPI \uc218\uce58\uac00 \ud3ec\ud568\ub41c \uccb4\uacc4\uc801\uc778 \ub9ac\ud150\uc158 \uc804\ub7b5 \ubcf4\uace0\uc11c\uac00 \uc0dd\uc131\ub429\ub2c8\ub2e4.",
+  imgPromptEn:"Tense crisis response meeting scene. Whiteboard covered in action plans and sticky notes. In the background a crashing red graph with a small green recovery arrow hinting at hope. Cold dramatic cinematic lighting.",
+  imgPromptKo:"[Situation] \uc704\uae30 \ub300\uc751 \ud68c\uc758 \uc7a5\uba74\n[Task] \ud654\uc774\ud2b8\ubcf4\ub4dc\uc758 \ub300\ucc45\uacfc \ud3ec\uc2a4\ud2b8\uc787\n[Action] \ub099\ud558\ud558\ub294 \ube68\uac04 \uadf8\ub798\ud504\uc640 \uc791\uc740 \ub179\uc0c9 \ubc18\ub4f1 \ud654\uc0b4\ud45c\n[Result] \ucc28\uac11\uace0 \uadf9\uc801\uc778 \uc2dc\ub124\ub9c8\ud2f1 \uc870\uba85",
+  imgDesc:"\uae34\uc7a5\uac10 \ub118\uce58\ub294 \uc704\uae30 \ub300\uc751 \ud68c\uc758 \uc7a5\uba74. \ud654\uc774\ud2b8\ubcf4\ub4dc\uc5d0 \ube7c\uace1\ud55c \ub300\ucc45\uacfc \ud3ec\uc2a4\ud2b8\uc787, \ubc30\uacbd\uc758 \ub099\ud558\ud558\ub294 \ube68\uac04 \uadf8\ub798\ud504 \uc606\uc73c\ub85c \uc791\uc740 \ub179\uc0c9 \ubc18\ub4f1 \ud654\uc0b4\ud45c\uac00 \ud76c\ub9dd\uc744 \uc554\uc2dc. \ucc28\uac11\uace0 \uadf9\uc801\uc778 \uc870\uba85\uc774 \uae34\ubc15\ud568\uc744 \uace0\uc870\uc2dc\ud0a4\ub294 \uc2dc\ub124\ub9c8\ud2f1 \ube44\uc988\ub2c8\uc2a4 \uc0ac\uc9c4.",
+  codePrompt:"[Situation] \ud504\ub85c\ub355\uc158 \uc11c\ubc84\uac00 24\uc2dc\uac04\ub9c8\ub2e4 OOM\uc73c\ub85c \uc7ac\uc2dc\uc791\ub429\ub2c8\ub2e4\n[Task] \uba54\ubaa8\ub9ac \ub204\uc218 \uc6d0\uc778\uc744 \ucc3e\uace0 \uc218\uc815\ud558\ub294 \ucf54\ub4dc\ub97c \uc791\uc131\ud558\uc138\uc694\n[Action] tracemalloc\uc73c\ub85c \ub204\uc218 \uc9c0\uc810\uc744 \ud504\ub85c\ud30c\uc77c\ub9c1\ud55c \ub4a4 \uc218\uc815\ud558\uc138\uc694\n[Result] \uba54\ubaa8\ub9ac \uc0ac\uc6a9\ub7c9 \uc548\uc815\ud654 \ubc0f 30\ubd84 \uac04\uaca9 \ubaa8\ub2c8\ud130\ub9c1 \ucd94\uac00",
+  codeResult:"import tracemalloc\nimport time\nfrom collections import defaultdict\n\n# SITUATION: \uba54\ubaa8\ub9ac \ub204\uc218 \ud0d0\uc9c0 \ubc0f \uc218\uc815\n\n# \ub204\uc218\uac00 \uc788\ub294 \ucf54\ub4dc (\uc804\uc5ed \uce90\uc2dc\uac00 \ubb34\ud55c \uc99d\uac00)\n_cache = {}  # \ubb38\uc81c: \ub9cc\ub8cc \uc5c6\ub294 \ubb34\ud55c \uce90\uc2dc\n\ndef get_data_leak(key):\n    if key not in _cache:\n        _cache[key] = expensive_operation(key)  # \uba54\ubaa8\ub9ac \ub204\uc218!\n    return _cache[key]\n\n# ACTION: tracemalloc\uc73c\ub85c \ud504\ub85c\ud30c\uc77c\ub9c1\ntracemalloc.start()\nsnapshot1 = tracemalloc.take_snapshot()\n\n# \uc218\uc815\ub41c \ucf54\ub4dc: LRU \uce90\uc2dc \uc0ac\uc6a9\nfrom functools import lru_cache\n\n@lru_cache(maxsize=1000)  # \ucd5c\ub300 1000\uac1c\ub9cc \uc720\uc9c0\ndef get_data_fixed(key):\n    return expensive_operation(key)\n\nsnapshot2 = tracemalloc.take_snapshot()\nstats = snapshot2.compare_to(snapshot1, 'lineno')\nprint(\"\uba54\ubaa8\ub9ac \uc99d\uac00 Top 3:\")\nfor stat in stats[:3]:\n    print(f\"  {stat}\")",
+  imgData:"STAR.webp"
+},
+{
+  id:"CO-STAR",
+  name:"CO-STAR",
+  fullName:"Context \u00b7 Objective \u00b7 Style \u00b7 Tone \u00b7 Audience \u00b7 Response",
+  difficulty:"intermediate",
+  diffLabel:"\u2b50\u2b50\u2b50 Intermediate",
+  category:"\uc644\uc804 \uba85\uc138\ud615",
+  focus:"6\uac00\uc9c0 \uc694\uc18c \uc644\uc804 \uba85\uc138\ud654",
+  strengths:["\ucd5c\uace0 \uc815\ubc00\ub3c4", "\ube0c\ub79c\ub4dc \uc77c\uad00\uc131", "\ub2e4\ubaa9\uc801 \ud65c\uc6a9"],
+  desc:"\ucee8\ud14d\uc2a4\ud2b8(C), \ubaa9\ud45c(O), \uc2a4\ud0c0\uc77c(S), \ud1a4(T), \ub300\uc0c1(A), \uc751\ub2f5\ud615\uc2dd(R) 6\uac00\uc9c0 \uc694\uc18c\ub97c \ubaa8\ub450 \uba85\uc138\ud558\uc5ec AI \ucd9c\ub825\uc758 \ud488\uc9c8\uacfc \uc77c\uad00\uc131\uc744 \uadf9\ub300\ud654\ud558\ub294 \uace0\uae09 \ud504\ub808\uc784\uc6cc\ud06c\uc785\ub2c8\ub2e4.",
+  docPrompt:"[Context] \uc6b0\ub9ac \ud68c\uc0ac\ub294 \ud300 \ud611\uc5c5 SaaS \uc194\ub8e8\uc158\uc744 B2B \uc2dc\uc7a5\uc5d0 \uc0c8\ub85c \ucd9c\uc2dc\ud569\ub2c8\ub2e4.\n[Objective] \uc2e0\uaddc \uae30\ub2a5 \uc5c5\ub370\uc774\ud2b8\ub97c \uc54c\ub9ac\ub294 \ub274\uc2a4\ub808\ud130 \uc774\uba54\uc77c\uc744 \uc791\uc131\ud558\uc138\uc694.\n[Style] \uac04\uacb0\ud558\uace0 \uc804\ubb38\uc801\uc778 \ube44\uc988\ub2c8\uc2a4 \ubb38\uccb4\n[Tone] \ub530\ub73b\ud558\uace0 \uc2e0\ub8b0\uac10 \uc788\ub294 \uc5b4\uc870\n[Audience] IT \ubd80\uc11c \uad00\ub9ac\uc790 \ubc0f \uc911\uc18c\uae30\uc5c5 \ub300\ud45c\n[Response] \uc774\uba54\uc77c \uc81c\ubaa9 + \ubcf8\ubb38 200\uc790 \uc774\ub0b4 + CTA \ubc84\ud2bc \ubb38\uad6c 1\uac1c",
+  docResult:"\uc81c\ubaa9: [\uc5c5\ub370\uc774\ud2b8] \ud300 \uc0dd\uc0b0\uc131\uc744 30% \ub192\uc774\ub294 \uc0c8 \uae30\ub2a5\uc774 \ucd9c\uc2dc\ub418\uc5c8\uc2b5\ub2c8\ub2e4 | \ubcf8\ubb38: IT \uad00\ub9ac\uc790\ubd84\ub4e4\uaed8 \uc2e0\ub8b0\uac10 \uc788\ub294 \uc5b4\uc870\ub85c \ud575\uc2ec \uae30\ub2a5\uc744 \uc18c\uac1c\ud558\ub294 \uc644\uc131\ub41c \ub274\uc2a4\ub808\ud130\uac00 \uc0dd\uc131\ub429\ub2c8\ub2e4.",
+  imgPromptEn:"Abstract UI elements and data visualizations floating on a clean blue and white palette. 3D isometric flat design hero banner conveying B2B SaaS professionalism and trustworthiness.",
+  imgPromptKo:"[Context] B2B SaaS \ud788\uc5b4\ub85c \ubc30\ub108\n[Objective] \uc804\ubb38\uc131\uacfc \uc2e0\ub8b0\uac10 \uc804\ub2ec\n[Style] 3D \uc544\uc774\uc18c\uba54\ud2b8\ub9ad \ud50c\ub7ab \ub514\uc790\uc778\n[Tone] \ud30c\ub780\uc0c9\uacfc \ud770\uc0c9\uc758 \uae54\ub054\ud55c \ud314\ub808\ud2b8",
+  imgDesc:"\ud30c\ub780\uc0c9\uacfc \ud770\uc0c9\uc758 \uae54\ub054\ud55c \ud314\ub808\ud2b8 \uc704\uc5d0 \ub5a0 \uc788\ub294 \ucd94\uc0c1\uc801 UI \uc694\uc18c\ub4e4\uacfc \ub370\uc774\ud130 \uc2dc\uac01\ud654. 3D \uc544\uc774\uc18c\uba54\ud2b8\ub9ad \uac10\uc131\uc758 \ud50c\ub7ab \ub514\uc790\uc778\uc73c\ub85c B2B SaaS\uc758 \uc804\ubb38\uc131\uacfc \uc2e0\ub8b0\uac10\uc744 \ub3d9\uc2dc\uc5d0 \uc804\ub2ec\ud558\ub294 \ud788\uc5b4\ub85c \ubc30\ub108.",
+  codePrompt:"[Context] FastAPI \uae30\ubc18 REST API \uc11c\ubc84\ub97c \uac1c\ubc1c \uc911\uc785\ub2c8\ub2e4\n[Objective] JWT \ud1a0\ud070 \uae30\ubc18 \uc0ac\uc6a9\uc790 \uc778\uc99d \ubbf8\ub4e4\uc6e8\uc5b4\ub97c \uad6c\ud604\ud558\uc138\uc694\n[Style] Clean Architecture \ud328\ud134, \uc758\uc874\uc131 \uc8fc\uc785 \uc0ac\uc6a9\n[Tone] \ud504\ub85c\ub355\uc158 \ub808\ubca8 \ucf54\ub4dc \ud488\uc9c8\n[Audience] \uc2dc\ub2c8\uc5b4 \uac1c\ubc1c\uc790 \ucf54\ub4dc \ub9ac\ubdf0 \uae30\uc900 \ucda9\uc871\n[Response] \ubbf8\ub4e4\uc6e8\uc5b4 \ud074\ub798\uc2a4 + FastAPI \uc801\uc6a9 \uc608\uc2dc \ucf54\ub4dc",
+  codeResult:"from fastapi import Request, HTTPException, status\nfrom fastapi.security import HTTPBearer, HTTPAuthorizationCredentials\nimport jwt\n\nsecurity = HTTPBearer()\n\nclass JWTAuthMiddleware:\n    \"\"\"Clean Architecture \uae30\ubc18 JWT \uc778\uc99d \ubbf8\ub4e4\uc6e8\uc5b4\"\"\"\n\n    def __init__(self, secret_key: str, algorithm: str = \"HS256\"):\n        self.secret_key = secret_key\n        self.algorithm = algorithm\n\n    def verify_token(self, token: str) -> dict:\n        try:\n            payload = jwt.decode(token, self.secret_key, algorithms=[self.algorithm])\n            return payload\n        except jwt.ExpiredSignatureError:\n            raise HTTPException(\n                status_code=status.HTTP_401_UNAUTHORIZED,\n                detail=\"\ud1a0\ud070\uc774 \ub9cc\ub8cc\ub418\uc5c8\uc2b5\ub2c8\ub2e4.\",\n                headers={\"WWW-Authenticate\": \"Bearer\"}\n            )\n        except jwt.InvalidTokenError:\n            raise HTTPException(\n                status_code=status.HTTP_401_UNAUTHORIZED,\n                detail=\"\uc720\ud6a8\ud558\uc9c0 \uc54a\uc740 \ud1a0\ud070\uc785\ub2c8\ub2e4.\"\n            )\n\n# FastAPI \uc801\uc6a9\nfrom fastapi import FastAPI, Depends\n\napp = FastAPI()\nauth = JWTAuthMiddleware(secret_key=\"your-secret-key\")\n\nasync def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)):\n    return auth.verify_token(credentials.credentials)\n\n@app.get(\"/protected\")\nasync def protected_route(user: dict = Depends(get_current_user)):\n    return {\"user_id\": user[\"sub\"], \"message\": \"\uc778\uc99d \uc131\uacf5\"}",
+  imgData:"CO-STAR.webp"
+},
+{
+  id:"RISEN",
+  name:"RISEN",
+  fullName:"Role \u00b7 Instructions \u00b7 Steps \u00b7 End-goal \u00b7 Narrowing",
+  difficulty:"intermediate",
+  diffLabel:"\u2b50\u2b50\u2b50 Intermediate",
+  category:"\ub2e8\uacc4\ubcc4 \uc2e4\ud589\ud615",
+  focus:"\uc5ed\ud560\u00b7\uc9c0\uc2dc\u00b7\ub2e8\uacc4\u00b7\ubaa9\ud45c\u00b7\ubc94\uc704 \ud55c\uc815",
+  strengths:["\ubcf5\uc7a1\ud55c \uc791\uc5c5 \ucc98\ub9ac", "\ub2e8\uacc4\ubcc4 \uc2e4\ud589", "\ubc94\uc704 \uc81c\uc5b4"],
+  desc:"\uc5ed\ud560(Role), \uc9c0\uc2dc\uc0ac\ud56d(Instructions), \uc218\ud589 \ub2e8\uacc4(Steps), \ucd5c\uc885 \ubaa9\ud45c(End-goal), \ubc94\uc704 \ud55c\uc815(Narrowing)\uc73c\ub85c \ubcf5\uc7a1\ud55c \ub2e4\ub2e8\uacc4 \uc791\uc5c5\uc744 \uccb4\uacc4\uc801\uc73c\ub85c \uc9c0\uc2dc\ud558\ub294 \uace0\uae09 \ud504\ub808\uc784\uc6cc\ud06c\uc785\ub2c8\ub2e4.",
+  docPrompt:"[Role] \ub2f9\uc2e0\uc740 UX \ub9ac\uc11c\uce58 \uc804\ubb38\uac00\uc785\ub2c8\ub2e4.\n[Input] \uc2e4\uc81c \uc0ac\uc6a9\uc790 \uc778\ud130\ubdf0 \ubc1c\ucdcc\ub85d\n[Steps]\n1. \ubd88\ud3b8\ud568 \ucd94\ucd9c \u2192 2. \uce74\ud14c\uace0\ub9ac \ubd84\ub958 \u2192 3. \uc6b0\uc120\uc21c\uc704 \uc815\ub82c \u2192 4. \uac1c\uc120 \ubc29\uc548 \uc81c\uc548\n[Expectation] \ud575\uc2ec \uc778\uc0ac\uc774\ud2b8 3\uac1c + \uac1c\uc120 \uc81c\uc548 3\uac1c\n[Novelty] \ud45c\uba74\uc801 \ubd88\ub9cc \ub108\uba38\uc758 \uc228\uaca8\uc9c4 \ub2c8\uc988\ub97c \ubc1c\uad74\ud558\uc138\uc694",
+  docResult:"\ub2e8\uacc4\ubcc4\ub85c \uccb4\uacc4\uc801\uc778 UX \ubd84\uc11d \ubcf4\uace0\uc11c\uac00 \uc0dd\uc131\ub429\ub2c8\ub2e4. \ud45c\uba74\uc801 \ubd88\ub9cc\uc5d0\uc11c \uc228\uaca8\uc9c4 \ub2c8\uc988\uae4c\uc9c0 \ubc1c\uad74\ud558\ub294 \uae4a\uc774 \uc788\ub294 \uc778\uc0ac\uc774\ud2b8\uc640 \ud568\uaed8 \uc2e4\ud589 \uac00\ub2a5\ud55c \uac1c\uc120 \uc81c\uc548\uc774 \ud3ec\ud568\ub429\ub2c8\ub2e4.",
+  imgPromptEn:"Pastel flat illustration split panel: left side shows a user frowning at a cluttered complex app interface, right side shows the same user smiling at a clean minimal interface. Emotional contrast communicating UX improvement.",
+  imgPromptKo:"[Role] UX \ube44\ud3ec\uc560\ud504\ud130 \uc77c\ub7ec\uc2a4\ud2b8\ub808\uc774\ud130\n[Instructions] \ud30c\uc2a4\ud154 \ud50c\ub7ab \uc2a4\ud0c0\uc77c\ub85c \ub450 \ud328\ub110 \ub300\ube44\n[Steps] \uc88c: \ubcf5\uc7a1\ud55c \uc571\uacfc \ucc21\uadf8\ub9b0 \uc0ac\uc6a9\uc790 / \uc6b0: \ubbf8\ub2c8\uba40 UI\uc640 \uc6c3\ub294 \uc0ac\uc6a9\uc790\n[End-goal] UX \uac1c\uc120 \uba54\uc2dc\uc9c0\ub97c \uc9c1\uad00\uc801\uc73c\ub85c \uc804\ub2ec",
+  imgDesc:"\ud30c\uc2a4\ud154 \ud1a4\uc758 \ud50c\ub7ab \uc77c\ub7ec\uc2a4\ud2b8. \uc88c\uce21 \ud328\ub110\uc740 \uc815\ubcf4\uac00 \ub118\uccd0 \ud750\ub974\ub294 \ubcf5\uc7a1\ud55c \uc571 \ud654\uba74\uacfc \ucc21\uadf8\ub9b0 \uc0ac\uc6a9\uc790, \uc6b0\uce21 \ud328\ub110\uc740 \uc5ec\ubc31 \uc788\ub294 \ubbf8\ub2c8\uba40 \uc778\ud130\ud398\uc774\uc2a4\uc640 \ud658\ud558\uac8c \uc6c3\ub294 \uc0ac\uc6a9\uc790. \ub450 \ud328\ub110\uc758 \uac10\uc815 \ub300\ube44\uac00 UX \uac1c\uc120\uc758 \ud575\uc2ec \uba54\uc2dc\uc9c0\ub97c \uc9c1\uad00\uc801\uc73c\ub85c \uc804\ub2ec.",
+  codePrompt:"[Role] \uc2dc\ub2c8\uc5b4 \ub370\uc774\ud130 \uc5d4\uc9c0\ub2c8\uc5b4\n[Input] \uc77c 100GB \uaddc\ubaa8\uc758 \uc0ac\uc6a9\uc790 \ud589\ub3d9 \ub85c\uadf8 (JSONL \ud615\uc2dd)\n[Steps] \uc2a4\ud2b8\ub9ac\ubc0d \ud30c\uc2f1 \u2192 \uc138\uc158 \ub2e8\uc704 \uc9d1\uacc4 \u2192 \uc774\uc0c1\uce58 \uc81c\uac70 \u2192 Parquet \uc800\uc7a5\n[Expectation] \uba54\ubaa8\ub9ac 1GB \uc774\ud558\ub85c \ucc98\ub9ac \uac00\ub2a5\ud55c \ud30c\uc774\ud504\ub77c\uc778\n[Novelty] \ucc98\ub9ac \uc911 \uc2e4\ud328 \uc2dc \uccb4\ud06c\ud3ec\uc778\ud2b8\ub85c \uc7ac\uc2dc\uc791 \uac00\ub2a5\ud55c \uc124\uacc4",
+  codeResult:"import json\nimport pyarrow as pa\nimport pyarrow.parquet as pq\nfrom pathlib import Path\nfrom collections import defaultdict\n\nclass CheckpointedPipeline:\n    \"\"\"\uccb4\ud06c\ud3ec\uc778\ud2b8 \uae30\ubc18 \ub300\uc6a9\ub7c9 \ub85c\uadf8 \ucc98\ub9ac \ud30c\uc774\ud504\ub77c\uc778\"\"\"\n\n    def __init__(self, checkpoint_file: str = \"checkpoint.json\"):\n        self.checkpoint_file = checkpoint_file\n        self.processed_lines = self._load_checkpoint()\n\n    def _load_checkpoint(self) -> int:\n        if Path(self.checkpoint_file).exists():\n            with open(self.checkpoint_file) as f:\n                return json.load(f).get('processed_lines', 0)\n        return 0\n\n    def _save_checkpoint(self, line_num: int):\n        with open(self.checkpoint_file, 'w') as f:\n            json.dump({'processed_lines': line_num}, f)\n\n    def process_streaming(self, input_path: str, output_path: str, batch_size: int = 10000):\n        \"\"\"\uc2a4\ud2b8\ub9ac\ubc0d \ubc29\uc2dd\uc73c\ub85c \ub300\uc6a9\ub7c9 \ud30c\uc77c \ucc98\ub9ac (\uba54\ubaa8\ub9ac 1GB \uc774\ud558)\"\"\"\n        sessions = defaultdict(list)\n        batch = []\n\n        with open(input_path, 'r') as f:\n            for i, line in enumerate(f):\n                if i < self.processed_lines:\n                    continue  # \uccb4\ud06c\ud3ec\uc778\ud2b8 \uc774\ud6c4\ubd80\ud130 \uc7ac\uc2dc\uc791\n\n                try:\n                    event = json.loads(line)\n                    sessions[event['session_id']].append(event)\n                    batch.append(event)\n\n                    if len(batch) >= batch_size:\n                        self._write_parquet_batch(batch, output_path, i)\n                        batch.clear()\n                        self._save_checkpoint(i)\n                        print(f\"\ucc98\ub9ac \uc644\ub8cc: {i:,}\uc904\")\n\n                except (json.JSONDecodeError, KeyError):\n                    continue  # \uc774\uc0c1\uce58 \uc81c\uac70\n\n        if batch:\n            self._write_parquet_batch(batch, output_path, 'final')",
+  imgData:"RISEN.webp"
+},
+{
+  id:"GROW",
+  name:"GROW",
+  fullName:"Goal \u00b7 Reality \u00b7 Options \u00b7 Way Forward",
+  difficulty:"intermediate",
+  diffLabel:"\u2b50\u2b50\u2b50 Intermediate",
+  category:"\ucf54\uce6d \uc131\uc7a5\ud615",
+  focus:"\ubaa9\ud45c\u2192\ud604\uc2e4\u2192\uc120\ud0dd\uc9c0\u2192\uc2e4\ud589\uacc4\ud68d",
+  strengths:["\uc804\ub7b5\uc801 \uc0ac\uace0", "\uc2e4\ud589 \uacc4\ud68d", "\ucf54\uce6d \ud65c\uc6a9"],
+  desc:"\ubaa9\ud45c(Goal) \uc124\uc815 \u2192 \ud604\uc2e4(Reality) \ud30c\uc545 \u2192 \uc120\ud0dd\uc9c0(Options) \ud0d0\uc0c9 \u2192 \uc2e4\ud589 \ubc29\ud5a5(Way Forward) \uacb0\uc815\uc758 \ucf54\uce6d \ubaa8\ub378\ub85c, \uc804\ub7b5\uc801 \uc758\uc0ac\uacb0\uc815\uacfc \ubb38\uc81c \ud574\uacb0\uc5d0 \ud2b9\ud654\ub429\ub2c8\ub2e4.",
+  docPrompt:"[Goal] 6\uac1c\uc6d4 \ub0b4\uc5d0 \ud604\uc7ac \uc5f0\ubd09 \ub300\ube44 30% \uc778\uc0c1\uc744 \ub2ec\uc131\ud558\uace0 \uc2f6\uc2b5\ub2c8\ub2e4.\n[Reality] 3\ub144\ucc28 \ubc31\uc5d4\ub4dc \uac1c\ubc1c\uc790, Spring Boot/Java \uc804\ubb38, \ud604\uc7ac \uc5f0\ubd09 4,200\ub9cc\uc6d0\n[Options] \uc774 \ubaa9\ud45c\ub97c \ub2ec\uc131\ud558\uae30 \uc704\ud55c 5\uac00\uc9c0 \uc804\ub7b5\uc801 \uc635\uc158\uc744 \uc81c\uc2dc\ud558\uc138\uc694.\n[Will] \uac00\uc7a5 \ud604\uc2e4\uc801\uc778 2\uac00\uc9c0\ub97c \uc120\ud0dd\ud558\uace0, 6\uac1c\uc6d4 \uc8fc\uac04 \ub85c\ub4dc\ub9f5\uc744 \uc791\uc131\ud558\uc138\uc694.",
+  docResult:"\ud604\uc2e4 \uae30\ubc18 5\uac00\uc9c0 \uc804\ub7b5 \uc635\uc158(\uc774\uc9c1, \uc2a4\ud0ac\uc5c5, \uc0ac\uc774\ub4dc \ud504\ub85c\uc81d\ud2b8 \ub4f1)\uacfc \ud568\uaed8 \uc120\ud0dd\ub41c 2\uac00\uc9c0 \uc804\ub7b5\uc5d0 \ub300\ud55c \uc8fc\ucc28\ubcc4 \uad6c\uccb4\uc801 \uc2e4\ud589 \ub85c\ub4dc\ub9f5\uc774 \uc0dd\uc131\ub429\ub2c8\ub2e4.",
+  imgPromptEn:"A developer standing at a mountain trail fork. Multiple paths visible but one glowing golden path leads toward a sunrise on the horizon symbolizing the best choice. Teal and gold palette isometric illustration of a growth journey.",
+  imgPromptKo:"[Goal] \ucd5c\uc120\uc758 \uc120\ud0dd\uc744 \uc0c1\uc9d5\ud558\ub294 \ud669\uae08\ube5b \uae38\n[Reality] \uc0b0\uae30\uc2ad\uc758 \uac08\ub9bc\uae38 \uc55e\uc5d0 \uc120 \uac1c\ubc1c\uc790\n[Options] \uc5ec\ub7ec \uacbd\ub85c\uac00 \ubcf4\uc774\ub294 \uc544\uc774\uc18c\uba54\ud2b8\ub9ad \uc77c\ub7ec\uc2a4\ud2b8\n[Way Forward] \uc77c\ucd9c \ubc29\ud5a5\uc73c\ub85c \uc774\uc5b4\uc9c0\ub294 \uc131\uc7a5\uc758 \uc5ec\uc815",
+  imgDesc:"\uc0b0\uae30\uc2ad\uc5d0\uc11c \uac08\ub9bc\uae38 \uc55e\uc5d0 \uc120 \uac1c\ubc1c\uc790. \uc5ec\ub7ec \uacbd\ub85c \uc911 \ud669\uae08\ube5b\uc73c\ub85c \uac15\uc870\ub41c \ud558\ub098\uc758 \uae38\uc774 \uc77c\ucd9c \ubc29\ud5a5\uc73c\ub85c \uc774\uc5b4\uc9c0\uba70 \ucd5c\uc120\uc758 \uc120\ud0dd\uc744 \uc0c1\uc9d5. \uccad\ub85d-\uace8\ub4dc \ud314\ub808\ud2b8\uc758 \uc544\uc774\uc18c\uba54\ud2b8\ub9ad \uc77c\ub7ec\uc2a4\ud2b8\uac00 \uc131\uc7a5 \uc5ec\uc815\uc744 \ud76c\ub9dd\uc801\uc73c\ub85c \ud45c\ud604.",
+  codePrompt:"[Goal] \ub808\uac70\uc2dc \ubaa8\ub180\ub9ac\uc2dd Django \uc571\uc744 \ub9c8\uc774\ud06c\ub85c\uc11c\ube44\uc2a4\ub85c \uc804\ud658\n[Reality] 10\ub9cc \uc904 \uaddc\ubaa8, \ud14c\uc2a4\ud2b8 \ucee4\ubc84\ub9ac\uc9c0 20%, \ub2e8\uc77c PostgreSQL DB\n[Options] \uac00\ub2a5\ud55c \ub9c8\uc774\uadf8\ub808\uc774\uc158 \uc804\ub7b5 5\uac00\uc9c0\ub97c \uc7a5\ub2e8\uc810\uacfc \ud568\uaed8 \uc81c\uc2dc\ud558\uc138\uc694\n[Will] Strangler Fig \ud328\ud134\uc744 \uc120\ud0dd, \uccab \ubc88\uc9f8 \uc11c\ube44\uc2a4(\uc778\uc99d) \ubd84\ub9ac \ucf54\ub4dc\ub97c \uc791\uc131\ud558\uc138\uc694",
+  codeResult:"# GROW \ud504\ub808\uc784\uc6cc\ud06c \uc801\uc6a9: \ub9c8\uc774\ud06c\ub85c\uc11c\ube44\uc2a4 \ub9c8\uc774\uadf8\ub808\uc774\uc158\n# \uc804\ub7b5: Strangler Fig \ud328\ud134\uc73c\ub85c \uc778\uc99d \uc11c\ube44\uc2a4 \ubd84\ub9ac\n\n# \uc0c8\ub85c\uc6b4 \ub3c5\ub9bd \uc778\uc99d \ub9c8\uc774\ud06c\ub85c\uc11c\ube44\uc2a4 (FastAPI)\nfrom fastapi import FastAPI\nimport httpx\n\nauth_service = FastAPI(title=\"Auth Microservice\")\n\n@auth_service.post(\"/auth/login\")\nasync def microservice_login(credentials: dict):\n    \"\"\"\uae30\uc874 Django \ub85c\uc9c1\uc5d0\uc11c \ubd84\ub9ac\ub41c \ub3c5\ub9bd \uc778\uc99d \uc11c\ube44\uc2a4\"\"\"\n    # \uc778\uc99d \ub85c\uc9c1 (\uae30\uc874 Django\uc5d0\uc11c \uc774\uad00)\n    user = await verify_credentials(credentials)\n    token = generate_jwt(user['id'])\n    return {\"token\": token, \"user_id\": user['id']}\n\n# Django \uc571\uc5d0\uc11c \uc0c8 \uc11c\ube44\uc2a4\ub85c \ub77c\uc6b0\ud305 (Strangler Fig)\nclass AuthServiceProxy:\n    \"\"\"\uc810\uc9c4\uc801 \ub9c8\uc774\uadf8\ub808\uc774\uc158: \uc0c8 \uc11c\ube44\uc2a4\ub85c \ud2b8\ub798\ud53d \uc804\ud658\"\"\"\n    AUTH_SERVICE_URL = \"http://auth-service:8001\"\n\n    async def login(self, username: str, password: str) -> dict:\n        async with httpx.AsyncClient() as client:\n            response = await client.post(\n                f\"{self.AUTH_SERVICE_URL}/auth/login\",\n                json={\"username\": username, \"password\": password},\n                timeout=5.0\n            )\n        return response.json()\n\n# \ub9c8\uc774\uadf8\ub808\uc774\uc158 \uc644\ub8cc \ud6c4 Django \uc778\uc99d \ubdf0\ub97c \ud504\ub85d\uc2dc\ub85c \uad50\uccb4\nauth_proxy = AuthServiceProxy()",
+  imgData:"GROW.webp"
+},
+{
+  id:"PREP",
+  name:"PREP",
+  fullName:"Point \u00b7 Reason \u00b7 Example \u00b7 Point",
+  difficulty:"intermediate",
+  diffLabel:"\u2b50\u2b50\u2b50 Intermediate",
+  category:"\ub17c\uc99d \uad6c\uc870\ud615",
+  focus:"\uc8fc\uc7a5\u2192\uadfc\uac70\u2192\uc0ac\ub840\u2192\uc7ac\uac15\uc870",
+  strengths:["\ub17c\ub9ac\uc801 \uc124\ub4dd", "\uad6c\uc870\uc801 \uae00\uc4f0\uae30", "\ubc1c\ud45c\u00b7\ubcf4\uace0\uc11c \ud65c\uc6a9"],
+  desc:"\ud575\uc2ec \uc8fc\uc7a5(Point) \u2192 \uc774\uc720/\uadfc\uac70(Reason) \u2192 \uad6c\uccb4\uc801 \uc0ac\ub840(Example) \u2192 \ud575\uc2ec \uc7ac\uac15\uc870(Point)\uc758 \uc21c\ud658 \uad6c\uc870\ub85c \ub17c\ub9ac\uc801\uc774\uace0 \uc124\ub4dd\ub825 \uc788\ub294 \uae00\uc4f0\uae30\ub97c \uc720\ub3c4\ud569\ub2c8\ub2e4.",
+  docPrompt:"[Point] AI \ub3c4\uc785\uc774 \uac1c\ubc1c\ud300 \uc0dd\uc0b0\uc131\uc744 \ud5a5\uc0c1\uc2dc\ud0a8\ub2e4\ub294 \uc8fc\uc7a5\uc744 \ud3bc\uce58\uc138\uc694.\n[Reason] \uc774 \uc8fc\uc7a5\uc744 \ub4b7\ubc1b\uce68\ud558\ub294 3\uac00\uc9c0 \uadfc\uac70\ub97c \uc81c\uc2dc\ud558\uc138\uc694.\n[Example] \uac01 \uadfc\uac70\uc5d0 \ub300\ud55c \uc2e4\uc81c \uc0ac\ub840\ub098 \ub370\uc774\ud130\ub97c \ud3ec\ud568\ud558\uc138\uc694.\n[Point] \uacb0\ub860\uc5d0\uc11c \ud575\uc2ec \uc8fc\uc7a5\uc744 \ub354\uc6b1 \uac15\ud654\ud558\uc5ec \uc7ac\uac15\uc870\ud558\uc138\uc694.",
+  docResult:"\ub17c\ub9ac\uc801 \ud750\ub984\uc744 \uac16\ucd98 \uc124\ub4dd\ub825 \uc788\ub294 \ubcf4\uace0\uc11c\uac00 \uc0dd\uc131\ub429\ub2c8\ub2e4. \uc8fc\uc7a5\u2192\uadfc\uac70\u2192\uc0ac\ub840\u2192\uc7ac\uac15\uc870\uc758 \uad6c\uc870\ub85c \ub3c5\uc790\uac00 \uc790\uc5f0\uc2a4\ub7fd\uac8c \uacb0\ub860\uc5d0 \ub3d9\uc758\ud558\ub3c4\ub85d \uc720\ub3c4\ud569\ub2c8\ub2e4.",
+  imgPromptEn:"A confident junior developer sitting before a dark-theme monitor reviewing AI-suggested code. Floating badges and icons surround them and a friendly AI robot arm beside their shoulder visualizes that AI is a partner not a competitor.",
+  imgPromptKo:"[Point] AI\ub294 \uac1c\ubc1c\uc790\uc758 \uacbd\uc7c1\uc790\uac00 \uc544\ub2cc \ub3d9\ubc18\uc790\n[Reason] \ub2e4\ud06c \ud14c\ub9c8 \ubaa8\ub2c8\ud130 \uc55e\uc758 \uc790\uc2e0\uac10 \uc788\ub294 \uc8fc\ub2c8\uc5b4 \uac1c\ubc1c\uc790\n[Example] \ub5a0\ub2e4\ub2c8\ub294 \ubc30\uc9c0\uc640 \uc544\uc774\ucf58, AI \ub85c\ubd07 \ud314\n[Point] \ud568\uaed8\ud558\ub294 \ubbf8\ub798\ub97c \uc2dc\uac01\ud654",
+  imgDesc:"\ub2e4\ud06c \ud14c\ub9c8 \ubaa8\ub2c8\ud130 \uc55e\uc5d0 \uc790\uc2e0\uac10 \uc788\uac8c \uc549\uc544 AI \uc81c\uc548 \ucf54\ub4dc\ub97c \uc0b4\ud53c\ub294 \uc8fc\ub2c8\uc5b4 \uac1c\ubc1c\uc790. \uc8fc\ubcc0\uc5d0 \ub5a0\ub2e4\ub2c8\ub294 \ubc30\uc9c0\uc640 \uc544\uc774\ucf58, \uc5b4\uae68 \uc606\uc5d0 \ud568\uaed8\ud558\ub294 AI \ub85c\ubd07 \ud314\uc774 'AI\ub294 \uacbd\uc7c1\uc790\uac00 \uc544\ub2cc \ub3d9\ubc18\uc790'\ub77c\ub294 \uba54\uc2dc\uc9c0\ub97c \uc2dc\uac01\ud654.",
+  codePrompt:"[Point] \ud0c0\uc785 \ud78c\ud2b8 \uc0ac\uc6a9\uc774 Python \ucf54\ub4dc \ud488\uc9c8\uc744 \ub192\uc778\ub2e4\n[Reason] 3\uac00\uc9c0 \uadfc\uac70: IDE \uc9c0\uc6d0, \ub7f0\ud0c0\uc784 \uac80\uc99d, \ubb38\uc11c\ud654\n[Example] \ud0c0\uc785 \ud78c\ud2b8 \uc5c6\ub294 \ucf54\ub4dc vs \uc788\ub294 \ucf54\ub4dc \ube44\uad50\n[Point] mypy \uc815\uc801 \ubd84\uc11d\uc73c\ub85c \ubc84\uadf8\ub97c \uc0ac\uc804 \ucc28\ub2e8",
+  codeResult:"# PREP: \ud0c0\uc785 \ud78c\ud2b8\uc758 \uc911\uc694\uc131\n\n# POINT: \ud0c0\uc785 \ud78c\ud2b8\uac00 \ucf54\ub4dc \ud488\uc9c8\uc744 \ub192\uc778\ub2e4\n\n# REASON 1: IDE \uc790\ub3d9\uc644\uc131\u00b7\uc5d0\ub7ec \uac10\uc9c0 \ud5a5\uc0c1\n# BEFORE (\ud0c0\uc785 \ud78c\ud2b8 \uc5c6\uc74c)\ndef process_data(data, threshold):\n    return [x for x in data if x > threshold]  # IDE\uac00 x\uc758 \ud0c0\uc785\uc744 \ubaa8\ub984\n\n# AFTER (\ud0c0\uc785 \ud78c\ud2b8 \uc788\uc74c)\nfrom typing import List\ndef process_data(data: List[float], threshold: float) -> List[float]:\n    return [x for x in data if x > threshold]  # IDE\uac00 \uc644\uc804\ud55c \ud0c0\uc785 \uc815\ubcf4 \uc81c\uacf5\n\n# REASON 2: \ub7f0\ud0c0\uc784 \uac80\uc99d (pydantic)\nfrom pydantic import BaseModel, validator\n\nclass UserInput(BaseModel):\n    name: str\n    age: int\n    email: str\n\n    @validator('age')\n    def age_must_be_positive(cls, v):\n        if v < 0:\n            raise ValueError('\ub098\uc774\ub294 \uc591\uc218\uc5ec\uc57c \ud569\ub2c8\ub2e4')\n        return v\n\n# EXAMPLE: \ud0c0\uc785 \uc5d0\ub7ec\ub97c \ucef4\ud30c\uc77c \ud0c0\uc784\uc5d0 \uc7a1\uae30\n# mypy\ub85c \uc2e4\ud589: mypy script.py\ndef greet(name: str) -> str:\n    return f\"Hello, {name}\"\n\nresult: int = greet(\"Alice\")  # mypy\uac00 \ud0c0\uc785 \ubd88\uc77c\uce58 \uacbd\uace0 \ubc1c\uc0dd!\n# error: Incompatible types in assignment (expression has type \"str\", variable has type \"int\")\n\n# POINT (\uc7ac\uac15\uc870): \ud0c0\uc785 \ud78c\ud2b8 + mypy = \ub7f0\ud0c0\uc784 \uc804 \ubc84\uadf8 90% \ucc28\ub2e8",
+  imgData:"PREP.webp"
+},
+{
+  id:"CRISPE",
+  name:"CRISPE",
+  fullName:"Capacity \u00b7 Role \u00b7 Insight \u00b7 Statement \u00b7 Personality \u00b7 Experiment",
+  difficulty:"advanced",
+  diffLabel:"\u2b50\u2b50\u2b50\u2b50 Advanced",
+  category:"\uc804\ubb38\uac00 \uc2ec\uce35\ud615",
+  focus:"6\uc694\uc18c \uc804\ubb38\uac00 \uc2ec\uce35 \uba85\uc138",
+  strengths:["\ucd5c\uace0 \uc218\uc900 \ucd9c\ub825", "\uc804\ubb38\uac00 \uc2dc\ubbac\ub808\uc774\uc158", "\uc2e4\ud5d8\uc801 \ud0d0\uad6c"],
+  desc:"AI\uc758 \uc5ed\ub7c9(Capacity), \uc5ed\ud560(Role), \ud1b5\ucc30(Insight), \uc9c4\uc220(Statement), \uac1c\uc131(Personality), \uc2e4\ud5d8(Experiment) 6\uc694\uc18c\ub97c \uba85\uc138\ud558\uc5ec \uc804\ubb38\uac00 \uc218\uc900\uc758 \uc2ec\uce35 \ubd84\uc11d\uc744 \uc774\ub04c\uc5b4\ub0b4\ub294 \ucd5c\uace0\uae09 \ud504\ub808\uc784\uc6cc\ud06c\uc785\ub2c8\ub2e4.",
+  docPrompt:"[Capacity] \ub2f9\uc2e0\uc740 GPT-4\uae09 \uc5b8\uc5b4 \ubaa8\ub378\ub85c, \ubcf5\ud569\uc801 \ucd94\ub860\uacfc \ucc3d\uc758\uc801 \ubd84\uc11d\uc774 \uac00\ub2a5\ud569\ub2c8\ub2e4.\n[Role] \uc2a4\ud0c0\ud2b8\uc5c5 \ud22c\uc790 \uc2ec\uc0ac\uc5ed \ubc0f \uc81c\ud488 \uc804\ub7b5\uac00\n[Insight] AI \ud5ec\uc2a4\ucf00\uc5b4 \uc2dc\uc7a5\uc758 \ud604\uc7ac \ud2b8\ub80c\ub4dc\uc640 \ud22c\uc790 \ud328\ud134\uc744 \ubd84\uc11d\ud558\uc138\uc694.\n[Statement] 2025\ub144 AI \ud5ec\uc2a4\ucf00\uc5b4 \uc2a4\ud0c0\ud2b8\uc5c5 \ud53c\uce58\ub371\uc744 \uc791\uc131\ud558\uc138\uc694.\n[Personality] \ub370\uc774\ud130 \uae30\ubc18\uc774\uba74\uc11c\ub3c4 \ube44\uc804\uc744 \uc81c\uc2dc\ud558\ub294 \uc124\ub4dd\ub825 \uc788\ub294 \uc5b4\uc870\n[Experiment] \uae30\uc874 \ud53c\uce58\ub371 \ud328\ud134\uc744 \ud30c\uad34\ud558\ub294 \ud601\uc2e0\uc801 \uc2a4\ud1a0\ub9ac\ud154\ub9c1 \uc2dc\ub3c4",
+  docResult:"\uae30\uc874 \ud53c\uce58\ub371 \uacf5\uc2dd\uc744 \ud0c8\ud53c\ud55c \ud601\uc2e0\uc801\uc778 \uc2a4\ud1a0\ub9ac\ud154\ub9c1 \uad6c\uc870, \uc2e4\uc81c \ud22c\uc790 \ub370\uc774\ud130 \uae30\ubc18 \uc2dc\uc7a5 \ubd84\uc11d, \ucc28\ubcc4\ud654\ub41c \ube44\uc804 \uc81c\uc2dc\uac00 \ud3ec\ud568\ub41c \uace0\ud488\uc9c8 \ud53c\uce58\ub371\uc774 \uc0dd\uc131\ub429\ub2c8\ub2e4.",
+  imgPromptEn:"A smartphone surrounded by health food icons and glowing AI neural network visualization on a green-blue gradient background. App UI clearly visible, shining neural network conveys AI nutritional analysis as the core value. Pitch deck hero image.",
+  imgPromptKo:"[Capacity] \ucd5c\uace0 \ud488\uc9c8\uc758 \ud53c\uce58\ub371 \ube44\uc8fc\uc5bc\n[Role] AI \ud5ec\uc2a4\ucf00\uc5b4 \uc571 \ud788\uc5b4\ub85c \uc774\ubbf8\uc9c0\n[Insight] \uadf8\ub9b0-\ube14\ub8e8 \uadf8\ub77c\ub514\uc5b8\ud2b8 \ubc30\uacbd, AI \uc2e0\uacbd\ub9dd \uc2dc\uac01\ud654\n[Statement] \uc2a4\ub9c8\ud2b8\ud3f0 \uc571 UI\uc640 \uac74\uac15 \uc2dd\ud488 \uc544\uc774\ucf58\n[Personality] \ucca8\ub2e8 \uae30\uc220\uacfc \uac74\uac15\uc758 \uc735\ud569\uc744 \ud45c\ud604",
+  imgDesc:"\uadf8\ub9b0-\ube14\ub8e8 \uadf8\ub77c\ub514\uc5b8\ud2b8 \ubc30\uacbd \uc704\uc5d0 \uac74\uac15 \uc2dd\ud488 \uc544\uc774\ucf58\uacfc AI \uc2e0\uacbd\ub9dd \uc2dc\uac01\ud654\ub85c \ub458\ub7ec\uc2f8\uc778 \uc2a4\ub9c8\ud2b8\ud3f0. \uc571 UI\uac00 \uc120\uba85\ud558\uac8c \ubcf4\uc774\uace0, \ube5b\ub098\ub294 \ub274\ub7f4 \ub124\ud2b8\uc6cc\ud06c\uac00 'AI\uac00 \uc601\uc591\uc744 \ubd84\uc11d\ud55c\ub2e4'\ub294 \ud575\uc2ec \uac00\uce58\ub97c \uc2dc\uac01\uc801\uc73c\ub85c \ud45c\ud604\ud55c \ud53c\uce58\ub371 \ud788\uc5b4\ub85c.",
+  codePrompt:"[Capacity] \uc2dc\uc2a4\ud15c \uc124\uacc4 \uc804\ubb38\uac00\n[Role] MLOps \uc544\ud0a4\ud14d\ud2b8\n[Insight] \ud604\uc7ac \ub2e8\uc21c \uc2a4\ud06c\ub9bd\ud2b8 \ubc29\uc2dd\uc758 ML \ud30c\uc774\ud504\ub77c\uc778 \ud55c\uacc4 \uc778\uc2dd\n[Statement] \ud504\ub85c\ub355\uc158 \ub808\ubca8 ML \ud30c\uc774\ud504\ub77c\uc778\uc744 \uc124\uacc4\ud558\uc138\uc694\n[Personality] \ud655\uc7a5\uc131\u00b7\uc7ac\ud604\uc131\u00b7\ubaa8\ub2c8\ud130\ub9c1\uc744 \ucd5c\uc6b0\uc120 \uace0\ub824\n[Experiment] \ucd5c\uc2e0 MLOps \ud328\ud134(Feature Store, Model Registry) \uc801\uc6a9",
+  codeResult:"from dataclasses import dataclass\nfrom typing import Any\nimport mlflow\nimport mlflow.sklearn\nfrom sklearn.pipeline import Pipeline\n\n@dataclass\nclass ModelConfig:\n    name: str\n    version: str\n    features: list\n    hyperparams: dict\n\nclass MLOpsPipeline:\n    \"\"\"\ud504\ub85c\ub355\uc158 \ub808\ubca8 MLOps \ud30c\uc774\ud504\ub77c\uc778\"\"\"\n\n    def __init__(self, config: ModelConfig):\n        self.config = config\n        mlflow.set_tracking_uri(\"http://mlflow-server:5000\")\n\n    def train_with_tracking(self, X_train, y_train) -> str:\n        \"\"\"MLflow\ub85c \uc2e4\ud5d8 \ucd94\uc801 \ubc0f \ubaa8\ub378 \ub4f1\ub85d\"\"\"\n        with mlflow.start_run(run_name=f\"{self.config.name}_v{self.config.version}\"):\n            # \ud558\uc774\ud37c\ud30c\ub77c\ubbf8\ud130 \ub85c\uae45\n            mlflow.log_params(self.config.hyperparams)\n            mlflow.log_param(\"features\", self.config.features)\n\n            # \ubaa8\ub378 \ud559\uc2b5\n            model = self._build_pipeline()\n            model.fit(X_train, y_train)\n\n            # \uba54\ud2b8\ub9ad \ud3c9\uac00 \ubc0f \ub85c\uae45\n            metrics = self._evaluate(model, X_train, y_train)\n            mlflow.log_metrics(metrics)\n\n            # Model Registry\uc5d0 \ub4f1\ub85d\n            mlflow.sklearn.log_model(\n                model,\n                artifact_path=\"model\",\n                registered_model_name=self.config.name\n            )\n\n            run_id = mlflow.active_run().info.run_id\n            print(f\"\u2713 \ubaa8\ub378 \ub4f1\ub85d \uc644\ub8cc: {self.config.name} (run_id: {run_id})\")\n            return run_id\n\n    def _build_pipeline(self) -> Pipeline:\n        from sklearn.preprocessing import StandardScaler\n        from sklearn.ensemble import RandomForestClassifier\n        return Pipeline([\n            ('scaler', StandardScaler()),\n            ('model', RandomForestClassifier(**self.config.hyperparams))\n        ])",
+  imgData:"CRISPE.webp"
+},
+{
+  id:"TRACE",
+  name:"TRACE",
+  fullName:"Task \u00b7 Requirements \u00b7 Audience \u00b7 Context \u00b7 Examples",
+  difficulty:"advanced",
+  diffLabel:"\u2b50\u2b50\u2b50\u2b50 Advanced",
+  category:"\uc644\uc804 \uba85\uc138 \uace0\uae09\ud615",
+  focus:"\uc791\uc5c5\u00b7\uc694\uad6c\uc0ac\ud56d\u00b7\ub300\uc0c1\u00b7\ub9e5\ub77d\u00b7\uc0ac\ub840 \uc644\uc804 \uba85\uc138",
+  strengths:["\uc644\uc804\ud55c \uba85\uc138", "\ub300\uc0c1 \ub9de\ucda4\ud654", "\uc0ac\ub840 \uae30\ubc18 \ud559\uc2b5"],
+  desc:"\uc791\uc5c5(Task), \uc138\ubd80 \uc694\uad6c\uc0ac\ud56d(Requirements), \ub300\uc0c1 \ub3c5\uc790(Audience), \ubc30\uacbd \ub9e5\ub77d(Context), \ucc38\uace0 \uc0ac\ub840(Examples)\ub97c \uc644\uc804\ud788 \uba85\uc138\ud558\uc5ec \uc804\ubb38\uc801\uc774\uace0 \ub9e5\ub77d \ub9de\ucda4\ud615 \uacb0\uacfc\ub97c \uc0dd\uc131\ud558\ub294 \ucd5c\uace0\uae09 \ud504\ub808\uc784\uc6cc\ud06c\uc785\ub2c8\ub2e4.",
+  docPrompt:"[Task] \uc6d0\uaca9 \uadfc\ubb34 \uac00\uc774\ub4dc\ub77c\uc778 \ubb38\uc11c \uc791\uc131\n[Requirements] 10\ud398\uc774\uc9c0 \uc774\ub0b4, \uc815\ucc45\u00b7\ub3c4\uad6c\u00b7\uc18c\ud1b5 \ubc29\uc2dd \ud3ec\ud568, \ubc95\uc801 \uc694\uac74 \uace0\ub824\n[Audience] \uc6d0\uaca9 \uadfc\ubb34 \uacbd\ud5d8 \uc5c6\ub294 \uc911\uc18c\uae30\uc5c5 HR \ub2f4\ub2f9\uc790\n[Context] \ucf54\ub85c\ub098 \uc774\ud6c4 \ud558\uc774\ube0c\ub9ac\ub4dc \uadfc\ubb34 \ub3c4\uc785 \uae09\uc99d, \ubc95\uc801 \ubd84\uc7c1 \uc99d\uac00 \ubc30\uacbd\n[Examples] \uad6c\uae00\u00b7\uc2ac\ub799\u00b7\uc5d0\uc5b4\ube44\uc564\ube44\uc758 \uc6d0\uaca9 \uadfc\ubb34 \uc815\ucc45 \ubca4\uce58\ub9c8\ud0b9",
+  docResult:"10\ud398\uc774\uc9c0 \ubd84\ub7c9\uc758 \uc644\uc131\ub41c \uc6d0\uaca9 \uadfc\ubb34 \uac00\uc774\ub4dc\ub77c\uc778\uc774 \uc0dd\uc131\ub429\ub2c8\ub2e4. HR \ub2f4\ub2f9\uc790 \ub208\ub192\uc774\uc5d0 \ub9de\ucdb0 \uc815\ucc45, \ub3c4\uad6c, \uc18c\ud1b5 \ubc29\uc2dd\uc774 \uccb4\uacc4\uc801\uc73c\ub85c \uc815\ub9ac\ub418\uace0 \uae00\ub85c\ubc8c \ubca4\uce58\ub9c8\ud06c \uc0ac\ub840\uac00 \ud3ec\ud568\ub429\ub2c8\ub2e4.",
+  imgPromptEn:"A person focused working at a home office filled with warm natural light. Holographic collaboration tool UI elements and productivity data charts float around them, visualizing remote work connectivity. Alone but connected mood.",
+  imgPromptKo:"[Task] \uc6d0\uaca9 \uadfc\ubb34 \ud658\uacbd \uc2dc\uac01\ud654\n[Requirements] \ub530\ub73b\ud55c \uc790\uc5f0\uad11\uc758 \ud648 \uc624\ud53c\uc2a4\n[Audience] \uc6d0\uaca9 \uadfc\ubb34\uc790\n[Context] \ud640\ub85c\uadf8\ub798\ud53d \ud611\uc5c5 \ub3c4\uad6c UI\uc640 \uc0dd\uc0b0\uc131 \ucc28\ud2b8\n[Examples] '\ud63c\uc790\uc9c0\ub9cc \uc5f0\uacb0\ub418\uc5b4 \uc788\ub2e4'\ub294 \uc6d0\uaca9 \uadfc\ubb34 \ud328\ub7ec\ub2e4\uc784",
+  imgDesc:"\ub530\ub73b\ud55c \uc790\uc5f0\uad11\uc774 \uac00\ub4dd\ud55c \ud648 \uc624\ud53c\uc2a4\uc5d0\uc11c \uc9d1\uc911\ud558\uba70 \uc77c\ud558\ub294 \uc778\ubb3c. \uc8fc\ubcc0\uc5d0 \ub5a0 \uc788\ub294 \ud640\ub85c\uadf8\ub798\ud53d \ud611\uc5c5 \ub3c4\uad6c UI\uc640 \uc0dd\uc0b0\uc131 \ub370\uc774\ud130 \ucc28\ud2b8\uac00 '\ud63c\uc790\uc9c0\ub9cc \uc5f0\uacb0\ub418\uc5b4 \uc788\ub2e4'\ub294 \uc6d0\uaca9 \uadfc\ubb34\uc758 \ud328\ub7ec\ub2e4\uc784\uc744 \uc138\ub828\ub418\uac8c \uc2dc\uac01\ud654.",
+  codePrompt:"[Task] \ubd84\uc0b0 \uc2dc\uc2a4\ud15c \ud5ec\uc2a4\uccb4\ud06c \ubaa8\ub2c8\ud130\ub9c1 \uad6c\ud604\n[Requirements] \ub2e4\uc911 \uc11c\ube44\uc2a4 \uc9c0\uc6d0, \uc54c\ub78c \uc784\uacc4\uac12 \uc124\uc815, \ud788\uc2a4\ud1a0\ub9ac \uc800\uc7a5\n[Audience] SRE \ud300 (Site Reliability Engineering)\n[Context] MSA \uc804\ud658 \ud6c4 \uc11c\ube44\uc2a4 \uc218 \uae09\uc99d\uc73c\ub85c \uc218\ub3d9 \ubaa8\ub2c8\ud130\ub9c1 \ud55c\uacc4\n[Examples] Prometheus/Grafana \ud328\ud134 \ucc38\uace0, PagerDuty \uc5f0\ub3d9 \uace0\ub824",
+  codeResult:"import asyncio\nimport aiohttp\nfrom datetime import datetime\nfrom dataclasses import dataclass, field\nfrom typing import List, Optional\n\n@dataclass\nclass ServiceHealth:\n    name: str\n    url: str\n    threshold_ms: int = 500\n    history: List[dict] = field(default_factory=list)\n\nclass DistributedHealthChecker:\n    \"\"\"SRE\ud300\uc744 \uc704\ud55c \ubd84\uc0b0 \uc11c\ube44\uc2a4 \ud5ec\uc2a4\uccb4\ud06c \ubaa8\ub2c8\ud130\ub9c1\"\"\"\n\n    def __init__(self, alert_webhook: Optional[str] = None):\n        self.services: List[ServiceHealth] = []\n        self.alert_webhook = alert_webhook\n\n    def register(self, name: str, url: str, threshold_ms: int = 500):\n        self.services.append(ServiceHealth(name, url, threshold_ms))\n\n    async def check_service(self, service: ServiceHealth, session: aiohttp.ClientSession) -> dict:\n        start = datetime.now()\n        try:\n            async with session.get(service.url, timeout=aiohttp.ClientTimeout(total=5)) as resp:\n                elapsed_ms = (datetime.now() - start).total_seconds() * 1000\n                status = {\n                    'service': service.name,\n                    'status': 'healthy' if resp.status == 200 else 'degraded',\n                    'response_ms': round(elapsed_ms, 2),\n                    'http_status': resp.status,\n                    'timestamp': datetime.now().isoformat(),\n                    'alert': elapsed_ms > service.threshold_ms\n                }\n                service.history.append(status)\n                if status['alert']:\n                    await self._send_alert(service.name, elapsed_ms, service.threshold_ms)\n                return status\n        except Exception as e:\n            return {'service': service.name, 'status': 'down', 'error': str(e)}\n\n    async def check_all(self) -> List[dict]:\n        async with aiohttp.ClientSession() as session:\n            tasks = [self.check_service(s, session) for s in self.services]\n            return await asyncio.gather(*tasks)\n\n    async def _send_alert(self, service: str, elapsed: float, threshold: int):\n        if self.alert_webhook:\n            async with aiohttp.ClientSession() as session:\n                await session.post(self.alert_webhook, json={\n                    \"text\": f\"\u26a0\ufe0f {service} \uc751\ub2f5 \uc9c0\uc5f0: {elapsed:.0f}ms (\uc784\uacc4\uac12: {threshold}ms)\"\n                })",
+  imgData:"TRACE.webp"
+}];
+
+let currentTab = 'overview';
+let currentSection = 'doc';
+
+function diffClass(d){
+  if(d==='easy') return 'badge-easy';
+  if(d==='medium') return 'badge-medium';
+  if(d==='intermediate') return 'badge-intermediate';
+  return 'badge-advanced';
+}
+
+function buildNav(){
+  const nav = document.getElementById('nav-tabs');
+  const tabs = [{id:'overview',name:'📊 Overview'},...FW.map(f=>({id:f.id,name:f.name}))];
+  nav.innerHTML = tabs.map(t=>`
+    <button class="tab-btn ${t.id===currentTab?'active':''}" onclick="showTab('${t.id}')">${t.name}</button>
+  `).join('');
+}
+
+function showTab(id){
+  currentTab = id;
+  currentSection = 'doc';
+  buildNav();
+  renderMain();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderMain(){
+  const el = document.getElementById('main-content');
+  if(currentTab==='overview') el.innerHTML = renderOverview();
+  else {
+    const fw = FW.find(f=>f.id===currentTab);
+    if(fw) el.innerHTML = renderDetail(fw);
+  }
+}
+
+function renderOverview(){
+  const cards = FW.map(fw=>`
+    <div class="fw-card" onclick="showTab('${fw.id}')">
+      <div class="badge-row">
+        <span class="badge badge-id">${fw.id}</span>
+        <span class="badge ${diffClass(fw.difficulty)}">${fw.diffLabel}</span>
+      </div>
+      <h3>${fw.name}</h3>
+      <div class="fullname">${fw.fullName}</div>
+      <p>${fw.desc.substring(0,120)}...</p>
+      <div class="strengths">${fw.strengths.map(s=>`<span class="strength-tag">${s}</span>`).join('')}</div>
+      <button class="view-btn">View Details →</button>
+    </div>
+  `).join('');
+
+  const rows = FW.map(fw=>`
+    <tr>
+      <td><strong>${fw.id}</strong></td>
+      <td>${fw.fullName}</td>
+      <td><span class="diff-badge ${diffClass(fw.difficulty)}">${fw.diffLabel}</span></td>
+      <td>${fw.category}</td>
+      <td>${fw.focus}</td>
+      <td>${fw.strengths.join(', ')}</td>
+    </tr>
+  `).join('');
+
+  return `
+    <div class="overview-grid">${cards}</div>
+    <div class="comparison-table" style="margin-top:32px">
+      <h3 style="font-size:1.1rem;font-weight:700;color:#1e293b;margin-bottom:16px">📊 Framework Comparison Table</h3>
+      <table>
+        <thead><tr><th>ID</th><th>Full Name</th><th>Difficulty</th><th>Category</th><th>Focus</th><th>Strengths</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>
+  `;
+}
+
+function renderDetail(fw){
+  const secTabs = [
+    {id:'doc', label:'📄 Document'},
+    {id:'img', label:'🖼️ Image'},
+    {id:'code', label:'💻 Code'}
+  ];
+
+  const secTabsHtml = secTabs.map(s=>`
+    <button class="sec-tab ${s.id===currentSection?'active':''}" onclick="showSection('${s.id}')">${s.label}</button>
+  `).join('');
+
+  const docSection = `
+    <div class="content-section ${currentSection==='doc'?'visible':''}">
+      <div class="card-grid">
+        <div class="content-card">
+          <h4>📝 Prompt</h4>
+          <div class="prompt-box">${escHtml(fw.docPrompt)}</div>
+        </div>
+        <div class="content-card">
+          <h4>✅ AI Output</h4>
+          <div class="result-box">${escHtml(fw.docResult)}</div>
+        </div>
+      </div>
+    </div>`;
+
+  const imgSection = `
+    <div class="content-section ${currentSection==='img'?'visible':''}">
+      <div class="card-grid">
+        <div class="content-card">
+          <h4>🇺🇸 Image Prompt (English)</h4>
+          <div class="prompt-box">${escHtml(fw.imgPromptEn)}</div>
+          <div style="margin-top:12px">
+          <h4 style="margin-bottom:8px">🇰🇷 Image Prompt (Korean)</h4>
+          <div class="prompt-box">${escHtml(fw.imgPromptKo)}</div>
+          </div>
+        </div>
+        <div class="content-card" style="padding:0;overflow:hidden">
+          <div class="img-wrap">
+            <img src="${fw.imgData?fw.imgData:'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22280%22><rect fill=%22%23f1f5f9%22 width=%22400%22 height=%22280%22/><text x=%22200%22 y=%22140%22 text-anchor=%22middle%22 fill=%22%2394a3b8%22>Image</text></svg>'}" 
+                 alt="${fw.id} example image" loading="lazy"/>
+          </div>
+          <div class="img-desc">${escHtml(fw.imgDesc)}</div>
+        </div>
+      </div>
+    </div>`;
+
+  const codeSection = `
+    <div class="content-section ${currentSection==='code'?'visible':''}">
+      <div class="card-grid">
+        <div class="content-card">
+          <h4>💡 Prompt</h4>
+          <div class="prompt-box">${escHtml(fw.codePrompt)}</div>
+        </div>
+        <div class="content-card">
+          <h4>🖥️ AI Generated Code</h4>
+          <div class="prompt-box">${escHtml(fw.codeResult)}</div>
+        </div>
+      </div>
+    </div>`;
+
+  return `
+    <button class="back-btn" onclick="showTab('overview')">← Back to Overview</button>
+    <div class="fw-detail-header">
+      <div class="top-row">
+        <div class="fw-icon">${fw.id[0]}</div>
+        <div>
+          <h2>${fw.name}</h2>
+          <div class="sub">${fw.fullName}</div>
+          <div class="badges">
+            <span class="badge ${diffClass(fw.difficulty)}">${fw.diffLabel}</span>
+            <span class="badge" style="background:#f1f5f9;color:#475569">${fw.category}</span>
+            <span class="badge" style="background:#f0fdf4;color:#166534">🎯 ${fw.focus}</span>
+          </div>
+        </div>
+      </div>
+      <div class="desc">${fw.desc}</div>
+      <div class="strengths">${fw.strengths.map(s=>`<span class="strength-tag">✓ ${s}</span>`).join('')}</div>
+    </div>
+    <div class="section-tabs">${secTabsHtml}</div>
+    ${docSection}
+    ${imgSection}
+    ${codeSection}
+  `;
+}
+
+function showSection(id){
+  currentSection = id;
+  renderMain();
+}
+
+function escHtml(s){
+  return String(s)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
+}
+
+// Init
+buildNav();
+renderMain();
+</script>
+</body>
+</html>
