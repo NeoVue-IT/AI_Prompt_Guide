@@ -77,6 +77,36 @@ td{padding:11px 10px;border-bottom:1px solid #f1f5f9;vertical-align:top;line-hei
 tr:last-child td{border-bottom:none}
 tr:hover td{background:#f8fafc}
 .diff-badge{padding:2px 8px;border-radius:12px;font-size:0.72rem;font-weight:600;white-space:nowrap}
+
+.section-block{margin-bottom:32px}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.section-head h3{font-size:1.15rem;font-weight:800;color:#1e293b}
+.section-head p{font-size:0.85rem;color:#64748b}
+
+.toggle-btn{
+  padding:10px 16px;
+  border:none;
+  background:#1e293b;
+  color:#fff;
+  border-radius:10px;
+  font-weight:700;
+  font-size:0.82rem;
+  cursor:pointer;
+  transition:all 0.2s;
+}
+.toggle-btn:hover{background:#334155}
+
+.collapsible{
+  display:none;
+}
+.collapsible.visible{
+  display:block;
+  animation:fadeIn 0.3s ease;
+}
+</style>
+
+
+
 </style>
 </head>
 <body>
@@ -362,6 +392,7 @@ const FW = [{
 
 let currentTab = 'overview';
 let currentSection = 'doc';
+let showOthers = false;
 
 function diffClass(d){
   if(d==='easy') return 'badge-easy';
@@ -372,7 +403,7 @@ function diffClass(d){
 
 function buildNav(){
   const nav = document.getElementById('nav-tabs');
-  const tabs = [{id:'overview',name:'📊 Overview'},...FW.map(f=>({id:f.id,name:f.name}))];
+  const tabs = [{id:'overview',name:'📊 전체'},...FW.map(f=>({id:f.id,name:f.name}))];
   nav.innerHTML = tabs.map(t=>`
     <button class="tab-btn ${t.id===currentTab?'active':''}" onclick="showTab('${t.id}')">${t.name}</button>
   `).join('');
@@ -395,8 +426,16 @@ function renderMain(){
   }
 }
 
+function toggleOthers(){
+  showOthers = !showOthers;
+  renderMain();
+}
+
 function renderOverview(){
-  const cards = FW.map(fw=>`
+  const mainFrameworks = FW.slice(0, 5);
+  const otherFrameworks = FW.slice(5);
+
+  const mainCards = mainFrameworks.map(fw=>`
     <div class="fw-card" onclick="showTab('${fw.id}')">
       <div class="badge-row">
         <span class="badge badge-id">${fw.id}</span>
@@ -406,7 +445,21 @@ function renderOverview(){
       <div class="fullname">${fw.fullName}</div>
       <p>${fw.desc.substring(0,120)}...</p>
       <div class="strengths">${fw.strengths.map(s=>`<span class="strength-tag">${s}</span>`).join('')}</div>
-      <button class="view-btn">View Details →</button>
+      <button class="view-btn" type="button">View Details →</button>
+    </div>
+  `).join('');
+
+  const otherCards = otherFrameworks.map(fw=>`
+    <div class="fw-card" onclick="showTab('${fw.id}')">
+      <div class="badge-row">
+        <span class="badge badge-id">${fw.id}</span>
+        <span class="badge ${diffClass(fw.difficulty)}">${fw.diffLabel}</span>
+      </div>
+      <h3>${fw.name}</h3>
+      <div class="fullname">${fw.fullName}</div>
+      <p>${fw.desc.substring(0,120)}...</p>
+      <div class="strengths">${fw.strengths.map(s=>`<span class="strength-tag">${s}</span>`).join('')}</div>
+      <button class="view-btn" type="button">View Details →</button>
     </div>
   `).join('');
 
@@ -422,11 +475,45 @@ function renderOverview(){
   `).join('');
 
   return `
-    <div class="overview-grid">${cards}</div>
+    <div class="section-block">
+      <div class="section-head">
+        <div>
+          <h3>⭐ Main Frameworks</h3>
+          <p>The 5 primary frameworks shown first for a cleaner overview.</p>
+        </div>
+      </div>
+      <div class="overview-grid">${mainCards}</div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-head">
+        <div>
+          <h3>📚 Others</h3>
+          <p>Additional frameworks grouped separately to reduce clutter.</p>
+        </div>
+        <button class="toggle-btn" type="button" onclick="toggleOthers()">
+          ${showOthers ? 'Hide Others' : 'Show Others'}
+        </button>
+      </div>
+
+      <div class="collapsible ${showOthers ? 'visible' : ''}">
+        <div class="overview-grid">${otherCards}</div>
+      </div>
+    </div>
+
     <div class="comparison-table" style="margin-top:32px">
       <h3 style="font-size:1.1rem;font-weight:700;color:#1e293b;margin-bottom:16px">📊 Framework Comparison Table</h3>
       <table>
-        <thead><tr><th>ID</th><th>Full Name</th><th>Difficulty</th><th>Category</th><th>Focus</th><th>Strengths</th></tr></thead>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Difficulty</th>
+            <th>Category</th>
+            <th>Focus</th>
+            <th>Strengths</th>
+          </tr>
+        </thead>
         <tbody>${rows}</tbody>
       </table>
     </div>
