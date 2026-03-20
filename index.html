@@ -12,7 +12,38 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .header p{color:rgba(255,255,255,0.8);margin-top:8px;font-size:1rem}
 .nav{background:#fff;border-bottom:2px solid #e2e8f0;padding:0 16px;overflow-x:auto;white-space:nowrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
 .nav::-webkit-scrollbar{height:4px}.nav::-webkit-scrollbar-track{background:#f1f5f9}.nav::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:2px}
-.nav-inner{display:inline-flex;gap:2px;padding:8px 0}
+.nav-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:8px 0;
+  min-width:max-content;
+}
+
+.nav-tabs-left{
+  display:inline-flex;
+  gap:2px;
+  align-items:center;
+}
+
+.nav-toggle-btn{
+  padding:8px 14px;
+  border:none;
+  background:#1e293b;
+  color:#fff;
+  border-radius:8px;
+  font-size:0.82rem;
+  font-weight:700;
+  cursor:pointer;
+  transition:all 0.2s;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+
+.nav-toggle-btn:hover{
+  background:#334155;
+}
 .tab-btn{padding:8px 14px;border:none;background:none;cursor:pointer;font-size:0.82rem;font-weight:600;color:#64748b;border-radius:8px;transition:all 0.2s;white-space:nowrap}
 .tab-btn:hover{background:#f1f5f9;color:#1e293b}
 .tab-btn.active{background:#2563eb;color:#fff;box-shadow:0 2px 8px rgba(37,99,235,0.3)}
@@ -403,12 +434,32 @@ function diffClass(d){
 
 function buildNav(){
   const nav = document.getElementById('nav-tabs');
-  const tabs = [{id:'overview',name:'📊 전체'},...FW.map(f=>({id:f.id,name:f.name}))];
-  nav.innerHTML = tabs.map(t=>`
-    <button class="tab-btn ${t.id===currentTab?'active':''}" onclick="showTab('${t.id}')">${t.name}</button>
-  `).join('');
-}
 
+  const visibleFrameworks = showOthers ? FW : FW.slice(0, 5);
+  const tabs = [
+    { id:'overview', name:'📊 전체' },
+    ...visibleFrameworks.map(f => ({ id:f.id, name:f.name }))
+  ];
+
+  const visibleIds = tabs.map(t => t.id);
+  if (!visibleIds.includes(currentTab)) {
+    currentTab = 'overview';
+  }
+
+  nav.innerHTML = `
+    <div class="nav-tabs-left">
+      ${tabs.map(t => `
+        <button class="tab-btn ${t.id===currentTab?'active':''}" onclick="showTab('${t.id}')">
+          ${t.name}
+        </button>
+      `).join('')}
+    </div>
+
+    <button class="nav-toggle-btn" type="button" onclick="toggleOthers()">
+      ${showOthers ? 'Hide Others' : 'Show Others'}
+    </button>
+  `;
+}
 function showTab(id){
   currentTab = id;
   currentSection = 'doc';
@@ -428,6 +479,14 @@ function renderMain(){
 
 function toggleOthers(){
   showOthers = !showOthers;
+
+  // 숨김 상태로 바꿨는데 현재 탭이 Others 쪽이면 overview로 이동
+  const mainIds = FW.slice(0,5).map(f => f.id);
+  if (!showOthers && currentTab !== 'overview' && !mainIds.includes(currentTab)) {
+    currentTab = 'overview';
+  }
+
+  buildNav();
   renderMain();
 }
 
@@ -463,7 +522,18 @@ function renderOverview(){
     </div>
   `).join('');
 
-  const rows = FW.map(fw=>`
+  const mainRows = mainFrameworks.map(fw=>`
+    <tr>
+      <td><strong>${fw.id}</strong></td>
+      <td>${fw.fullName}</td>
+      <td><span class="diff-badge ${diffClass(fw.difficulty)}">${fw.diffLabel}</span></td>
+      <td>${fw.category}</td>
+      <td>${fw.focus}</td>
+      <td>${fw.strengths.join(', ')}</td>
+    </tr>
+  `).join('');
+
+  const otherRows = otherFrameworks.map(fw=>`
     <tr>
       <td><strong>${fw.id}</strong></td>
       <td>${fw.fullName}</td>
@@ -491,9 +561,6 @@ function renderOverview(){
           <h3>📚 Others</h3>
           <p>Additional frameworks grouped separately to reduce clutter.</p>
         </div>
-        <button class="toggle-btn" type="button" onclick="toggleOthers()">
-          ${showOthers ? 'Hide Others' : 'Show Others'}
-        </button>
       </div>
 
       <div class="collapsible ${showOthers ? 'visible' : ''}">
@@ -502,21 +569,30 @@ function renderOverview(){
     </div>
 
     <div class="comparison-table" style="margin-top:32px">
-      <h3 style="font-size:1.1rem;font-weight:700;color:#1e293b;margin-bottom:16px">📊 Framework Comparison Table</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Full Name</th>
-            <th>Difficulty</th>
-            <th>Category</th>
-            <th>Focus</th>
-            <th>Strengths</th>
-          </tr>
-        </thead>
-        <tbody>${rows}</tbody>
-      </table>
+  <div class="section-head" style="margin-bottom:16px">
+    <div>
+      <h3 style="font-size:1.1rem;font-weight:700;color:#1e293b">📊 Framework Comparison Table</h3>
+      <p>Main 5 frameworks are always shown. Others follow the same toggle.</p>
     </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Full Name</th>
+        <th>Difficulty</th>
+        <th>Category</th>
+        <th>Focus</th>
+        <th>Strengths</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${mainRows}
+      ${showOthers ? otherRows : ''}
+    </tbody>
+  </table>
+</div>
   `;
 }
 
