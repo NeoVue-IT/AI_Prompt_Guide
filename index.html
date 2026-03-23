@@ -598,8 +598,8 @@ function renderOverview(){
 
 function renderDetail(fw){
   const secTabs = [
-    {id:'doc', label:'📄 Document'},
-    {id:'img', label:'🖼️ Image'}
+    {id:'doc', label:'📄 문저 생성'},
+    {id:'img', label:'🖼️ 이미지 생성'}
   //  {id:'code', label:'💻 Code'}
   ];
 
@@ -611,11 +611,11 @@ function renderDetail(fw){
     <div class="content-section ${currentSection==='doc'?'visible':''}">
       <div class="card-grid">
         <div class="content-card">
-          <h4>📝 Prompt</h4>
+          <h4>📝 문서 프롬프트</h4>
           <div class="prompt-box">${escHtml(fw.docPrompt)}</div>
         </div>
         <div class="content-card">
-          <h4>✅ AI Output</h4>
+          <h4>✅ AI 출력</h4>
           <div class="result-box">${escHtml(fw.docResult)}</div>
         </div>
       </div>
@@ -625,7 +625,7 @@ function renderDetail(fw){
     <div class="content-section ${currentSection==='img'?'visible':''}">
       <div class="card-grid">
         <div class="content-card">
-          <h4>🇺🇸 Image Prompt (English)</h4>
+          <h4>🇺🇸 이미지 프롬프트 (영문)</h4>
           <div class="prompt-box">${escHtml(fw.imgPromptEn)}</div>
           <div style="margin-top:12px">
           <h4 style="margin-bottom:8px">🇰🇷 이미지 프롬프트</h4>
