@@ -324,8 +324,10 @@ const FW = [{
   focus:"\uc5ed\ud560\u00b7\uc791\uc5c5\u00b7\ucd9c\ub825\ud615\uc2dd \uba85\ud655\ud654",
   strengths:["\ube60\ub978 \ud559\uc2b5", "\ubc94\uc6a9\uc131 \ub192\uc74c", "\uc9c1\uad00\uc801 \uad6c\uc870"],
   desc:"AI\uc5d0\uac8c \uc5ed\ud560(Role)\uc744 \ubd80\uc5ec\ud558\uace0, \uc218\ud589\ud560 \uc791\uc5c5(Task)\uc744 \uba85\uc2dc\ud558\uba70, \uc6d0\ud558\ub294 \ucd9c\ub825 \ud615\uc2dd(Format)\uc744 \uc9c0\uc815\ud558\ub294 \uac00\uc7a5 \uae30\ucd08\uc801\uc778 3\ub2e8\uacc4 \ud504\ub808\uc784\uc6cc\ud06c\uc785\ub2c8\ub2e4.",
-  useWhen: "AI에게 역할, 작업, 결과 형식을 명확히 요청할 때",
-  quickExample: "“마케팅 담당자 역할로 이 내용을 보고서 형식으로 정리해줘”",
+  docUseWhen:"AI에게 역할, 작업, 결과 형식을 명확히 요청할 때",
+  docQuickExample:"“마케팅 담당자 역할로 이 내용을 보고서 형식으로 정리해줘”",
+  imgUseWhen:"이미지 스타일, 역할, 결과 형태를 명확하게 지정하고 싶을 때",
+  imgQuickExample:"“광고 디자이너 역할로, 따뜻한 톤의 친환경 제품 광고 이미지를 만들어줘”",
   docPrompt:"[Role] \ub2f9\uc2e0\uc740 10\ub144 \uacbd\ub825\uc758 \uc2dc\ub2c8\uc5b4 \uce74\ud53c\ub77c\uc774\ud130\uc785\ub2c8\ub2e4.\n[Task] 20-30\ub300\ub97c \ud0c0\uac9f\uc73c\ub85c \ud55c \uce5c\ud658\uacbd \ud140\ube14\ub7ec \uad11\uace0 \uce74\ud53c\ub97c \uc791\uc131\ud558\uc138\uc694.\n[Format]\n- \ud5e4\ub4dc\ub77c\uc778: 1\uc904 (20\uc790 \uc774\ub0b4)\n- \uc11c\ube0c\uce74\ud53c: 2\uc904\n- \ud574\uc2dc\ud0dc\uadf8: 5\uac1c",
   docResult:"\ud5e4\ub4dc\ub77c\uc778: \uc9c0\uad6c\ub97c \ub2f4\uc740 \ud55c \ubaa8\uae08\n\uc11c\ube0c\uce74\ud53c: \ub9e4\uc77c \uc4f0\ub294 \ud140\ube14\ub7ec \ud558\ub098\ub85c \ud558\ub8e8 500ml\uc758 \ud50c\ub77c\uc2a4\ud2f1\uc744 \uc904\uc774\uc138\uc694. \uc791\uc740 \uc120\ud0dd\uc774 \uc9c0\uad6c\ub97c \ubc14\uafc9\ub2c8\ub2e4.\n\ud574\uc2dc\ud0dc\uadf8: #\uce5c\ud658\uacbd\ud140\ube14\ub7ec #\uc81c\ub85c\uc6e8\uc774\uc2a4\ud2b8 #\uc9c0\uc18d\uac00\ub2a5\ud55c\ub77c\uc774\ud504 #\uc5d0\ucf54\ub77c\uc774\ud504 #\uadf8\ub9b0\ucc4c\ub9b0\uc9c0",
   docCompare: "간단한 이메일, 회의록 초안, 공지사항 등 정형화된 짧은 문서에 유리합니다.",
@@ -345,8 +347,10 @@ const FW = [{
   focus:"\uc791\uc5c5\u00b7\ud589\ub3d9\u00b7\ubaa9\ud45c \uc5f0\uacb0",
   strengths:["\ubaa9\ud45c \uba85\ud655", "\ud589\ub3d9 \uc9c0\ud5a5", "\ub2e8\uc21c \uad6c\uc870"],
   desc:"\uc218\ud589\ud560 \uc791\uc5c5(Task), \uad6c\uccb4\uc801\uc778 \ud589\ub3d9(Action), \ub2ec\uc131\ud560 \ubaa9\ud45c(Goal)\ub97c \uc21c\uc11c\ub300\ub85c \uae30\uc220\ud558\uc5ec AI\uac00 \ubaa9\uc801\uc5d0 \ub9de\ub294 \uacb0\uacfc\ub97c \uc0dd\uc131\ud558\ub3c4\ub85d \uc720\ub3c4\ud558\ub294 \ud504\ub808\uc784\uc6cc\ud06c\uc785\ub2c8\ub2e4.",
-  useWhen:"무엇을 해야 하는지, 어떻게 할지, 왜 하는지를 함께 전달할 때",
-  quickExample:"“이 데이터를 분석해서 핵심 인사이트를 도출하고, 보고용으로 정리해줘”",
+  docUseWhen:"무엇을 해야 하는지, 어떻게 할지, 왜 하는지를 함께 전달할 때",
+  docQuickExample:"“이 데이터를 분석해서 핵심 인사이트를 도출하고, 보고용으로 정리해줘”",
+  imgUseWhen:"무엇을 만들지, 어떻게 표현할지, 어떤 목적의 이미지인지 명확히 할 때",
+  imgQuickExample:"“제품 이미지를 제작하고, 고급스럽게 표현해서 광고용으로 사용할 수 있게 만들어줘”",
   docPrompt:"[Task] Python\uc73c\ub85c CSV \ud30c\uc77c\uc744 \uc77d\uc5b4\uc11c \uacb0\uce21\uac12\uc744 \ucc98\ub9ac\ud558\ub294 \ucf54\ub4dc\ub97c \uc791\uc131\ud558\uc138\uc694.\n[Action] pandas \ub77c\uc774\ube0c\ub7ec\ub9ac\ub97c \uc0ac\uc6a9\ud558\uc5ec \uad6c\ud604\ud558\uace0, \uac01 \ub2e8\uacc4\ub9c8\ub2e4 \uc8fc\uc11d\uc744 \ub2ec\uc544\uc8fc\uc138\uc694.\n[Goal] \ucd08\ubcf4\uc790\ub3c4 \uc774\ud574\ud560 \uc218 \uc788\ub3c4\ub85d \uba85\ud655\ud558\uace0 \uac00\ub3c5\uc131 \ub192\uc740 \ucf54\ub4dc\ub97c \uc791\uc131\ud558\ub294 \uac83\uc785\ub2c8\ub2e4.",
   docResult:"\ubaa9\ud45c \uc9c0\ud5a5\uc801\uc774\uace0 \ub2e8\uacc4\ubcc4 \ud589\ub3d9\uc774 \uba85\ud655\ud55c \uacb0\uacfc\ubb3c\uc774 \uc0dd\uc131\ub429\ub2c8\ub2e4. \uac01 \uc561\uc158\uc774 \ucd5c\uc885 \ubaa9\ud45c\uc640 \uc9c1\uc811 \uc5f0\uacb0\ub418\uc5b4 \uc77c\uad00\uc131 \uc788\ub294 \ucd9c\ub825\uc774 \ub098\uc635\ub2c8\ub2e4.",
   docCompare: "업무 지시서, 작업 정의 문서, 실행 중심 가이드 등 명확한 수행 단계가 필요한 문서에 적합합니다.",
@@ -366,8 +370,10 @@ const FW = [{
   focus:"\uc0c1\ud669 \u2192 \ud589\ub3d9 \u2192 \uae30\ub300\uacb0\uacfc \u2192 \ucc38\uace0\uc608\uc2dc",
   strengths:["\ub9e5\ub77d \ud48d\ubd80", "\uc608\uc2dc \ud559\uc2b5", "\uc77c\uad00\uc131 \uc720\uc9c0"],
   desc:"\ub9e5\ub77d(Context)\uc744 \ucda9\ubd84\ud788 \uc81c\uacf5\ud558\uace0, \uc6d0\ud558\ub294 \ud589\ub3d9(Action)\uc744 \uc9c0\uc2dc\ud558\uba70, \uae30\ub300\ud558\ub294 \uacb0\uacfc(Result)\uc640 \ucc38\uace0\ud560 \uc608\uc2dc(Example)\ub97c \ud568\uaed8 \uc81c\uc2dc\ud558\ub294 \ud504\ub808\uc784\uc6cc\ud06c\uc785\ub2c8\ub2e4.",
-  useWhen:"배경 설명이 중요하고, 원하는 결과 예시까지 함께 전달하고 싶을 때",
-  quickExample:"“이 프로젝트 상황을 고려해서 보고서를 작성하고, 결과 예시까지 포함해줘”",
+  docUseWhen:"배경 설명이 중요하고, 원하는 결과 예시까지 함께 전달하고 싶을 때",
+  docQuickExample:"“이 프로젝트 상황을 고려해서 보고서를 작성하고, 결과 예시까지 포함해줘”",
+  imgUseWhen:"배경 상황과 원하는 결과 느낌을 구체적으로 전달하고 싶을 때",
+  imgQuickExample:"“신제품 출시 상황을 반영해서 이미지를 만들고, 감성적인 광고 느낌으로 표현해줘”",
   docPrompt:"[Context] \uc800\ub294 \ud604\uc7ac \uc911\uc694\ud55c \ud504\ub85c\uc81d\ud2b8\uc758 \ub9c8\uac10 \uae30\ud55c \uc5f0\uc7a5\uc744 \uc694\uccad\ud574\uc57c \ud558\ub294 \uc0c1\ud669\uc785\ub2c8\ub2e4.\n\ud504\ub85c\uc81d\ud2b8\ub294 75% \uc644\ub8cc\ub418\uc5c8\uace0, \uc608\uc0c1\uce58 \ubabb\ud55c \uae30\uc220\uc801 \uc774\uc288\uac00 \ubc1c\uc0dd\ud588\uc2b5\ub2c8\ub2e4.\n[Action] \uc0c1\uc0ac\uc5d0\uac8c \ubcf4\ub0b4\ub294 \uc815\uc911\ud558\uace0 \uc124\ub4dd\ub825 \uc788\ub294 \uc774\uba54\uc77c\uc744 \uc791\uc131\ud558\uc138\uc694.\n[Result] \uc0c1\uc0ac\uac00 3\uc77c \uc5f0\uc7a5\uc744 \uc2b9\uc778\ud558\ub3c4\ub85d \uc124\ub4dd\ud558\ub294 \uac83\uc774 \ubaa9\ud45c\uc785\ub2c8\ub2e4.\n[Example] \uc804\ubb38\uc801\uc774\uace0 \ucc45\uc784\uac10 \uc788\ub294 \uc5b4\uc870\ub85c, \ubb38\uc81c \uc6d0\uc778\uacfc \ud574\uacb0 \uacc4\ud68d\uc744 \ud3ec\ud568\ud558\uc138\uc694.",
   docResult:"\uc548\ub155\ud558\uc138\uc694 \ud300\uc7a5\ub2d8, \ud604\uc7ac \uc9c4\ud589 \uc911\uc778 [\ud504\ub85c\uc81d\ud2b8\uba85]\uacfc \uad00\ub828\ud558\uc5ec \ub9d0\uc500\ub4dc\ub9b4 \uc0ac\ud56d\uc774 \uc788\uc5b4 \uc5f0\ub77d\ub4dc\ub9bd\ub2c8\ub2e4. \ud604\uc7ac \uc804\uccb4 \uc791\uc5c5\uc758 75%\uac00 \uc644\ub8cc\ub41c \uc0c1\ud0dc\uc774\ub098, \uc608\uc0c1\uce58 \ubabb\ud55c API \uc5f0\ub3d9 \uc774\uc288\uac00 \ubc1c\uc0dd\ud558\uc5ec...",
   docCompare: "기존 보고서 양식을 유지해야 하거나, 특정 논조를 따라야 하는 전문 학술/기업 문서에 적합합니다.",
@@ -387,8 +393,10 @@ const FW = [{
   focus:"\uc5ed\ud560\u00b7\uc9c0\uc2dc\u00b7\ub2e8\uacc4\u00b7\ubaa9\ud45c\u00b7\ubc94\uc704 \ud55c\uc815",
   strengths:["\ubcf5\uc7a1\ud55c \uc791\uc5c5 \ucc98\ub9ac", "\ub2e8\uacc4\ubcc4 \uc2e4\ud589", "\ubc94\uc704 \uc81c\uc5b4"],
   desc:"\uc5ed\ud560(Role), \uc9c0\uc2dc\uc0ac\ud56d(Instructions), \uc218\ud589 \ub2e8\uacc4(Steps), \ucd5c\uc885 \ubaa9\ud45c(End-goal), \ubc94\uc704 \ud55c\uc815(Narrowing)\uc73c\ub85c \ubcf5\uc7a1\ud55c \ub2e4\ub2e8\uacc4 \uc791\uc5c5\uc744 \uccb4\uacc4\uc801\uc73c\ub85c \uc9c0\uc2dc\ud558\ub294 \uace0\uae09 \ud504\ub808\uc784\uc6cc\ud06c\uc785\ub2c8\ub2e4.",
-  useWhen:"복잡한 업무를 단계별로 나누어 정확하게 시키고 싶을 때",
-  quickExample:"“데이터 분석가 역할로 이 자료를 단계별로 분석하고 핵심만 요약해줘”",
+  docUseWhen:"복잡한 업무를 단계별로 나누어 정확하게 시키고 싶을 때",
+  docQuickExample:"“데이터 분석가 역할로 이 자료를 단계별로 분석하고 핵심만 요약해줘”",
+  imgUseWhen:"이미지 생성 과정을 단계적으로 제어하고 결과 디테일을 높이고 싶을 때",
+  imgQuickExample:"“디자이너 역할로 이미지를 단계별로 구성하고, 깔끔하고 집중도 높은 광고 이미지로 만들어줘”",
   docPrompt:"[Role] \ub2f9\uc2e0\uc740 UX \ub9ac\uc11c\uce58 \uc804\ubb38\uac00\uc785\ub2c8\ub2e4.\n[Input] \uc2e4\uc81c \uc0ac\uc6a9\uc790 \uc778\ud130\ubdf0 \ubc1c\ucdcc\ub85d\n[Steps]\n1. \ubd88\ud3b8\ud568 \ucd94\ucd9c \u2192 2. \uce74\ud14c\uace0\ub9ac \ubd84\ub958 \u2192 3. \uc6b0\uc120\uc21c\uc704 \uc815\ub82c \u2192 4. \uac1c\uc120 \ubc29\uc548 \uc81c\uc548\n[Expectation] \ud575\uc2ec \uc778\uc0ac\uc774\ud2b8 3\uac1c + \uac1c\uc120 \uc81c\uc548 3\uac1c\n[Novelty] \ud45c\uba74\uc801 \ubd88\ub9cc \ub108\uba38\uc758 \uc228\uaca8\uc9c4 \ub2c8\uc988\ub97c \ubc1c\uad74\ud558\uc138\uc694",
   docResult:"\ub2e8\uacc4\ubcc4\ub85c \uccb4\uacc4\uc801\uc778 UX \ubd84\uc11d \ubcf4\uace0\uc11c\uac00 \uc0dd\uc131\ub429\ub2c8\ub2e4. \ud45c\uba74\uc801 \ubd88\ub9cc\uc5d0\uc11c \uc228\uaca8\uc9c4 \ub2c8\uc988\uae4c\uc9c0 \ubc1c\uad74\ud558\ub294 \uae4a\uc774 \uc788\ub294 \uc778\uc0ac\uc774\ud2b8\uc640 \ud568\uaed8 \uc2e4\ud589 \uac00\ub2a5\ud55c \uac1c\uc120 \uc81c\uc548\uc774 \ud3ec\ud568\ub429\ub2c8\ub2e4.",
   docCompare: "기술 사양서, 경영 전략 로드맵, 방대한 데이터 분석 보고서 등 긴 호흡의 문서 작성에 최적입니다.",
@@ -408,8 +416,10 @@ const FW = [{
   focus:"6\uac00\uc9c0 \uc694\uc18c \uc644\uc804 \uba85\uc138\ud654",
   strengths:["\ucd5c\uace0 \uc815\ubc00\ub3c4", "\ube0c\ub79c\ub4dc \uc77c\uad00\uc131", "\ub2e4\ubaa9\uc801 \ud65c\uc6a9"],
   desc:"\ucee8\ud14d\uc2a4\ud2b8(C), \ubaa9\ud45c(O), \uc2a4\ud0c0\uc77c(S), \ud1a4(T), \ub300\uc0c1(A), \uc751\ub2f5\ud615\uc2dd(R) 6\uac00\uc9c0 \uc694\uc18c\ub97c \ubaa8\ub450 \uba85\uc138\ud558\uc5ec AI \ucd9c\ub825\uc758 \ud488\uc9c8\uacfc \uc77c\uad00\uc131\uc744 \uadf9\ub300\ud654\ud558\ub294 \uace0\uae09 \ud504\ub808\uc784\uc6cc\ud06c\uc785\ub2c8\ub2e4.",
-  useWhen:"이메일, 보고서, 발표자료의 톤과 스타일을 정교하게 맞추고 싶을 때",
-  quickExample:"“임원 보고용으로 전문적이고 간결한 톤으로 이 내용을 정리해줘”",
+  docUseWhen:"이메일, 보고서, 발표자료의 톤과 스타일을 정교하게 맞추고 싶을 때",
+  docQuickExample:"“임원 보고용으로 전문적이고 간결한 톤으로 이 내용을 정리해줘”",
+  imgUseWhen:"스타일, 톤, 대상까지 포함해서 이미지 결과를 정교하게 맞추고 싶을 때",
+  imgQuickExample:"“20~30대 고객 대상, 세련되고 미니멀한 스타일로 제품 광고 이미지를 만들어줘”",
   docPrompt:"[Context] \uc6b0\ub9ac \ud68c\uc0ac\ub294 \ud300 \ud611\uc5c5 SaaS \uc194\ub8e8\uc158\uc744 B2B \uc2dc\uc7a5\uc5d0 \uc0c8\ub85c \ucd9c\uc2dc\ud569\ub2c8\ub2e4.\n[Objective] \uc2e0\uaddc \uae30\ub2a5 \uc5c5\ub370\uc774\ud2b8\ub97c \uc54c\ub9ac\ub294 \ub274\uc2a4\ub808\ud130 \uc774\uba54\uc77c\uc744 \uc791\uc131\ud558\uc138\uc694.\n[Style] \uac04\uacb0\ud558\uace0 \uc804\ubb38\uc801\uc778 \ube44\uc988\ub2c8\uc2a4 \ubb38\uccb4\n[Tone] \ub530\ub73b\ud558\uace0 \uc2e0\ub8b0\uac10 \uc788\ub294 \uc5b4\uc870\n[Audience] IT \ubd80\uc11c \uad00\ub9ac\uc790 \ubc0f \uc911\uc18c\uae30\uc5c5 \ub300\ud45c\n[Response] \uc774\uba54\uc77c \uc81c\ubaa9 + \ubcf8\ubb38 200\uc790 \uc774\ub0b4 + CTA \ubc84\ud2bc \ubb38\uad6c 1\uac1c",
   docResult:"\uc81c\ubaa9: [\uc5c5\ub370\uc774\ud2b8] \ud300 \uc0dd\uc0b0\uc131\uc744 30% \ub192\uc774\ub294 \uc0c8 \uae30\ub2a5\uc774 \ucd9c\uc2dc\ub418\uc5c8\uc2b5\ub2c8\ub2e4 | \ubcf8\ubb38: IT \uad00\ub9ac\uc790\ubd84\ub4e4\uaed8 \uc2e0\ub8b0\uac10 \uc788\ub294 \uc5b4\uc870\ub85c \ud575\uc2ec \uae30\ub2a5\uc744 \uc18c\uac1c\ud558\ub294 \uc644\uc131\ub41c \ub274\uc2a4\ub808\ud130\uac00 \uc0dd\uc131\ub429\ub2c8\ub2e4.",
   docCompare: "브랜드 가이드라인 북, 보도자료, 마케팅 캠페인 기획서 등 최고 수준의 퀄리티가 필요한 대외 문서에 쓰입니다.",
@@ -791,12 +801,12 @@ function renderDetail(fw){
         <div class="prompt-guide">
           <div class="guide-item use-when">
             <span class="guide-label">✔ 사용 상황</span>
-            <div class="guide-text">${escHtml(fw.useWhen || '-')}</div>
+            <div class="guide-text">${escHtml(fw.docUseWhen || '-')}</div>
           </div>
 
           <div class="guide-item quick-example">
             <span class="guide-label">💬 빠른 예시</span>
-            <div class="guide-text quick-example-text">${escHtml(fw.quickExample || '-')}</div>
+            <div class="guide-text quick-example-text">${escHtml(fw.docQuickExample || '-')}</div>
           </div>
         </div>
 
@@ -819,12 +829,12 @@ function renderDetail(fw){
         <div class="prompt-guide">
           <div class="guide-item use-when">
             <span class="guide-label">✔ 사용 상황</span>
-            <div class="guide-text">${escHtml(fw.useWhen || '-')}</div>
+            <div class="guide-text">${escHtml(fw.imgUseWhen || '-')}</div>
           </div>
 
           <div class="guide-item quick-example">
             <span class="guide-label">💬 빠른 예시</span>
-            <div class="guide-text quick-example-text">${escHtml(fw.quickExample || '-')}</div>
+            <div class="guide-text quick-example-text">${escHtml(fw.imgQuickExample || '-')}</div>
           </div>
         </div>
 
