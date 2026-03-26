@@ -68,19 +68,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .fw-card .view-btn{margin-top:16px;width:100%;padding:8px;background:#2563eb;color:#fff;border:none;border-radius:8px;font-weight:600;font-size:0.82rem;cursor:pointer;transition:background 0.2s}
 .fw-card .view-btn:hover{background:#1d4ed8}
 
-/* Framework Detail */
-.fw-detail-header{background:#fff;border-radius:16px;padding:28px;margin-bottom:24px;box-shadow:0 1px 4px rgba(0,0,0,0.06);border:1px solid #e2e8f0}
-.fw-detail-header .top-row{display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap}
-.fw-icon{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#2563eb,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:800;color:#fff;flex-shrink:0}
-.fw-detail-header h2{font-size:1.6rem;font-weight:800;color:#1e293b}
-.fw-detail-header .sub{color:#64748b;font-size:0.9rem;margin-top:2px}
-.fw-detail-header .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.fw-detail-header .desc{margin-top:16px;color:#475569;line-height:1.7;font-size:0.9rem}
-.fw-detail-header .strengths{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-
-.section-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
-.sec-tab{padding:10px 20px;border:2px solid #e2e8f0;background:#fff;border-radius:10px;font-weight:600;font-size:0.85rem;cursor:pointer;transition:all 0.2s;color:#64748b}
-.sec-tab.active{border-color:#2563eb;background:#eff6ff;color:#2563eb}
 
 .content-section{display:none}
 .content-section.visible{display:block;animation:fadeIn 0.3s ease}
@@ -165,18 +152,6 @@ tr:hover td{background:#f8fafc}
 .section-head h3{font-size:1.15rem;font-weight:800;color:#1e293b}
 .section-head p{font-size:0.85rem;color:#64748b}
 
-.toggle-btn{
-  padding:10px 16px;
-  border:none;
-  background:#1e293b;
-  color:#fff;
-  border-radius:10px;
-  font-weight:700;
-  font-size:0.82rem;
-  cursor:pointer;
-  transition:all 0.2s;
-}
-.toggle-btn:hover{background:#334155}
 
 .collapsible{
   display:none;
@@ -241,56 +216,6 @@ tr:hover td{background:#f8fafc}
   }
 }
 
-.strategy-card{
-  border-radius:16px;
-  padding:20px 22px;
-  border:1px solid;
-}
-
-.strategy-card.doc{
-  background:#eff6ff;
-  border-color:#bfdbfe;
-}
-
-.strategy-card.img{
-  background:#faf5ff;
-  border-color:#e9d5ff;
-}
-
-.strategy-head{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-weight:800;
-  font-size:1rem;
-  margin-bottom:10px;
-}
-
-.strategy-card.doc .strategy-head{
-  color:#1d4ed8;
-}
-
-.strategy-card.img .strategy-head{
-  color:#7c3aed;
-}
-
-.strategy-icon{
-  font-size:1.05rem;
-  line-height:1;
-}
-
-.strategy-body{
-  font-size:0.95rem;
-  line-height:1.75;
-}
-
-.strategy-card.doc .strategy-body{
-  color:#3b82f6;
-}
-
-.strategy-card.img .strategy-body{
-  color:#9333ea;
-}
 
 .strategy-switch{
   display:grid;
@@ -374,10 +299,6 @@ tr:hover td{background:#f8fafc}
   color:#9333ea;
 }
 </style>
-
-
-
-</style>
 </head>
 <body>
 
@@ -412,8 +333,6 @@ const FW = [{
   imgPromptEn:"Soft sunlight filtering through a lush green forest, a matte tumbler placed on a moss-covered rock. Background is dreamy and misty, only the tumbler in sharp focus. Editorial-style eco product photography.",
   imgPromptKo:"[Role] \uc0c1\uc5c5 \uc0ac\uc9c4 \uc804\ubb38\uac00\n[Task] \uce5c\ud658\uacbd \ud140\ube14\ub7ec \uc5d0\ub514\ud1a0\ub9ac\uc5bc \uc81c\ud488 \uc0ac\uc9c4\n[Format] 16:9 \uac00\ub85c\ud615, \uc790\uc5f0\uad11, \ubcf4\ucf00 \ubc30\uacbd",
   imgDesc:"\ubd80\ub4dc\ub7ec\uc6b4 \ud587\uc0b4\uc774 \uc2a4\uba70\ub4dc\ub294 \ucd08\ub85d \uc232\uc18d, \uc774\ub07c \ub080 \ubc14\uc704 \uc704\uc5d0 \uc62c\ub824\uc9c4 \ubb34\uad11 \ud140\ube14\ub7ec. \ubc30\uacbd\uc740 \ubabd\ud658\uc801\uc778 \uc548\uac1c\ub85c \ud750\ub9bf\ud558\uace0 \uc804\uba74 \ud140\ube14\ub7ec\ub9cc \uc120\uba85\ud558\uac8c \ucd08\uc810\uc774 \ub9de\ucdb0\uc9c4 \uc5d0\ub514\ud1a0\ub9ac\uc5bc \uac10\uc131\uc758 \uc81c\ud488 \uc0ac\uc9c4.",
-  codePrompt:"[Role] Python \uc2dc\ub2c8\uc5b4 \uac1c\ubc1c\uc790\n[Task] CSV \ud30c\uc77c\uc744 \uc77d\uc5b4 \uacb0\uce21\uac12\uc744 \ucc98\ub9ac\ud558\ub294 \uc7ac\uc0ac\uc6a9 \uac00\ub2a5\ud55c \ud568\uc218\ub97c \uc791\uc131\ud558\uc138\uc694\n[Format]\n- \ud568\uc218 \ub2e8\uc704\ub85c \ubd84\ub9ac\n- \uac01 \ub2e8\uacc4 \uc8fc\uc11d \ud3ec\ud568\n- if __name__ == \"__main__\": \uc2e4\ud589 \uc608\uc2dc \ud3ec\ud568",
-  codeResult:"import pandas as pd\n\ndef handle_missing_values(filepath: str, strategy: str = 'mean') -> pd.DataFrame:\n    \"\"\"\n    CSV \ud30c\uc77c\uc744 \uc77d\uc5b4 \uacb0\uce21\uac12\uc744 \ucc98\ub9ac\ud558\ub294 \ud568\uc218\n    Args:\n        filepath: CSV \ud30c\uc77c \uacbd\ub85c\n        strategy: \uacb0\uce21\uac12 \ucc98\ub9ac \uc804\ub7b5 ('mean', 'median', 'drop')\n    Returns:\n        \ucc98\ub9ac\ub41c DataFrame\n    \"\"\"\n    # 1\ub2e8\uacc4: CSV \ud30c\uc77c \ub85c\ub4dc\n    df = pd.read_csv(filepath)\n    print(f\"\uc6d0\ubcf8 \ub370\uc774\ud130: {df.shape}, \uacb0\uce21\uac12: {df.isnull().sum().sum()}\uac1c\")\n\n    # 2\ub2e8\uacc4: \uc804\ub7b5\uc5d0 \ub530\ub978 \uacb0\uce21\uac12 \ucc98\ub9ac\n    if strategy == 'mean':\n        df = df.fillna(df.mean(numeric_only=True))\n    elif strategy == 'median':\n        df = df.fillna(df.median(numeric_only=True))\n    elif strategy == 'drop':\n        df = df.dropna()\n\n    print(f\"\ucc98\ub9ac \ud6c4: {df.shape}, \uacb0\uce21\uac12: {df.isnull().sum().sum()}\uac1c\")\n    return df\n\nif __name__ == \"__main__\":\n    result = handle_missing_values(\"data.csv\", strategy=\"mean\")\n    print(result.head())",
   imgData:"RTF.webp"
 },
 {
@@ -435,8 +354,6 @@ const FW = [{
   imgPromptEn:"Isometric view of a code editor and data charts floating on purple-teal background. Code snippets, pie charts, and bar graphs hovering in mid-air representing data processing. 3D tech illustration style.",
   imgPromptKo:"[Task] \ub370\uc774\ud130 \ucc98\ub9ac \uacfc\uc815\uc744 \uc2dc\uac01\ud654\ud558\ub294 3D \ud14c\ud06c \uc77c\ub7ec\uc2a4\ud2b8 \uc0dd\uc131\n[Action] \uc544\uc774\uc18c\uba54\ud2b8\ub9ad \ubdf0, \ubcf4\ub77c-\uccad\ub85d \ubc30\uacbd, \ucf54\ub4dc\uc640 \ucc28\ud2b8 \uc694\uc18c \ubc30\uce58\n[Goal] \uac1c\ubc1c\uc790 \uce5c\ud654\uc801\uc774\uace0 \ud604\ub300\uc801\uc778 \uae30\uc220 \uac10\uc131\uc758 \uc77c\ub7ec\uc2a4\ud2b8",
   imgDesc:"\ubcf4\ub77c-\uccad\ub85d \ubc30\uacbd \uc704\uc5d0 \uc544\uc774\uc18c\uba54\ud2b8\ub9ad \uc2dc\uc810\uc73c\ub85c \ud3bc\uccd0\uc9c4 \ucf54\ub4dc \uc5d0\ub514\ud130\uc640 \ub370\uc774\ud130 \ucc28\ud2b8. \ucf54\ub4dc \uc870\uac01\uacfc \ud30c\uc774 \ucc28\ud2b8, \ub9c9\ub300 \uadf8\ub798\ud504\uac00 \uacf5\uc911\uc5d0 \ub5a0 \uc788\uc5b4 \ub370\uc774\ud130 \ucc98\ub9ac \uacfc\uc815\uc744 \uc2dc\uac01\uc801\uc73c\ub85c \ud45c\ud604\ud55c 3D \ud14c\ud06c \uc77c\ub7ec\uc2a4\ud2b8.",
-  codePrompt:"[Task] \uc0ac\uc6a9\uc790\uc758 \uc774\ub984\u00b7\uc774\uba54\uc77c\u00b7\ub098\uc774\ub97c \uc785\ub825\ubc1b\uc544 \uc720\ud6a8\uc131\uc744 \uac80\uc0ac\ud558\ub294 \ud568\uc218\ub97c \uc791\uc131\ud558\uc138\uc694\n[Action] \uc815\uaddc\uc2dd(regex)\uc73c\ub85c \uc774\uba54\uc77c \ud615\uc2dd \uac80\uc0ac, \ub098\uc774\ub294 1-120 \ubc94\uc704 \ud655\uc778\n[Goal] \uac01 \ud56d\ubaa9\uc758 \uc720\ud6a8\uc131 \uacb0\uacfc\ub97c \ub515\uc154\ub108\ub9ac\ub85c \ubc18\ud658\ud558\uc5ec \uc5b4\ub5a4 \ud56d\ubaa9\uc774 \ud2c0\ub838\ub294\uc9c0 \uba85\ud655\ud788 \uc804\ub2ec",
-  codeResult:"import re\n\ndef validate_user_input(name: str, email: str, age: int) -> dict:\n    \"\"\"\uc0ac\uc6a9\uc790 \uc785\ub825\uac12 \uc720\ud6a8\uc131 \uac80\uc0ac\"\"\"\n    results = {}\n\n    # \uc774\ub984 \uac80\uc0ac: 2\uc790 \uc774\uc0c1\n    results['name'] = {\n        'valid': len(name.strip()) >= 2,\n        'message': '\uc774\ub984\uc740 2\uc790 \uc774\uc0c1\uc774\uc5b4\uc57c \ud569\ub2c8\ub2e4.' if len(name.strip()) < 2 else '\uc720\ud6a8\ud569\ub2c8\ub2e4.'\n    }\n\n    # \uc774\uba54\uc77c \uac80\uc0ac: \uc815\uaddc\uc2dd\n    email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'\n    results['email'] = {\n        'valid': bool(re.match(email_pattern, email)),\n        'message': '\uc62c\ubc14\ub978 \uc774\uba54\uc77c \ud615\uc2dd\uc774 \uc544\ub2d9\ub2c8\ub2e4.' if not re.match(email_pattern, email) else '\uc720\ud6a8\ud569\ub2c8\ub2e4.'\n    }\n\n    # \ub098\uc774 \uac80\uc0ac: 1-120\n    results['age'] = {\n        'valid': 1 <= age <= 120,\n        'message': '\ub098\uc774\ub294 1~120 \uc0ac\uc774\uc5ec\uc57c \ud569\ub2c8\ub2e4.' if not (1 <= age <= 120) else '\uc720\ud6a8\ud569\ub2c8\ub2e4.'\n    }\n\n    return results",
   imgData:"TAG.webp"
 },
 {
@@ -458,8 +375,6 @@ const FW = [{
   imgPromptEn:"Professional person focused on writing an email on a laptop under warm office lighting. Background is softly blurred bokeh. Photorealistic business photography, shallow depth of field.",
   imgPromptKo:"[Context] \uc911\uc694\ud55c \uc5c5\ubb34 \uc774\uba54\uc77c\uc744 \uc791\uc131\ud558\ub294 \uc9c1\uc7a5\uc778\n[Action] \ub530\ub73b\ud55c \uc0ac\ubb34\uc2e4 \uc870\uba85, \ub178\ud2b8\ubd81\uc5d0 \uc9d1\uc911\ud558\ub294 \uc778\ubb3c\n[Result] \ubcf4\ucf00 \ubc30\uacbd\uc758 \ud3ec\ud1a0\ub9ac\uc5bc\ub9ac\uc2a4\ud2f1 \ube44\uc988\ub2c8\uc2a4 \uc0ac\uc9c4",
   imgDesc:"\ub530\ub73b\ud55c \uc0ac\ubb34\uc2e4 \uc870\uba85 \uc544\ub798 \ub178\ud2b8\ubd81 \ud654\uba74\uc5d0 \uc9d1\uc911\ud558\uba70 \uc774\uba54\uc77c\uc744 \uc791\uc131\ud558\ub294 \uc804\ubb38\uc9c1 \uc778\ubb3c. \ubc30\uacbd\uc740 \ud750\ub9bf\ud55c \ubcf4\ucf00 \ucc98\ub9ac\ub85c \uc778\ubb3c\uc5d0 \uc2dc\uc120\uc774 \uc9d1\uc911\ub418\ub294 \ud3ec\ud1a0\ub9ac\uc5bc\ub9ac\uc2a4\ud2f1 \ube44\uc988\ub2c8\uc2a4 \uc0ac\uc9c4.",
-  codePrompt:"[Context] \ud604\uc7ac \ucf54\ub4dc\uc5d0 SQL \uc778\uc81d\uc158 \ucde8\uc57d\uc810\uc774 \uc788\uc2b5\ub2c8\ub2e4\n[Action] \ud30c\ub77c\ubbf8\ud130 \ubc14\uc778\ub529 \ubc29\uc2dd\uc73c\ub85c \uc548\uc804\ud55c DB \ucffc\ub9ac \ud568\uc218\ub85c \uad50\uccb4\ud558\uc138\uc694\n[Result] OWASP Top 10 \ubcf4\uc548 \uac00\uc774\ub4dc\ub77c\uc778\uc744 \ucda9\uc871\ud558\ub294 \ucf54\ub4dc\n[Example] psycopg2 \uacf5\uc2dd \ubb38\uc11c\uc758 parameterized query \ud328\ud134\uc744 \ucc38\uace0\ud558\uc138\uc694",
-  codeResult:"import psycopg2\nfrom contextlib import contextmanager\n\n@contextmanager\ndef get_db_connection():\n    conn = psycopg2.connect(DATABASE_URL)\n    try:\n        yield conn\n    finally:\n        conn.close()\n\n# \ucde8\uc57d\ud55c \ucf54\ub4dc (SQL Injection \uc704\ud5d8)\n# query = f\"SELECT * FROM users WHERE email = '{email}'\"\n\n# \uc548\uc804\ud55c \ucf54\ub4dc (\ud30c\ub77c\ubbf8\ud130 \ubc14\uc778\ub529)\ndef get_user_by_email(email: str) -> dict:\n    \"\"\"OWASP \uac00\uc774\ub4dc\ub77c\uc778 \uc900\uc218 - \ud30c\ub77c\ubbf8\ud130 \ubc14\uc778\ub529 \uc0ac\uc6a9\"\"\"\n    query = \"SELECT id, name, email FROM users WHERE email = %s AND is_active = %s\"\n    with get_db_connection() as conn:\n        with conn.cursor() as cur:\n            cur.execute(query, (email, True))  # \ud30c\ub77c\ubbf8\ud130\ub294 \ud29c\ud50c\ub85c \uc804\ub2ec\n            row = cur.fetchone()\n            return {'id': row[0], 'name': row[1], 'email': row[2]} if row else None",
   imgData:"CARE.webp"
 },
 {
@@ -481,8 +396,6 @@ const FW = [{
   imgPromptEn:"Pastel flat illustration split panel: left side shows a user frowning at a cluttered complex app interface, right side shows the same user smiling at a clean minimal interface. Emotional contrast communicating UX improvement.",
   imgPromptKo:"[Role] UX \ube44\ud3ec\uc560\ud504\ud130 \uc77c\ub7ec\uc2a4\ud2b8\ub808\uc774\ud130\n[Instructions] \ud30c\uc2a4\ud154 \ud50c\ub7ab \uc2a4\ud0c0\uc77c\ub85c \ub450 \ud328\ub110 \ub300\ube44\n[Steps] \uc88c: \ubcf5\uc7a1\ud55c \uc571\uacfc \ucc21\uadf8\ub9b0 \uc0ac\uc6a9\uc790 / \uc6b0: \ubbf8\ub2c8\uba40 UI\uc640 \uc6c3\ub294 \uc0ac\uc6a9\uc790\n[End-goal] UX \uac1c\uc120 \uba54\uc2dc\uc9c0\ub97c \uc9c1\uad00\uc801\uc73c\ub85c \uc804\ub2ec",
   imgDesc:"\ud30c\uc2a4\ud154 \ud1a4\uc758 \ud50c\ub7ab \uc77c\ub7ec\uc2a4\ud2b8. \uc88c\uce21 \ud328\ub110\uc740 \uc815\ubcf4\uac00 \ub118\uccd0 \ud750\ub974\ub294 \ubcf5\uc7a1\ud55c \uc571 \ud654\uba74\uacfc \ucc21\uadf8\ub9b0 \uc0ac\uc6a9\uc790, \uc6b0\uce21 \ud328\ub110\uc740 \uc5ec\ubc31 \uc788\ub294 \ubbf8\ub2c8\uba40 \uc778\ud130\ud398\uc774\uc2a4\uc640 \ud658\ud558\uac8c \uc6c3\ub294 \uc0ac\uc6a9\uc790. \ub450 \ud328\ub110\uc758 \uac10\uc815 \ub300\ube44\uac00 UX \uac1c\uc120\uc758 \ud575\uc2ec \uba54\uc2dc\uc9c0\ub97c \uc9c1\uad00\uc801\uc73c\ub85c \uc804\ub2ec.",
-  codePrompt:"[Role] \uc2dc\ub2c8\uc5b4 \ub370\uc774\ud130 \uc5d4\uc9c0\ub2c8\uc5b4\n[Input] \uc77c 100GB \uaddc\ubaa8\uc758 \uc0ac\uc6a9\uc790 \ud589\ub3d9 \ub85c\uadf8 (JSONL \ud615\uc2dd)\n[Steps] \uc2a4\ud2b8\ub9ac\ubc0d \ud30c\uc2f1 \u2192 \uc138\uc158 \ub2e8\uc704 \uc9d1\uacc4 \u2192 \uc774\uc0c1\uce58 \uc81c\uac70 \u2192 Parquet \uc800\uc7a5\n[Expectation] \uba54\ubaa8\ub9ac 1GB \uc774\ud558\ub85c \ucc98\ub9ac \uac00\ub2a5\ud55c \ud30c\uc774\ud504\ub77c\uc778\n[Novelty] \ucc98\ub9ac \uc911 \uc2e4\ud328 \uc2dc \uccb4\ud06c\ud3ec\uc778\ud2b8\ub85c \uc7ac\uc2dc\uc791 \uac00\ub2a5\ud55c \uc124\uacc4",
-  codeResult:"import json\nimport pyarrow as pa\nimport pyarrow.parquet as pq\nfrom pathlib import Path\nfrom collections import defaultdict\n\nclass CheckpointedPipeline:\n    \"\"\"\uccb4\ud06c\ud3ec\uc778\ud2b8 \uae30\ubc18 \ub300\uc6a9\ub7c9 \ub85c\uadf8 \ucc98\ub9ac \ud30c\uc774\ud504\ub77c\uc778\"\"\"\n\n    def __init__(self, checkpoint_file: str = \"checkpoint.json\"):\n        self.checkpoint_file = checkpoint_file\n        self.processed_lines = self._load_checkpoint()\n\n    def _load_checkpoint(self) -> int:\n        if Path(self.checkpoint_file).exists():\n            with open(self.checkpoint_file) as f:\n                return json.load(f).get('processed_lines', 0)\n        return 0\n\n    def _save_checkpoint(self, line_num: int):\n        with open(self.checkpoint_file, 'w') as f:\n            json.dump({'processed_lines': line_num}, f)\n\n    def process_streaming(self, input_path: str, output_path: str, batch_size: int = 10000):\n        \"\"\"\uc2a4\ud2b8\ub9ac\ubc0d \ubc29\uc2dd\uc73c\ub85c \ub300\uc6a9\ub7c9 \ud30c\uc77c \ucc98\ub9ac (\uba54\ubaa8\ub9ac 1GB \uc774\ud558)\"\"\"\n        sessions = defaultdict(list)\n        batch = []\n\n        with open(input_path, 'r') as f:\n            for i, line in enumerate(f):\n                if i < self.processed_lines:\n                    continue  # \uccb4\ud06c\ud3ec\uc778\ud2b8 \uc774\ud6c4\ubd80\ud130 \uc7ac\uc2dc\uc791\n\n                try:\n                    event = json.loads(line)\n                    sessions[event['session_id']].append(event)\n                    batch.append(event)\n\n                    if len(batch) >= batch_size:\n                        self._write_parquet_batch(batch, output_path, i)\n                        batch.clear()\n                        self._save_checkpoint(i)\n                        print(f\"\ucc98\ub9ac \uc644\ub8cc: {i:,}\uc904\")\n\n                except (json.JSONDecodeError, KeyError):\n                    continue  # \uc774\uc0c1\uce58 \uc81c\uac70\n\n        if batch:\n            self._write_parquet_batch(batch, output_path, 'final')",
   imgData:"RISEN.webp"
 },
 {
@@ -504,8 +417,6 @@ const FW = [{
   imgPromptEn:"Abstract UI elements and data visualizations floating on a clean blue and white palette. 3D isometric flat design hero banner conveying B2B SaaS professionalism and trustworthiness.",
   imgPromptKo:"[Context] B2B SaaS \ud788\uc5b4\ub85c \ubc30\ub108\n[Objective] \uc804\ubb38\uc131\uacfc \uc2e0\ub8b0\uac10 \uc804\ub2ec\n[Style] 3D \uc544\uc774\uc18c\uba54\ud2b8\ub9ad \ud50c\ub7ab \ub514\uc790\uc778\n[Tone] \ud30c\ub780\uc0c9\uacfc \ud770\uc0c9\uc758 \uae54\ub054\ud55c \ud314\ub808\ud2b8",
   imgDesc:"\ud30c\ub780\uc0c9\uacfc \ud770\uc0c9\uc758 \uae54\ub054\ud55c \ud314\ub808\ud2b8 \uc704\uc5d0 \ub5a0 \uc788\ub294 \ucd94\uc0c1\uc801 UI \uc694\uc18c\ub4e4\uacfc \ub370\uc774\ud130 \uc2dc\uac01\ud654. 3D \uc544\uc774\uc18c\uba54\ud2b8\ub9ad \uac10\uc131\uc758 \ud50c\ub7ab \ub514\uc790\uc778\uc73c\ub85c B2B SaaS\uc758 \uc804\ubb38\uc131\uacfc \uc2e0\ub8b0\uac10\uc744 \ub3d9\uc2dc\uc5d0 \uc804\ub2ec\ud558\ub294 \ud788\uc5b4\ub85c \ubc30\ub108.",
-  codePrompt:"[Context] FastAPI \uae30\ubc18 REST API \uc11c\ubc84\ub97c \uac1c\ubc1c \uc911\uc785\ub2c8\ub2e4\n[Objective] JWT \ud1a0\ud070 \uae30\ubc18 \uc0ac\uc6a9\uc790 \uc778\uc99d \ubbf8\ub4e4\uc6e8\uc5b4\ub97c \uad6c\ud604\ud558\uc138\uc694\n[Style] Clean Architecture \ud328\ud134, \uc758\uc874\uc131 \uc8fc\uc785 \uc0ac\uc6a9\n[Tone] \ud504\ub85c\ub355\uc158 \ub808\ubca8 \ucf54\ub4dc \ud488\uc9c8\n[Audience] \uc2dc\ub2c8\uc5b4 \uac1c\ubc1c\uc790 \ucf54\ub4dc \ub9ac\ubdf0 \uae30\uc900 \ucda9\uc871\n[Response] \ubbf8\ub4e4\uc6e8\uc5b4 \ud074\ub798\uc2a4 + FastAPI \uc801\uc6a9 \uc608\uc2dc \ucf54\ub4dc",
-  codeResult:"from fastapi import Request, HTTPException, status\nfrom fastapi.security import HTTPBearer, HTTPAuthorizationCredentials\nimport jwt\n\nsecurity = HTTPBearer()\n\nclass JWTAuthMiddleware:\n    \"\"\"Clean Architecture \uae30\ubc18 JWT \uc778\uc99d \ubbf8\ub4e4\uc6e8\uc5b4\"\"\"\n\n    def __init__(self, secret_key: str, algorithm: str = \"HS256\"):\n        self.secret_key = secret_key\n        self.algorithm = algorithm\n\n    def verify_token(self, token: str) -> dict:\n        try:\n            payload = jwt.decode(token, self.secret_key, algorithms=[self.algorithm])\n            return payload\n        except jwt.ExpiredSignatureError:\n            raise HTTPException(\n                status_code=status.HTTP_401_UNAUTHORIZED,\n                detail=\"\ud1a0\ud070\uc774 \ub9cc\ub8cc\ub418\uc5c8\uc2b5\ub2c8\ub2e4.\",\n                headers={\"WWW-Authenticate\": \"Bearer\"}\n            )\n        except jwt.InvalidTokenError:\n            raise HTTPException(\n                status_code=status.HTTP_401_UNAUTHORIZED,\n                detail=\"\uc720\ud6a8\ud558\uc9c0 \uc54a\uc740 \ud1a0\ud070\uc785\ub2c8\ub2e4.\"\n            )\n\n# FastAPI \uc801\uc6a9\nfrom fastapi import FastAPI, Depends\n\napp = FastAPI()\nauth = JWTAuthMiddleware(secret_key=\"your-secret-key\")\n\nasync def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)):\n    return auth.verify_token(credentials.credentials)\n\n@app.get(\"/protected\")\nasync def protected_route(user: dict = Depends(get_current_user)):\n    return {\"user_id\": user[\"sub\"], \"message\": \"\uc778\uc99d \uc131\uacf5\"}",
   imgData:"CO-STAR.webp"
 },
 {
