@@ -298,6 +298,62 @@ tr:hover td{background:#f8fafc}
 .strategy-tab.img .strategy-tab-body{
   color:#9333ea;
 }
+
+/*excel-css*/
+.excel-category-bar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:24px;
+}
+
+.excel-cat-btn{
+  padding:10px 16px;
+  border:1px solid #e2e8f0;
+  background:#fff;
+  color:#475569;
+  border-radius:10px;
+  font-weight:700;
+  font-size:0.84rem;
+  cursor:pointer;
+  transition:all 0.2s;
+}
+
+.excel-cat-btn:hover{
+  background:#f8fafc;
+  color:#1e293b;
+}
+
+.excel-cat-btn.active{
+  background:#2563eb;
+  border-color:#2563eb;
+  color:#fff;
+  box-shadow:0 2px 8px rgba(37,99,235,0.25);
+}
+
+.excel-prompt-grid{
+  display:grid;
+  gap:20px;
+}
+
+.excel-prompt-card{
+  background:#fff;
+  border:1px solid #e2e8f0;
+  border-radius:16px;
+  padding:24px;
+  box-shadow:0 1px 4px rgba(0,0,0,0.06);
+}
+
+.excel-prompt-head{
+  margin-bottom:16px;
+}
+
+.excel-prompt-head h4{
+  font-size:1rem;
+  font-weight:800;
+  color:#1e293b;
+  margin:0;
+}
 </style>
 </head>
 <body>
@@ -619,9 +675,91 @@ const FW = [{
   imgData:"TRACE.webp"
 }];
 
+const EXCEL_PROMPTS = [
+  {
+    category: "데이터 분석",
+    prompts: [
+      {
+        title: "기본 데이터 분석",
+        useCase: "데이터에서 핵심 인사이트를 빠르게 파악하고 싶을 때",
+        quickQuestion: "이 데이터에서 중요한 포인트 뭐야?",
+        prompt: "엑셀 데이터 분석가 역할로 아래 데이터를 분석하고 핵심 인사이트 3가지만 요약해줘."
+      },
+      {
+        title: "트렌드 분석",
+        useCase: "시간 흐름이나 변화 패턴을 보고 싶을 때",
+        quickQuestion: "이거 증가하는 추세야?",
+        prompt: "이 데이터를 기준으로 트렌드, 이상치, 주요 변화 포인트를 분석해줘."
+      }
+    ]
+  },
+  {
+    category: "데이터 정리",
+    prompts: [
+      {
+        title: "중복 / 공백 / 형식 정리",
+        useCase: "데이터를 정리해서 바로 사용할 수 있게 만들고 싶을 때",
+        quickQuestion: "이 데이터 정리 어떻게 해야 해?",
+        prompt: "이 엑셀 데이터를 정리해야 하는데, 중복 제거, 공백 제거, 형식 통일 방법을 단계별로 알려줘."
+      }
+    ]
+  },
+  {
+    category: "함수",
+    prompts: [
+      {
+        title: "IF 함수",
+        useCase: "조건에 따라 다른 결과를 표시하고 싶을 때",
+        quickQuestion: "조건에 따라 값 다르게 나오게 하고 싶어",
+        prompt: "IF 함수를 사용해서 조건별 결과를 나누는 수식을 만들어줘."
+      },
+      {
+        title: "XLOOKUP / VLOOKUP",
+        useCase: "다른 표에서 값을 찾아와 연결하고 싶을 때",
+        quickQuestion: "다른 표 값 가져오려면 어떤 함수 써야 해?",
+        prompt: "이 데이터를 기준으로 VLOOKUP 또는 XLOOKUP 중 어떤 게 적절한지 추천하고 수식을 만들어줘."
+      }
+    ]
+  },
+  {
+    category: "차트",
+    prompts: [
+      {
+        title: "차트 추천",
+        useCase: "데이터를 보기 좋게 시각화하고 싶을 때",
+        quickQuestion: "이 데이터는 어떤 차트가 제일 좋아?",
+        prompt: "이 데이터를 가장 잘 보여줄 수 있는 차트를 추천하고, 엑셀에서 만드는 방법을 단계별로 알려줘."
+      }
+    ]
+  },
+  {
+    category: "자동화",
+    prompts: [
+      {
+        title: "반복 업무 자동화",
+        useCase: "매일 반복하는 엑셀 작업 시간을 줄이고 싶을 때",
+        quickQuestion: "이 작업 자동화할 수 있어?",
+        prompt: "이 엑셀 작업을 자동화하고 싶은데, 가장 쉬운 방법(함수 / 매크로 / 파워쿼리 중 추천)을 알려줘."
+      }
+    ]
+  },
+  {
+    category: "문제 해결",
+    prompts: [
+      {
+        title: "수식 / 오류 원인 분석",
+        useCase: "수식 오류나 엑셀 문제의 원인을 찾고 싶을 때",
+        quickQuestion: "왜 이 수식이 안 되는 거야?",
+        prompt: "이 엑셀에서 오류가 나는 이유를 설명해주고 해결 방법을 알려줘."
+      }
+    ]
+  }
+];
+
 let currentTab = 'overview';
 let currentSection = 'doc';
 let showOthers = false;
+let currentExcelCategory = 0;
 
 function diffClass(d){
   if(d==='easy') return 'badge-easy';
@@ -660,7 +798,11 @@ function buildNav(){
 }
 function showTab(id){
   currentTab = id;
-  currentSection = 'doc';
+
+  if (id !== 'excel') {
+    currentSection = 'doc';
+  }
+
   buildNav();
   renderMain();
   window.scrollTo({top:0,behavior:'smooth'});
@@ -668,8 +810,12 @@ function showTab(id){
 
 function renderMain(){
   const el = document.getElementById('main-content');
-  if(currentTab==='overview') el.innerHTML = renderOverview();
-  else {
+
+  if(currentTab==='overview') {
+    el.innerHTML = renderOverview();
+  } else if (currentTab === 'excel') {
+    el.innerHTML = renderExcelDetail();
+  } else {
     const fw = FW.find(f=>f.id===currentTab);
     if(fw) el.innerHTML = renderDetail(fw);
   }
@@ -691,6 +837,24 @@ function toggleOthers(){
 function renderOverview(){
   const mainFrameworks = FW.slice(0, 5);
   const otherFrameworks = FW.slice(5);
+
+  const excelCard = `
+    <div class="fw-card">
+      <div class="badge-row">
+        <span class="badge badge-id">EXCEL</span>
+        <span class="badge badge-easy">업무 템플릿</span>
+      </div>
+      <h3>Excel Prompt Library</h3>
+      <div class="fullname">엑셀 업무 프롬프트 모음</div>
+      <p>데이터 분석, 함수, 차트, 자동화, 문제 해결까지 실무에서 바로 복붙해서 쓸 수 있는 엑셀 프롬프트를 모아둔 섹션입니다.</p>
+      <div class="strengths">
+        <span class="strength-tag">실무형</span>
+        <span class="strength-tag">복붙용</span>
+        <span class="strength-tag">엑셀 업무</span>
+      </div>
+      <button class="view-btn" type="button" onclick="showTab('excel')">상세 보기 →</button>
+    </div>
+  `;
 
   const mainCards = mainFrameworks.map(fw=>`
     <div class="fw-card">
@@ -754,6 +918,16 @@ function renderOverview(){
     <div class="section-block">
       <div class="section-head">
         <div>
+          <h3>📊 업무 템플릿</h3>
+          <p>Framework 학습과 별개로, 바로 실무에 적용할 수 있는 프롬프트 모음입니다.</p>
+        </div>
+      </div>
+      <div class="overview-grid">${excelCard}</div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-head">
+        <div>
           <h3>📚 Others</h3>
           <p>Additional frameworks grouped separately to reduce clutter.</p>
         </div>
@@ -777,7 +951,7 @@ function renderOverview(){
       <tr>
         <th>ID</th>
         <th>Full Name</th>
-        <th>Difficulty</th>
+        <th>난이도</th>
         <th>문서 생성</th>
         <th>이미지 생성</th>
       </tr>
@@ -899,9 +1073,74 @@ function renderDetail(fw){
     ${imgSection}
   `;
 }
+
+function renderExcelDetail(){
+  const categoryButtons = EXCEL_PROMPTS.map((cat, index) => `
+    <button
+      class="excel-cat-btn ${index === currentExcelCategory ? 'active' : ''}"
+      type="button"
+      onclick="showExcelCategory(${index})"
+    >
+      ${cat.category}
+    </button>
+  `).join('');
+
+  const promptCards = EXCEL_PROMPTS[currentExcelCategory].prompts.map((item, index) => `
+    <div class="excel-prompt-card">
+      <div class="excel-prompt-head">
+        <h4>${item.title}</h4>
+      </div>
+
+      <div class="prompt-guide">
+        <div class="guide-item use-when">
+          <span class="guide-label">✔ 사용 상황</span>
+          <div class="guide-text">${escHtml(item.useCase)}</div>
+        </div>
+
+        <div class="guide-item quick-example">
+          <span class="guide-label">💬 빠른 질문</span>
+          <div class="guide-text quick-example-text">${escHtml(item.quickQuestion)}</div>
+        </div>
+      </div>
+
+      <div class="content-card" style="padding:20px">
+        <h4>🧠 추천 프롬프트</h4>
+        <div class="prompt-box">${escHtml(item.prompt)}</div>
+      </div>
+    </div>
+  `).join('');
+
+  return `
+    <button class="back-btn" onclick="showTab('overview')">← Back to Overview</button>
+
+    <div class="detail-hero">
+      <div class="detail-top">
+        <div class="detail-icon">📊</div>
+        <div class="detail-title-wrap">
+          <h2>Excel Prompt Library</h2>
+          <div class="detail-subtitle">실무에서 바로 사용하는 엑셀 업무 프롬프트 모음</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="excel-category-bar">
+      ${categoryButtons}
+    </div>
+
+    <div class="excel-prompt-grid">
+      ${promptCards}
+    </div>
+  `;
+}
+
 //${codeSection}
 function showSection(id){
   currentSection = id;
+  renderMain();
+}
+
+function showExcelCategory(index){
+  currentExcelCategory = index;
   renderMain();
 }
 
