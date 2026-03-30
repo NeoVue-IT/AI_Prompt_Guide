@@ -1018,8 +1018,9 @@ const EXCEL_PROMPTS = [
   }
 ];
 
-let currentTab = 'overview';
-let currentSection = 'doc';
+let currentMainNav = 'frameworks';   // frameworks | excel | quick-prompts | agent-guide
+let currentTab = 'overview';         // overview or framework id
+let currentSection = 'doc';          // doc | img
 let showOthers = false;
 let currentExcelCategory = 0;
 let currentExcelPromptId = null;
@@ -1034,43 +1035,100 @@ function diffClass(d){
 function buildNav(){
   const nav = document.getElementById('nav-tabs');
 
-  const visibleFrameworks = showOthers ? FW : FW.slice(0, 5);
-  const tabs = [
-    { id:'overview', name:'📊 전체' },
-    ...visibleFrameworks.map(f => ({ id:f.id, name:f.name }))
+  const mainTabs = [
+    { id: 'frameworks', name: '🧩 Framework' },
+    { id: 'excel', name: '📊 Excel' },
+    { id: 'quick-prompts', name: '⚡ Quick Prompts' },
+    { id: 'agent-guide', name: '🤖 Agent Guide' }
   ];
 
-  const validIds = [...tabs.map(t => t.id), 'excel'];
+  const visibleFrameworks = showOthers ? FW : FW.slice(0, 5);
 
-  if (!validIds.includes(currentTab)) {
-    currentTab = 'overview';
+  const frameworkSubTabs = currentMainNav === 'frameworks'
+    ? [
+        { id: 'overview', name: '📊 전체' },
+        ...visibleFrameworks.map(f => ({ id: f.id, name: f.name }))
+      ]
+    : [];
+
+  const showToggle = currentMainNav === 'frameworks';
+
+  if (currentMainNav === 'frameworks') {
+    const validIds = frameworkSubTabs.map(t => t.id);
+    if (!validIds.includes(currentTab)) {
+      currentTab = 'overview';
+    }
   }
 
   nav.innerHTML = `
-    <div class="nav-tabs-left">
-      ${tabs.map(t => `
-        <button class="tab-btn ${t.id===currentTab?'active':''}" onclick="showTab('${t.id}')">
-          ${t.name}
-        </button>
-      `).join('')}
-    </div>
+    <div style="display:flex; flex-direction:column; gap:8px; width:100%;">
+      <div class="nav-tabs-left">
+        ${mainTabs.map(t => `
+          <button
+            class="tab-btn ${t.id === currentMainNav ? 'active' : ''}"
+            type="button"
+            onclick="showMainNav('${t.id}')"
+          >
+            ${t.name}
+          </button>
+        `).join('')}
+      </div>
 
-    <button class="nav-toggle-btn" type="button" onclick="toggleOthers()">
-      ${showOthers ? '감추기' : '더 보기'}
-    </button>
+      ${
+        currentMainNav === 'frameworks'
+          ? `
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+              <div class="nav-tabs-left">
+                ${frameworkSubTabs.map(t => `
+                  <button
+                    class="tab-btn ${t.id === currentTab ? 'active' : ''}"
+                    type="button"
+                    onclick="showTab('${t.id}')"
+                  >
+                    ${t.name}
+                  </button>
+                `).join('')}
+              </div>
+
+              ${
+                showToggle
+                  ? `
+                    <button class="nav-toggle-btn" type="button" onclick="toggleOthers()">
+                      ${showOthers ? '감추기' : '더 보기'}
+                    </button>
+                  `
+                  : ''
+              }
+            </div>
+          `
+          : ''
+      }
+    </div>
   `;
 }
 
+function showMainNav(id){
+  currentMainNav = id;
 
-function showTab(id){
-  currentTab = id;
-
-  if (id !== 'excel') {
-    currentSection = 'doc';
+  if (id === 'frameworks') {
+    if (!currentTab) currentTab = 'overview';
   }
 
   if (id === 'excel') {
     currentExcelPromptId = null;
+  }
+
+  buildNav();
+  renderMain();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showTab(id){
+  currentMainNav = 'frameworks';
+  currentTab = id;
+
+  if (id !== 'excel') {
+    currentSection = 'doc';
   }
 
   buildNav();
@@ -1081,18 +1139,76 @@ function showTab(id){
 function renderMain(){
   const el = document.getElementById('main-content');
 
-  if(currentTab==='overview') {
-    el.innerHTML = renderOverview();
-  } else if (currentTab === 'excel') {
-    if (currentExcelPromptId) {
-      el.innerHTML = renderExcelPromptDetail();
+  if (currentMainNav === 'frameworks') {
+    if (currentTab === 'overview') {
+      el.innerHTML = renderOverview();
     } else {
-      el.innerHTML = renderExcelDetail();  
-    }    
-  } else {
-    const fw = FW.find(f=>f.id===currentTab);
-    if(fw) el.innerHTML = renderDetail(fw);
+      const fw = FW.find(f => f.id === currentTab);
+      el.innerHTML = fw ? renderDetail(fw) : renderOverview();
+    }
+    return;
   }
+
+  if (currentMainNav === 'excel') {
+    el.innerHTML = currentExcelPromptId
+      ? renderExcelPromptDetail()
+      : renderExcelDetail();
+    return;
+  }
+
+  if (currentMainNav === 'quick-prompts') {
+    el.innerHTML = renderQuickPrompts();
+    return;
+  }
+
+  if (currentMainNav === 'agent-guide') {
+    el.innerHTML = renderAgentGuide();
+    return;
+  }
+
+  el.innerHTML = renderOverview();
+}
+
+function renderQuickPrompts(){
+  return `
+    <button class="back-btn" onclick="showMainNav('frameworks')">← Back to Frameworks</button>
+
+    <div class="detail-hero">
+      <div class="detail-top">
+        <div class="detail-icon">⚡</div>
+        <div class="detail-title-wrap">
+          <h2>Quick Prompts</h2>
+          <div class="detail-subtitle">자주 바로 복붙해서 쓰는 빠른 프롬프트 모음</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h4>📝 Quick Prompt Section</h4>
+      <div class="result-box">여기에 quick prompts 렌더 함수를 연결하면 됩니다.</div>
+    </div>
+  `;
+}
+
+function renderAgentGuide(){
+  return `
+    <button class="back-btn" onclick="showMainNav('frameworks')">← Back to Frameworks</button>
+
+    <div class="detail-hero">
+      <div class="detail-top">
+        <div class="detail-icon">🤖</div>
+        <div class="detail-title-wrap">
+          <h2>Agent Guide</h2>
+          <div class="detail-subtitle">에이전트 활용 가이드 및 사용 방법</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-card">
+      <h4>📘 Agent Guide Section</h4>
+      <div class="result-box">여기에 agent guide 렌더 함수를 연결하면 됩니다.</div>
+    </div>
+  `;
 }
 
 function toggleOthers(){
@@ -1126,7 +1242,7 @@ function renderOverview(){
         <span class="strength-tag">복붙용</span>
         <span class="strength-tag">엑셀 업무</span>
       </div>
-      <button class="view-btn" type="button" onclick="showTab('excel')">상세 보기 →</button>
+      <button class="view-btn" type="button" onclick="showMainNav('excel')">상세 보기 →</button>
     </div>
   `;
 
