@@ -49,9 +49,34 @@ function bindFrameworkEvents() {
   if (backBtn) {
     backBtn.addEventListener("click", () => {
       state.currentSubTab = "overview";
+      state.currentFrameworkSection = "doc";
       renderApp();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   }
+
+  document.querySelectorAll("[data-fw-id]").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const id = e.currentTarget.dataset.fwId;
+      if (!id) return;
+
+      state.currentSubTab = id;
+      state.currentFrameworkSection = "doc";
+      renderApp();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+
+  document.querySelectorAll("[data-fw-section]").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const section = e.currentTarget.dataset.fwSection;
+      if (!section) return;
+
+      state.currentFrameworkSection = section;
+      renderApp();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
 }
 
 renderApp();
