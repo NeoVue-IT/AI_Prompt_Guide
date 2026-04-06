@@ -35,8 +35,8 @@ function renderFrameworkOverview() {
     <div class="section-block">
       <div class="section-head">
         <div>
-          <h3>⭐ Main Frameworks</h3>
-          <p>대표 프레임워크를 카드 형태로 확인할 수 있습니다.</p>
+          <h3>🧩 프롬프트 프레임워크 모음</h3>
+          <p>업무 상황에 맞게 선택해서 사용할 수 있는 전체 프레임워크를 정리했습니다.</p>
         </div>
       </div>
 

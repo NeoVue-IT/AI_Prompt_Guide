@@ -39,8 +39,44 @@ export function renderApp() {
 
     default:
       app.innerHTML = renderOverview();
+      bindOverviewEvents();
       break;
   }
+}
+
+function bindOverviewEvents() {
+  qsa("[data-overview-fw-id]").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const id = e.currentTarget.dataset.overviewFwId;
+      if (!id) return;
+
+      state.currentMainTab = "frameworks";
+      state.currentSubTab = id;
+      state.currentFrameworkSection = "doc";
+      renderApp();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+
+  qsa("[data-overview-action]").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const action = e.currentTarget.dataset.overviewAction;
+      if (!action) return;
+
+      state.currentMainTab = action;
+
+      if (action === "quick-prompts") {
+        state.currentQuickPromptId = null;
+      }
+
+      if (action === "excel") {
+        state.currentExcelPromptId = null;
+      }
+
+      renderApp();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
 }
 
 function bindFrameworkEvents() {
