@@ -9,6 +9,7 @@ export const FRAMEWORKS = [
     difficulty: "easy",
     diffLabel: "⭐ 쉬움",
     category: "기본 구조형",
+    tags: ["기초", "구조화", "빠른 작성"],
 
     useWhen: "AI에게 역할, 작업, 결과 형식을 명확히 요청할 때",
     quickExample: "마케팅 담당자 역할로 이 내용을 보고서 형식으로 정리해줘",
@@ -46,6 +47,7 @@ export const FRAMEWORKS = [
     difficulty: "easy",
     diffLabel: "⭐ 쉬움",
     category: "목표 지향형",
+    tags: ["목표 중심", "실행 지향", "명확한 흐름"],
 
     useWhen: "무엇을 해야 하는지, 어떻게 할지, 왜 하는지를 함께 전달할 때",
     quickExample: "이 데이터를 분석해서 핵심 인사이트를 도출해줘",
@@ -77,6 +79,7 @@ export const FRAMEWORKS = [
     difficulty: "medium",
     diffLabel: "⭐⭐ 초-중급",
     category: "맥락 결과형",
+    tags: ["맥락 강조", "예시 포함", "결과 명확"],
 
     useWhen: "배경 설명이 중요하고, 원하는 결과 예시까지 함께 전달하고 싶을 때",
     quickExample: "이 프로젝트 상황을 고려해서 보고서를 작성하고, 결과 예시까지 포함해줘",
@@ -110,6 +113,7 @@ export const FRAMEWORKS = [
     difficulty: "intermediate",
     diffLabel: "⭐⭐⭐ 중급",
     category: "단계별 실행형",
+    tags: ["단계 분리", "복잡 작업", "정밀 제어"],
 
     useWhen: "복잡한 업무를 단계별로 나누어 정확하게 시키고 싶을 때",
     quickExample: "데이터 분석가 역할로 이 자료를 단계별로 분석하고 핵심만 요약해줘",
@@ -147,6 +151,7 @@ export const FRAMEWORKS = [
     difficulty: "intermediate",
     diffLabel: "⭐⭐⭐ 중급",
     category: "완전 명세형",
+    tags: ["고정밀", "톤 제어", "대상 맞춤"],
 
     useWhen: "이메일, 보고서, 발표자료의 톤과 스타일을 정교하게 맞추고 싶을 때",
     quickExample: "임원 보고용으로 전문적이고 간결한 톤으로 이 내용을 정리해줘",
@@ -182,6 +187,7 @@ export const FRAMEWORKS = [
     difficulty: "easy",
     diffLabel: "⭐ 쉬움",
     category: "감정 설득형",
+    tags: ["설득 구조", "감정 자극", "마케팅"],
 
     useWhen: "문제를 강조하고 해결책을 설득력 있게 제시할 때",
     quickExample: "현재 데이터 누락 문제를 강조하고, 자동화 해결 방안을 제안해줘",
@@ -213,6 +219,7 @@ export const FRAMEWORKS = [
     difficulty: "medium",
     diffLabel: "⭐⭐ 초-중급",
     category: "행동 목적형",
+    tags: ["논리 구조", "목적 명확", "분석형"],
 
     useWhen: "주장과 근거를 논리적으로 설명하거나 목적 중심으로 요청할 때",
     quickExample: "자동화가 필요한 이유를 논리적으로 설명해줘",
@@ -244,6 +251,7 @@ export const FRAMEWORKS = [
     difficulty: "easy",
     diffLabel: "⭐ 쉬움",
     category: "설득 전환형",
+    tags: ["마케팅", "관심 유도", "전환 구조"],
 
     useWhen: "상대의 관심을 끌고 행동을 유도하는 문구나 제안이 필요할 때",
     quickExample: "AI 도입의 필요성을 강조하고 참여를 유도하는 메시지를 만들어줘",
@@ -276,6 +284,7 @@ export const FRAMEWORKS = [
     difficulty: "easy",
     diffLabel: "⭐ 쉬움",
     category: "변화 제시형",
+    tags: ["문제 해결", "전후 비교", "설득형"],
 
     useWhen: "현재 문제 상태와 개선 후 기대 상태를 비교해 설명하고 싶을 때",
     quickExample: "현재 비효율적인 업무 방식과 자동화 이후의 개선 상태를 비교해서 정리해줘",
@@ -307,6 +316,7 @@ export const FRAMEWORKS = [
     difficulty: "easy",
     diffLabel: "⭐ 쉬움",
     category: "사례 구조형",
+    tags: ["경험 정리", "면접", "스토리"],
 
     useWhen: "경험, 사례, 성과를 논리적으로 설명하거나 면접/보고용으로 정리할 때",
     quickExample: "이 프로젝트 경험을 STAR 방식으로 정리해줘",
@@ -339,6 +349,7 @@ export const FRAMEWORKS = [
     difficulty: "medium",
     diffLabel: "⭐⭐ 초-중급",
     category: "코칭 계획형",
+    tags: ["코칭", "목표 설정", "문제 해결"],
 
     useWhen: "문제 해결이나 목표 달성을 위해 현황 진단과 실행 방향을 함께 정리하고 싶을 때",
     quickExample: "AI 파일럿 도입 목표를 기준으로 현재 상황, 선택지, 실행안을 정리해줘",
@@ -371,6 +382,7 @@ export const FRAMEWORKS = [
     difficulty: "easy",
     diffLabel: "⭐ 쉬움",
     category: "논리 전달형",
+    tags: ["의견 전달", "논리 구조", "간결"],
 
     useWhen: "의견, 주장, 제안 사항을 짧고 설득력 있게 정리하고 싶을 때",
     quickExample: "왜 AI 도입이 필요한지 PREP 방식으로 정리해줘",
@@ -403,6 +415,7 @@ export const FRAMEWORKS = [
     difficulty: "advanced",
     diffLabel: "⭐⭐⭐⭐ 고급",
     category: "고도화 지시형",
+    tags: ["고급 제어", "전문 작업", "정밀 지시"],
 
     useWhen: "역할, 관점, 표현 방식까지 정밀하게 제어하면서 더 창의적이거나 정교한 답변을 원할 때",
     quickExample: "전문가 역할과 통찰, 말투까지 반영해서 제안서를 작성해줘",
@@ -437,6 +450,7 @@ export const FRAMEWORKS = [
     difficulty: "intermediate",
     diffLabel: "⭐⭐⭐ 중급",
     category: "요청 구체화형",
+    tags: ["분석 추적", "근거 중심", "검증"],
 
     useWhen: "세부 요청 조건과 예시를 함께 줘야 원하는 결과가 나올 때",
     quickExample: "이 보고서를 아래 예시 스타일처럼 정리해줘",

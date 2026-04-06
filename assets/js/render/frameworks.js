@@ -58,6 +58,8 @@ function renderFrameworkOverview() {
             <div class="fullname">${escapeHtml(fw.fullName || "")}</div>
             <p>${escapeHtml(fw.shortDesc || "")}</p>
 
+            ${renderTags(fw)}
+
             <button
               type="button"
               class="view-btn"
@@ -150,7 +152,8 @@ function renderFrameworkDetail(fw) {
           <div class="detail-icon">⚡</div>
           <div class="detail-title-wrap">
             <h2>${escapeHtml(fw.title || fw.name || "")} (${escapeHtml(fw.fullName || "")})</h2>
-            <div class="detail-subtitle">${escapeHtml(fw.shortDesc || "")}</div>
+            ${renderTags(fw)}
+            <div class="detail-subtitle">${escapeHtml(fw.shortDesc || fw.desc || "")}</div>
           </div>
         </div>
       </div>
@@ -183,5 +186,33 @@ function renderFrameworkDetail(fw) {
 
       ${detailContent}
     </section>
+  `;
+}
+
+function renderTags(fw) {
+  const chips = [];
+
+  if (fw.category) {
+    chips.push(`<span class="strength-tag">${escapeHtml(fw.category)}</span>`);
+  }
+
+  if (Array.isArray(fw.tags)) {
+    chips.push(
+      ...fw.tags.map(tag => `<span class="strength-tag">${escapeHtml(tag)}</span>`)
+    );
+  }
+
+  if (!chips.length) return "";
+
+  return `<div class="strengths">${chips.join("")}</div>`;
+}
+
+function renderTagsInline(fw) {
+  if (!fw.tags || !fw.tags.length) return "";
+
+  return `
+    <div class="detail-tags">
+      ${fw.tags.map(tag => `<span class="tag-chip">${escapeHtml(tag)}</span>`).join("")}
+    </div>
   `;
 }
