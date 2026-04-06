@@ -4,10 +4,7 @@ import { renderMainNav, renderSubNav } from "./nav.js";
 import { renderOverview } from "./render/overview.js";
 import { renderFrameworks } from "./render/frameworks.js";
 import { renderQuickPrompts } from "./render/quickPrompts.js";
-
-function renderExcel() {
-  return `<section><h2>Excel Prompts</h2><p>Excel section here</p></section>`;
-}
+import { renderExcel } from "./render/excel.js";
 
 function renderAgents() {
   return `<section><h2>Agent Guide</h2><p>Agent guide section here</p></section>`;
@@ -33,6 +30,7 @@ export function renderApp() {
 
     case "excel":
       app.innerHTML = renderExcel();
+      bindExcelEvents();
       break;
 
     case "agents":
@@ -136,5 +134,46 @@ function bindQuickPromptEvents() {
     });
   });
 }
+
+function bindExcelEvents() {
+  const backOverview = qs("#back-to-overview-from-excel");
+  if (backOverview) {
+    backOverview.addEventListener("click", () => {
+      state.currentMainTab = "overview";
+      state.currentExcelPromptId = null;
+      renderApp();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  const backList = qs("#back-to-excel-list");
+  if (backList) {
+    backList.addEventListener("click", () => {
+      state.currentExcelPromptId = null;
+      renderApp();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  qsa("[data-excel-category]").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      state.currentExcelCategory = Number(e.currentTarget.dataset.excelCategory);
+      state.currentExcelPromptId = null;
+      renderApp();
+    });
+  });
+
+  qsa("[data-excel-id]").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const id = e.currentTarget.dataset.excelId;
+      if (!id) return;
+
+      state.currentExcelPromptId = id;
+      renderApp();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+}
+
 
 renderApp();
