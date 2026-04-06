@@ -1,6 +1,6 @@
 import { qs } from "./utils.js";
-import { state } from "./state.js";
-import { renderMainNav, renderFrameworkSubNav } from "./nav.js";
+import { state } from "../assets/js/render/state.js";
+import { renderMainNav, renderSubNav } from "../assets/js/render/nav.js";
 import { renderOverview } from "./render/overview.js";
 import { renderFrameworks } from "./render/frameworks.js";
 import { renderQuickPrompts } from "./render/quickPrompts.js";
@@ -15,34 +15,40 @@ function renderAgents() {
 
 export function renderApp() {
   renderMainNav();
-  renderFrameworkSubNav();
+  renderSubNav();
 
   const app = qs("#app");
+  if (!app) return;
 
   switch (state.currentMainTab) {
     case "frameworks":
       app.innerHTML = renderFrameworks();
       bindFrameworkEvents();
       break;
+
     case "quick-prompts":
       app.innerHTML = renderQuickPrompts();
       break;
+
     case "excel":
       app.innerHTML = renderExcel();
       break;
+
     case "agents":
       app.innerHTML = renderAgents();
       break;
+
     default:
       app.innerHTML = renderOverview();
+      break;
   }
 }
 
 function bindFrameworkEvents() {
-  const backBtn = document.getElementById("back-to-fw-overview");
+  const backBtn = qs("#back-to-fw-overview");
   if (backBtn) {
     backBtn.addEventListener("click", () => {
-      state.currentFrameworkTab = "overview";
+      state.currentSubTab = "overview";
       renderApp();
     });
   }

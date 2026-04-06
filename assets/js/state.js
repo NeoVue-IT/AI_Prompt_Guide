@@ -1,5 +1,5 @@
 export const state = {
   currentMainTab: "overview",
-  currentFrameworkTab: "overview",
+  currentSubTab: "overview",
   showOthers: false
 };
