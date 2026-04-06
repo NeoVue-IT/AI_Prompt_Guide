@@ -1,13 +1,7 @@
 import { state } from "../state.js";
 import { FRAMEWORKS } from "../../data/frameworks.js";
 import { escapeHtml } from "../utils.js";
-
-function diffClass(difficulty = "") {
-  if (difficulty === "easy") return "badge-easy";
-  if (difficulty === "medium") return "badge-medium";
-  if (difficulty === "intermediate") return "badge-intermediate";
-  return "badge-advanced";
-}
+import { diffClass, renderTags } from "../ui.js";
 
 export function renderFrameworks() {
   if (state.currentSubTab === "overview") {
@@ -57,9 +51,7 @@ function renderFrameworkOverview() {
             <h3>${escapeHtml(fw.title || fw.name || "")}</h3>
             <div class="fullname">${escapeHtml(fw.fullName || "")}</div>
             <p>${escapeHtml(fw.shortDesc || "")}</p>
-
-            ${renderTags(fw)}
-
+            ${renderTags(fw.category, fw.tags)}
             <button
               type="button"
               class="view-btn"
@@ -152,7 +144,7 @@ function renderFrameworkDetail(fw) {
           <div class="detail-icon">⚡</div>
           <div class="detail-title-wrap">
             <h2>${escapeHtml(fw.title || fw.name || "")} (${escapeHtml(fw.fullName || "")})</h2>
-            ${renderTags(fw)}
+            ${renderTags(fw.category, fw.tags)}
             <div class="detail-subtitle">${escapeHtml(fw.shortDesc || fw.desc || "")}</div>
           </div>
         </div>
@@ -186,33 +178,5 @@ function renderFrameworkDetail(fw) {
 
       ${detailContent}
     </section>
-  `;
-}
-
-function renderTags(fw) {
-  const chips = [];
-
-  if (fw.category) {
-    chips.push(`<span class="strength-tag">${escapeHtml(fw.category)}</span>`);
-  }
-
-  if (Array.isArray(fw.tags)) {
-    chips.push(
-      ...fw.tags.map(tag => `<span class="strength-tag">${escapeHtml(tag)}</span>`)
-    );
-  }
-
-  if (!chips.length) return "";
-
-  return `<div class="strengths">${chips.join("")}</div>`;
-}
-
-function renderTagsInline(fw) {
-  if (!fw.tags || !fw.tags.length) return "";
-
-  return `
-    <div class="detail-tags">
-      ${fw.tags.map(tag => `<span class="tag-chip">${escapeHtml(tag)}</span>`).join("")}
-    </div>
   `;
 }
