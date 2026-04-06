@@ -59,8 +59,7 @@ button {
    NAV
 ========================================= */
 .nav,
-.main-nav,
-.sub-nav {
+.main-nav {
   background: #fff;
   border-bottom: 2px solid #e2e8f0;
   padding: 0 16px;
@@ -73,8 +72,14 @@ button {
 }
 
 .sub-nav {
-  top: 56px;
-  border-top: none;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 12px 0 20px;
+  overflow: visible;
+  white-space: normal;
+  position: static;
 }
 
 .nav::-webkit-scrollbar,
@@ -134,6 +139,60 @@ button {
 .nav-toggle-btn:hover,
 .toggle-btn:hover {
   background: #334155;
+}
+
+.sub-nav .tab-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  min-width: 0;
+}
+
+.sub-nav .tab-btn {
+  padding: 7px 13px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #64748b;
+  border-radius: 999px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.sub-nav .tab-btn:hover {
+  background: #f8fafc;
+  color: #1e293b;
+}
+
+.sub-nav .tab-btn.active {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(37,99,235,0.18);
+}
+
+.sub-nav .nav-toggle-btn,
+.sub-nav .toggle-btn {
+  padding: 7px 13px;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #334155;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sub-nav .toggle-btn:hover,
+.sub-nav .nav-toggle-btn:hover {
+  background: #e2e8f0;
 }
 
 .tab-btn {

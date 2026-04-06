@@ -27,6 +27,8 @@ export const FRAMEWORKS = [
 
     docCompare: "짧고 구조화된 문서 (이메일, 공지, 요약)에 적합",
 
+    imgUseWhen: "이미지 스타일, 역할, 결과 형태를 명확하게 지정하고 싶을 때",
+    imgQuickExample: "광고 디자이너 역할로, 따뜻한 톤의 친환경 제품 광고 이미지를 만들어줘",
     imgPromptEn: "Eco-friendly tumbler on moss rock, soft sunlight, forest background, editorial style",
     imgPromptKo: "숲속 자연광 아래 이끼 위에 놓인 친환경 텀블러 제품 사진",
 
@@ -60,6 +62,8 @@ export const FRAMEWORKS = [
 
     docCompare: "실행 중심 문서, 작업 지시서에 적합",
 
+    imgUseWhen: "무엇을 만들지, 어떻게 표현할지, 어떤 목적의 이미지인지 명확히 할 때",
+    imgQuickExample: "제품 이미지를 제작하고, 고급스럽게 표현해서 광고용으로 사용할 수 있게 만들어줘",
     imgPromptEn: "Isometric tech illustration with charts and data visualization",
     imgPromptKo: "데이터 분석을 표현하는 아이소메트릭 기술 일러스트",
 
@@ -93,6 +97,8 @@ export const FRAMEWORKS = [
 
     docCompare: "기존 보고서 양식을 유지해야 하거나, 특정 논조를 따라야 하는 전문 문서에 적합합니다.",
 
+    imgUseWhen: "배경 상황과 원하는 결과 느낌을 구체적으로 전달하고 싶을 때",
+    imgQuickExample: "신제품 출시 상황을 반영해서 이미지를 만들고, 감성적인 광고 느낌으로 표현해줘",
     imgPromptEn: "Professional person focused on writing an email on a laptop under warm office lighting. Background is softly blurred bokeh. Photorealistic business photography, shallow depth of field.",
     imgPromptKo: `따뜻한 사무실 조명 아래 노트북 화면에 집중하며 이메일을 작성하는 전문직 인물. 배경은 흐릿한 보케 처리로 인물에 시선이 집중되는 비즈니스 사진.`,
 
@@ -131,6 +137,8 @@ export const FRAMEWORKS = [
 
     docCompare: "기술 사양서, 전략 로드맵, 긴 호흡의 분석 문서에 적합합니다.",
 
+    imgUseWhen: "이미지 생성 과정을 단계적으로 제어하고 결과 디테일을 높이고 싶을 때",
+    imgQuickExample: "디자이너 역할로 이미지를 단계별로 구성하고, 깔끔하고 집중도 높은 광고 이미지로 만들어줘",
     imgPromptEn: "Pastel flat illustration split panel: left side shows a user frowning at a cluttered complex app interface, right side shows the same user smiling at a clean minimal interface. Emotional contrast communicating UX improvement.",
     imgPromptKo: `파스텔 톤의 플랫 일러스트. 좌측은 복잡한 앱 화면과 찌그린 사용자, 우측은 미니멀한 UI와 웃는 사용자. UX 개선 대비를 보여주는 이미지.`,
 
@@ -167,6 +175,8 @@ export const FRAMEWORKS = [
 
     docCompare: "브랜드 가이드라인, 보도자료, 대외 문서처럼 완성도 높은 결과물이 필요할 때 적합합니다.",
 
+    imgUseWhen: "스타일, 톤, 대상까지 포함해서 이미지 결과를 정교하게 맞추고 싶을 때",
+    imgQuickExample: "20~30대 고객 대상, 세련되고 미니멀한 스타일로 제품 광고 이미지를 만들어줘",
     imgPromptEn: "Abstract UI elements and data visualizations floating on a clean blue and white palette. 3D isometric flat design hero banner conveying B2B SaaS professionalism and trustworthiness.",
     imgPromptKo: `파란색과 흰색의 깔끔한 팔레트 위에 떠 있는 추상적 UI 요소와 데이터 시각화. B2B SaaS의 전문성과 신뢰감을 전달하는 3D 아이소메트릭 배너.`,
 
@@ -199,6 +209,8 @@ export const FRAMEWORKS = [
 
     docCompare: "문제 정의, 고객 pain 강조, 해결책 제시가 필요한 마케팅 문서에 효과적입니다.",
 
+    imgUseWhen: "문제 상황과 해결 과정을 대비해서 표현하는 이미지를 만들 때",
+    imgQuickExample: "비효율적인 업무 환경과 자동화된 업무 환경을 대비해서 보여주는 이미지를 생성해줘",
     imgPromptEn: "Split illustration: left panel shows a cold dark chaotic bedroom with stressed person awake, right panel shows the same person peacefully sleeping under warm moonlight. A glowing app screen on the nightstand symbolizes the 5-minute miracle.",
     imgPromptKo: `왼쪽은 어둡고 혼란스러운 침실에서 잠 못 이루는 직장인, 오른쪽은 따뜻한 달빛 아래 평온하게 잠든 같은 인물. 앱 화면이 해결책을 상징하는 감성적 분할 일러스트.`,
 
@@ -231,6 +243,8 @@ export const FRAMEWORKS = [
 
     docCompare: "행동 유도와 목적 전달이 중요한 제안서, 설명서, 비교 문서에 적합합니다.",
 
+    imgUseWhen: "메시지와 근거를 시각적으로 전달하는 이미지를 만들 때",
+    imgQuickExample: "효율적인 시스템 도입의 필요성을 강조하는 비즈니스 인포그래픽 스타일 이미지를 생성해줘",
     imgPromptEn: "Top-down view of a glowing digital chess board. A golden king piece stands taller than the surrounding silver and white pieces, symbolizing competitive advantage. Blue ambient lighting, bokeh background, luxurious and strategic atmosphere.",
     imgPromptKo: `빛나는 디지털 체스판을 위에서 내려다본 구도. 황금색 킹이 나머지 말들보다 높게 솟아 있어 경쟁 우위를 상징하는 고급스러운 전략 이미지.`,
 
@@ -264,6 +278,8 @@ export const FRAMEWORKS = [
 
     docCompare: "마케팅 카피, 제안서, 공지, 캠페인 메시지처럼 행동 유도가 필요한 문서에 적합합니다.",
 
+    imgUseWhen: "관심을 끌고 흥미를 높인 뒤 행동을 유도하는 광고형 이미지를 만들 때",
+    imgQuickExample: "사내 AI 도입 캠페인 포스터를 시선을 끌게 만들고, 참여를 유도하는 느낌으로 생성해줘",
     imgPromptEn: "Modern marketing campaign poster with strong headline, engaging visuals, emotional appeal, and clear call-to-action button. Clean corporate style.",
     imgPromptKo: `강한 헤드라인과 시선을 끄는 중심 비주얼, 감정적 설득 요소, 명확한 행동 유도 버튼이 포함된 현대적 마케팅 포스터.`,
 
@@ -296,6 +312,8 @@ export const FRAMEWORKS = [
 
     docCompare: "개선 제안서, 변화관리 문서, 시스템 도입 설명 자료처럼 전환의 필요성을 보여줘야 하는 문서에 적합합니다.",
 
+    imgUseWhen: "현재 상태와 개선된 이후 상태를 전후 비교 형식으로 보여주고 싶을 때",
+    imgQuickExample: "수작업 중심 환경과 자동화된 환경을 before/after 형식으로 비교하는 이미지를 만들어줘",
     imgPromptEn: "Split-screen business illustration. Left side shows messy paperwork, spreadsheets, and stressed office workers. Right side shows clean dashboards, automated workflows, and calm employees. Bright professional corporate style.",
     imgPromptKo: `왼쪽은 종이 문서와 수작업 보고로 혼란스러운 사무 환경, 오른쪽은 대시보드와 자동화 프로세스로 정돈된 업무 환경을 보여주는 분할형 비즈니스 일러스트.`,
 
@@ -329,6 +347,8 @@ export const FRAMEWORKS = [
 
     docCompare: "성과 보고, 사례 소개, 면접 답변, 프로젝트 회고처럼 경험을 구조적으로 설명해야 할 때 적합합니다.",
 
+    imgUseWhen: "업무 사례나 성과 흐름을 단계적으로 설명하는 시각 자료가 필요할 때",
+    imgQuickExample: "Situation, Task, Action, Result 흐름이 보이도록 프로젝트 사례 인포그래픽을 만들어줘",
     imgPromptEn: "Professional presentation slide visual showing four connected steps: situation, task, action, result. Clean business infographic style with blue accents.",
     imgPromptKo: `Situation, Task, Action, Result 네 단계가 연결된 기업형 인포그래픽. 파란색 포인트와 깔끔한 발표자료 스타일.`,
 
@@ -362,6 +382,8 @@ export const FRAMEWORKS = [
 
     docCompare: "목표 설정, 코칭, 계획 수립, 실행안 정리 문서에 적합합니다.",
 
+    imgUseWhen: "목표부터 실행 방향까지 사고 흐름을 보여주는 계획형 이미지를 만들 때",
+    imgQuickExample: "목표, 현재 상황, 선택지, 실행 계획이 단계적으로 보이는 전략 로드맵 이미지를 만들어줘",
     imgPromptEn: "Strategic roadmap visual with four stages: goal, reality, options, way forward. Clean business planning board with arrows and milestone markers.",
     imgPromptKo: `Goal, Reality, Options, Way Forward 네 단계를 따라가는 전략 로드맵 보드. 화살표와 마일스톤이 포함된 깔끔한 기업형 계획 이미지.`,
 
@@ -395,6 +417,8 @@ export const FRAMEWORKS = [
 
     docCompare: "보고, 발표, 의견 정리, 제안 요약처럼 짧고 강한 전달이 필요한 문서에 적합합니다.",
 
+    imgUseWhen: "핵심 주장과 근거, 예시, 결론이 명확한 발표/설명용 이미지를 만들 때",
+    imgQuickExample: "핵심 주장과 이유, 예시, 결론이 한눈에 보이는 프레젠테이션 스타일 이미지를 만들어줘",
     imgPromptEn: "Minimal presentation graphic highlighting one central point, supporting reason, one example block, and final emphasized conclusion. Clean executive slide style.",
     imgPromptKo: `중앙 핵심 주장, 근거 블록, 예시 블록, 마지막 결론 강조가 보이는 미니멀한 임원 보고용 슬라이드 스타일 그래픽.`,
 
@@ -430,6 +454,8 @@ export const FRAMEWORKS = [
 
     docCompare: "전략 제안, 창의적 기획, 고급 문서 작성처럼 결과물의 깊이와 차별성이 중요한 작업에 적합합니다.",
 
+    imgUseWhen: "역할, 입력 정보, 단계, 목적, 기대 결과까지 세밀하게 통제한 이미지를 만들 때",
+    imgQuickExample: "전문가 관점과 명확한 단계, 목적이 반영된 프리미엄 전략 보드 스타일 이미지를 만들어줘",
     imgPromptEn: "Futuristic creative strategy board with layered notes representing role, insight, tone, and experimentation. Premium consulting presentation aesthetic.",
     imgPromptKo: `역할, 통찰, 톤, 실험적 접근 요소가 레이어처럼 배치된 미래형 전략 보드. 프리미엄 컨설팅 발표자료 감성의 이미지.`,
 
@@ -464,6 +490,8 @@ export const FRAMEWORKS = [
 
     docCompare: "기존 문서 형식을 따라야 하는 보고서, 회의자료, 상신 문서 작성에 유리합니다.",
 
+    imgUseWhen: "요청 조건, 맥락, 예시를 반영해 정돈된 결과물을 시각적으로 만들고 싶을 때",
+    imgQuickExample: "기존 보고서 스타일을 참고해서 비슷한 분위기의 기업형 포스터 이미지를 만들어줘",
     imgPromptEn: "Modern corporate poster design with structured layout, clear hierarchy, soft blue and purple tones, polished executive presentation style, clean typography-inspired composition.",
     imgPromptKo: `기존 기업 보고서 스타일을 참고한 정돈된 레이아웃의 포스터형 이미지. 파란색과 보라색 계열의 세련된 톤, 명확한 정보 계층 구조, 임원 보고용 분위기.`,
 
