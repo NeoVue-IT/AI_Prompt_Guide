@@ -75,10 +75,71 @@ function renderFrameworkOverview() {
 function renderFrameworkDetail(fw) {
   const currentSection = state.currentFrameworkSection || "doc";
 
-  const docVisible = currentSection === "doc" ? "visible" : "";
-  const imgVisible = currentSection === "img" ? "visible" : "";
-  const docActive = currentSection === "doc" ? "active" : "";
-  const imgActive = currentSection === "img" ? "active" : "";
+  let detailContent = "";
+
+  if (currentSection === "doc") {
+    detailContent = `
+      <div class="detail-content-grid">
+        <div class="content-card">
+          <h4>📝 프롬프트</h4>
+
+          <div class="prompt-guide">
+            <div class="guide-item use-when">
+              <span class="guide-label">✔ 사용 상황</span>
+              <div class="guide-text">${escapeHtml(fw.docUseWhen || fw.useWhen || "-")}</div>
+            </div>
+
+            <div class="guide-item quick-example">
+              <span class="guide-label">💬 빠른 예시</span>
+              <div class="guide-text quick-example-text">${escapeHtml(fw.docQuickExample || fw.quickExample || "-")}</div>
+            </div>
+          </div>
+
+          <div class="prompt-box">${escapeHtml(fw.docPrompt || "-")}</div>
+        </div>
+
+        <div class="content-card">
+          <h4>✅ AI 예상 출력물</h4>
+          <div class="result-box">${escapeHtml(fw.docResult || "-")}</div>
+        </div>
+      </div>
+    `;
+  } else {
+    detailContent = `
+      <div class="detail-content-grid">
+        <div class="content-card">
+          <h4>🖼️ 이미지 프롬프트</h4>
+
+          <div class="prompt-guide">
+            <div class="guide-item use-when">
+              <span class="guide-label">✔ 사용 상황</span>
+              <div class="guide-text">${escapeHtml(fw.imgUseWhen || fw.useWhen || "-")}</div>
+            </div>
+
+            <div class="guide-item quick-example">
+              <span class="guide-label">💬 빠른 예시</span>
+              <div class="guide-text quick-example-text">${escapeHtml(fw.imgQuickExample || fw.quickExample || "-")}</div>
+            </div>
+          </div>
+
+          <h4 style="margin-bottom:8px">🇺🇸 이미지 프롬프트 (영문)</h4>
+          <div class="prompt-box">${escapeHtml(fw.imgPromptEn || "-")}</div>
+
+          <div style="margin-top:12px">
+            <h4 style="margin-bottom:8px">🇰🇷 이미지 프롬프트 (한글)</h4>
+            <div class="prompt-box">${escapeHtml(fw.imgPromptKo || "-")}</div>
+          </div>
+        </div>
+
+        <div class="content-card" style="padding:0;overflow:hidden">
+          <div class="img-wrap">
+            <img src="${escapeHtml(fw.imgData || "")}" alt="${escapeHtml(fw.title || fw.name || "framework image")}" loading="lazy">
+          </div>
+          <div class="img-desc">${escapeHtml(fw.imgDesc || "-")}</div>
+        </div>
+      </div>
+    `;
+  }
 
   return `
     <section class="detail-view">
@@ -97,7 +158,7 @@ function renderFrameworkDetail(fw) {
       <div class="strategy-switch">
         <button
           type="button"
-          class="strategy-tab doc ${docActive}"
+          class="strategy-tab doc ${currentSection === "doc" ? "active" : ""}"
           data-fw-section="doc"
         >
           <div class="strategy-tab-head">
@@ -109,7 +170,7 @@ function renderFrameworkDetail(fw) {
 
         <button
           type="button"
-          class="strategy-tab img ${imgActive}"
+          class="strategy-tab img ${currentSection === "img" ? "active" : ""}"
           data-fw-section="img"
         >
           <div class="strategy-tab-head">
@@ -120,67 +181,7 @@ function renderFrameworkDetail(fw) {
         </button>
       </div>
 
-      <div class="content-section ${docVisible}">
-        <div class="card-grid">
-          <div class="content-card">
-            <h4>📝 프롬프트</h4>
-
-            <div class="prompt-guide">
-              <div class="guide-item use-when">
-                <span class="guide-label">✔ 사용 상황</span>
-                <div class="guide-text">${escapeHtml(fw.useWhen || "-")}</div>
-              </div>
-
-              <div class="guide-item quick-example">
-                <span class="guide-label">💬 빠른 예시</span>
-                <div class="guide-text quick-example-text">${escapeHtml(fw.quickExample || "-")}</div>
-              </div>
-            </div>
-
-            <div class="prompt-box">${escapeHtml(fw.docPrompt || "-")}</div>
-          </div>
-
-          <div class="content-card">
-            <h4>✅ AI 예상 출력물</h4>
-            <div class="result-box">${escapeHtml(fw.docResult || "-")}</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="content-section ${imgVisible}">
-        <div class="card-grid">
-          <div class="content-card">
-            <h4>🖼️ 이미지 프롬프트</h4>
-
-            <div class="prompt-guide">
-              <div class="guide-item use-when">
-                <span class="guide-label">✔ 사용 상황</span>
-                <div class="guide-text">${escapeHtml(fw.useWhen || "-")}</div>
-              </div>
-
-              <div class="guide-item quick-example">
-                <span class="guide-label">💬 빠른 예시</span>
-                <div class="guide-text quick-example-text">${escapeHtml(fw.quickExample || "-")}</div>
-              </div>
-            </div>
-
-            <h4 style="margin-bottom:8px">🇺🇸 이미지 프롬프트 (영문)</h4>
-            <div class="prompt-box">${escapeHtml(fw.imgPromptEn || "-")}</div>
-
-            <div style="margin-top:12px">
-              <h4 style="margin-bottom:8px">🇰🇷 이미지 프롬프트 (한글)</h4>
-              <div class="prompt-box">${escapeHtml(fw.imgPromptKo || "-")}</div>
-            </div>
-          </div>
-
-          <div class="content-card" style="padding:0;overflow:hidden">
-            <div class="img-wrap">
-              <img src="${escapeHtml(fw.imgData || "")}" alt="${escapeHtml(fw.title || fw.name || "framework image")}" loading="lazy">
-            </div>
-            <div class="img-desc">${escapeHtml(fw.imgDesc || "-")}</div>
-          </div>
-        </div>
-      </div>
+      ${detailContent}
     </section>
   `;
 }

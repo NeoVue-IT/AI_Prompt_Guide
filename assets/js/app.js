@@ -1,4 +1,4 @@
-import { qs } from "./utils.js";
+import { qs, qsa, copyIconSVG } from "./utils.js";
 import { state } from "./state.js";
 import { renderMainNav, renderSubNav } from "./nav.js";
 import { renderOverview } from "./render/overview.js";
@@ -28,6 +28,7 @@ export function renderApp() {
 
     case "quick-prompts":
       app.innerHTML = renderQuickPrompts();
+      bindQuickPromptEvents();
       break;
 
     case "excel":
@@ -55,7 +56,7 @@ function bindFrameworkEvents() {
     });
   }
 
-  document.querySelectorAll("[data-fw-id]").forEach(btn => {
+  qsa("[data-fw-id]").forEach(btn => {
     btn.addEventListener("click", (e) => {
       const id = e.currentTarget.dataset.fwId;
       if (!id) return;
@@ -67,7 +68,7 @@ function bindFrameworkEvents() {
     });
   });
 
-  document.querySelectorAll("[data-fw-section]").forEach(btn => {
+  qsa("[data-fw-section]").forEach(btn => {
     btn.addEventListener("click", (e) => {
       const section = e.currentTarget.dataset.fwSection;
       if (!section) return;
@@ -75,6 +76,63 @@ function bindFrameworkEvents() {
       state.currentFrameworkSection = section;
       renderApp();
       window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+}
+
+function bindQuickPromptEvents() {
+  const backOverview = qs("#back-to-overview-from-quick");
+  if (backOverview) {
+    backOverview.addEventListener("click", () => {
+      state.currentMainTab = "overview";
+      state.currentQuickPromptId = null;
+      renderApp();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  const backList = qs("#back-to-quick-list");
+  if (backList) {
+    backList.addEventListener("click", () => {
+      state.currentQuickPromptId = null;
+      renderApp();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  qsa("[data-quick-id]").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const id = e.currentTarget.dataset.quickId;
+      if (!id) return;
+
+      state.currentQuickPromptId = id;
+      renderApp();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+
+  qsa("[data-quick-nav-id]").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const id = e.currentTarget.dataset.quickNavId;
+      if (!id) return;
+
+      state.currentQuickPromptId = id;
+      renderApp();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+
+  qsa("[data-copy-target]").forEach(btn => {
+    btn.addEventListener("click", async (e) => {
+      const targetId = e.currentTarget.dataset.copyTarget;
+      const target = qs(`#${targetId}`);
+      if (!target) return;
+
+      await navigator.clipboard.writeText(target.innerText);
+      e.currentTarget.innerHTML = "✓";
+      setTimeout(() => {
+        e.currentTarget.innerHTML = copyIconSVG();
+      }, 1000);
     });
   });
 }
