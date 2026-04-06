@@ -1,4 +1,4 @@
-import { state } from "../assets/js/render/state.js";
+import { state } from "./state.js";
 import { renderApp } from "./app.js";
 import { FRAMEWORKS } from "../data/frameworks.js";
 import { qs } from "./utils.js";

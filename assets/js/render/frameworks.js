@@ -1,4 +1,4 @@
-import { state } from "../../../js/state.js";
+import { state } from "../../js/state.js";
 import { FRAMEWORKS } from "../../data/frameworks.js";
 import { escapeHtml } from "../utils.js";
 

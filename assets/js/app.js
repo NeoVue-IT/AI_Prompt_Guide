@@ -1,6 +1,6 @@
 import { qs } from "./utils.js";
-import { state } from "../assets/js/render/state.js";
-import { renderMainNav, renderSubNav } from "../assets/js/render/nav.js";
+import { state } from "./state.js";
+import { renderMainNav, renderSubNav } from "./nav.js";
 import { renderOverview } from "./render/overview.js";
 import { renderFrameworks } from "./render/frameworks.js";
 import { renderQuickPrompts } from "./render/quickPrompts.js";
