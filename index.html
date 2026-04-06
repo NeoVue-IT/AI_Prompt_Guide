@@ -1254,21 +1254,25 @@ function renderMain(){
 
 function renderQuickPrompts(){
   return `
-    <button class="back-btn" onclick="showMainNav('frameworks')">← Back to Frameworks</button>
-
-    <div class="detail-hero">
-      <div class="detail-top">
-        <div class="detail-icon">⚡</div>
-        <div class="detail-title-wrap">
-          <h2>Quick Prompts</h2>
-          <div class="detail-subtitle">자주 바로 복붙해서 쓰는 빠른 프롬프트 모음</div>
-        </div>
+    <div class="section-block">
+      <div class="section-head">
+        <h3>⚡ 빠른 프롬프트</h3>
+        <p>실무에서 바로 사용할 수 있는 프롬프트 모음</p>
       </div>
-    </div>
 
-    <div class="content-card">
-      <h4>📝 Quick Prompt Section</h4>
-      <div class="result-box">여기에 quick prompts 렌더 함수를 연결하면 됩니다.</div>
+      <div class="overview-grid">
+        ${QUICK_PROMPTS.map(item => `
+          <div class="fw-card">
+            <h3>${escHtml(item.title)}</h3>
+            <div class="fullname">${escHtml(item.shortDesc || '')}</div>
+            <p>${escHtml(item.useCase || '')}</p>
+
+            <button class="view-btn" onclick="showQuickPrompt('${item.id}')">
+              상세 보기 →
+            </button>
+          </div>
+        `).join('')}
+      </div>
     </div>
   `;
 }
@@ -1705,7 +1709,6 @@ function showQuickPromptDetail(id){
 function backToQuickPromptList(){
   currentQuickPromptId = null;
   renderMain();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function renderQuickPromptDetail(){
@@ -1713,7 +1716,7 @@ function renderQuickPromptDetail(){
   if(!item) return renderQuickPrompts();
 
   return `
-    <button class="back-btn" onclick="backToQuickPromptList()">← 빠른 프롬프트로 돌아가기</button>
+    <button class="back-btn" onclick="backToQuickPrompts()">← 빠른 프롬프트로 돌아가기</button>
 
     <div class="detail-hero">
       <div class="detail-top">
@@ -1728,46 +1731,27 @@ function renderQuickPromptDetail(){
     <div class="card-grid">
       <div class="content-card">
         <div class="prompt-guide">
+
           <div class="guide-item use-when">
             <span class="guide-label">📌 사용 상황</span>
-            <div class="guide-text">${escHtml(item.useCase || '-')}</div>
+            <div class="guide-text">
+              ${escHtml(item.useCase || '-')}
+            </div>
           </div>
 
           <div class="guide-item quick-example">
             <span class="guide-label">💬 빠른 질문</span>
-            <div class="guide-text quick-example-text">${escHtml(item.quickQuestion || '-')}</div>
+            <div class="guide-text quick-example-text">
+              ${escHtml(item.quickQuestion || '-')}
+            </div>
           </div>
-        </div>
 
-        <h4 style="margin-top:16px">🧠 추천 프롬프트</h4>
-        ${copyBox(`quick-${item.id}`, escHtml(item.prompt || '-'))}
+        </div>
       </div>
 
       <div class="content-card">
-        <h4>✅ 예상 결과</h4>
-        <div class="result-box">${escHtml(item.expectedOutput || '-')}</div>
-
-        <div style="margin-top:16px">
-          <h4>📌 예시</h4>
-          <div class="result-box">${escHtml(item.example || '-')}</div>
-        </div>
-
-        <div style="margin-top:16px">
-          <h4>💡 활용 팁</h4>
-          <div class="result-box">${escHtml(item.tip || '-')}</div>
-        </div>
-
-        ${
-          item.image ? `
-            <div style="margin-top:16px">
-              <h4>🖼 관련 이미지</h4>
-              <div class="img-wrap">
-                <img src="images/${escHtml(item.image)}" alt="${escHtml(item.title)}">
-                <div class="img-desc">${escHtml(item.imageDesc || '')}</div>
-              </div>
-            </div>
-          ` : ''
-        }
+        <h4>🧠 추천 프롬프트</h4>
+        ${copyBox(`quick-${item.id}`, escHtml(item.prompt || '-'))}
       </div>
     </div>
   `;
