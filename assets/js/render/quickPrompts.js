@@ -17,7 +17,7 @@ export function renderQuickPrompts() {
 
 function renderQuickPromptOverview() {
   return `
-    <button type="button" class="back-btn" id="back-to-overview-from-quick">← Back to Overview</button>
+    <button type="button" class="back-btn" id="back-to-overview-from-quick">← 전체 개요로 돌아가기</button>
 
     <div class="detail-hero">
       <div class="detail-top">

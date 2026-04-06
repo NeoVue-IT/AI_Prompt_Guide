@@ -13,7 +13,7 @@ export function renderFrameworks() {
   if (!fw) {
     return `
       <section class="detail-view">
-        <button type="button" class="back-btn" id="back-to-fw-overview">← Back to Overview</button>
+        <button type="button" class="back-btn" id="back-to-fw-overview">← 전체로 돌아가기</button>
         <div class="detail-hero">
           <div class="detail-top">
             <div class="detail-icon">⚠️</div>
@@ -62,6 +62,7 @@ function renderFrameworkOverview() {
           </article>
         `).join("")}
       </div>
+      ${renderFrameworkComparison()}
     </div>
   `;
 }
@@ -137,7 +138,7 @@ function renderFrameworkDetail(fw) {
 
   return `
     <section class="detail-view">
-      <button type="button" class="back-btn" id="back-to-fw-overview">← Back to Overview</button>
+      <button type="button" class="back-btn" id="back-to-fw-overview">← 전체 프롬프트 프레임워크로 돌아가기</button>
 
       <div class="detail-hero">
         <div class="detail-top">
@@ -178,5 +179,46 @@ function renderFrameworkDetail(fw) {
 
       ${detailContent}
     </section>
+  `;
+}
+
+function renderFrameworkComparison() {
+  return `
+    <div class="section-block">
+      <div class="section-head">
+        <div>
+          <h3>📊 프레임워크 비교</h3>
+          <p>각 프레임워크를 문서 생성 전략과 이미지 생성 전략 기준으로 비교할 수 있습니다.</p>
+        </div>
+      </div>
+
+      <div class="comparison-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Framework</th>
+              <th>난이도</th>
+              <th>문서 전략</th>
+              <th>이미지 전략</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${FRAMEWORKS.map(fw => `
+              <tr>
+                <td>
+                  <strong>${escapeHtml(fw.name || fw.id || "")}</strong><br>
+                  <span style="font-size:0.75rem;color:#64748b">
+                    ${escapeHtml(fw.fullName || "")}
+                  </span>
+                </td>
+                <td>${escapeHtml(fw.diffLabel || "-")}</td>
+                <td>${escapeHtml(fw.docCompare || "-")}</td>
+                <td>${escapeHtml(fw.imgCompare || "-")}</td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      </div>
+    </div>
   `;
 }

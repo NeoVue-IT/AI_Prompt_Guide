@@ -59,7 +59,7 @@ function renderExcelOverview() {
   `).join("");
 
   return `
-    <button type="button" class="back-btn" id="back-to-overview-from-excel">← Back to Overview</button>
+    <button type="button" class="back-btn" id="back-to-overview-from-excel">← 전체 개요로 돌아가기</button>
 
     <div class="detail-hero">
       <div class="detail-top">
@@ -108,7 +108,7 @@ function renderExcelPromptDetail() {
   `).join("");
 
   return `
-    <button type="button" class="back-btn" id="back-to-excel-list">← Back to Excel Library</button>
+    <button type="button" class="back-btn" id="back-to-excel-list">← Excel 목록으로 돌아가기</button>
 
     <div class="detail-hero">
       <div class="detail-top">
