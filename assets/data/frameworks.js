@@ -36,7 +36,7 @@ export const FRAMEWORKS = [
 
     imgDesc: "자연광과 감성적인 분위기의 제품 이미지",
 
-    imgData: "./assets/images/frameworks/rtf.webp"
+    imgData: "./assets/images/frameworks/RTF.webp"
   },
 
   {
@@ -71,7 +71,7 @@ export const FRAMEWORKS = [
 
     imgDesc: "데이터 흐름과 분석을 표현한 기술 이미지",
 
-    imgData: "./assets/images/frameworks/tag.webp"
+    imgData: "./assets/images/frameworks/TAG.webp"
   },
   {
     id: "care",
@@ -106,7 +106,7 @@ export const FRAMEWORKS = [
 
     imgDesc: "따뜻한 사무실 조명 아래 노트북에 집중하는 인물. 배경은 흐릿한 보케 처리로 정리된 포토리얼리스틱 비즈니스 이미지.",
 
-    imgData: "./assets/images/frameworks/care.webp"
+    imgData: "./assets/images/frameworks/CARE.webp"
   },
   {
     id: "risen",
@@ -146,7 +146,7 @@ export const FRAMEWORKS = [
 
     imgDesc: "복잡한 UI와 단순한 UI를 좌우 대비로 보여주는 UX 개선 테마의 파스텔 일러스트.",
 
-    imgData: "./assets/images/frameworks/risen.webp"
+    imgData: "./assets/images/frameworks/RISEN.webp"
   },
   {
     id: "co-star",
@@ -184,7 +184,7 @@ export const FRAMEWORKS = [
 
     imgDesc: "깔끔한 블루/화이트 톤의 B2B SaaS 스타일 히어로 배너 이미지.",
 
-    imgData: "./assets/images/frameworks/co-star.webp"
+    imgData: "./assets/images/frameworks/CO-STAR.webp"
   },
   {
     id: "pas",
@@ -218,7 +218,7 @@ export const FRAMEWORKS = [
 
     imgDesc: "불면과 해결 이후의 평온함을 좌우 분할로 보여주는 감성적 일러스트.",
 
-    imgData: "./assets/images/frameworks/pas.webp"
+    imgData: "./assets/images/frameworks/PAS.webp"
   },
   {
     id: "ape",
@@ -252,7 +252,7 @@ export const FRAMEWORKS = [
 
     imgDesc: "디지털 체스판 위 황금 킹을 중심으로 경쟁 우위를 상징하는 전략적 비즈니스 이미지.",
 
-    imgData: "./assets/images/frameworks/ape.webp"
+    imgData: "./assets/images/frameworks/APE.webp"
   },
   {
     id: "aida",
@@ -287,7 +287,7 @@ export const FRAMEWORKS = [
 
     imgDesc: "관심 유도 → 흥미 → 욕구 → 행동으로 이어지는 설득 흐름이 반영된 마케팅형 이미지.",
 
-    imgData: "./assets/images/frameworks/aida.webp"
+    imgData: "./assets/images/frameworks/AIDA.webp"
   },
   {
     id: "bab",
@@ -321,7 +321,7 @@ export const FRAMEWORKS = [
 
     imgDesc: "수작업 중심의 혼란스러운 업무 환경과 자동화 이후 정돈된 업무 환경을 좌우 대비로 보여주는 기업형 일러스트.",
 
-    imgData: "./assets/images/frameworks/bab.webp"
+    imgData: "./assets/images/frameworks/BAB.webp"
   },
   {
     id: "star",
@@ -356,7 +356,7 @@ export const FRAMEWORKS = [
 
     imgDesc: "상황에서 결과까지 흐름이 한눈에 보이는 기업형 4단계 인포그래픽 이미지.",
 
-    imgData: "./assets/images/frameworks/star.webp"
+    imgData: "./assets/images/frameworks/STAR.webp"
   },
   {
     id: "grow",
@@ -391,7 +391,7 @@ export const FRAMEWORKS = [
 
     imgDesc: "목표에서 실행 방향까지 이어지는 전략 로드맵을 보여주는 비즈니스 계획형 이미지.",
 
-    imgData: "./assets/images/frameworks/grow.webp"
+    imgData: "./assets/images/frameworks/GROW.webp"
   },
   {
     id: "prep",
@@ -426,7 +426,7 @@ export const FRAMEWORKS = [
 
     imgDesc: "핵심 주장과 근거, 예시, 결론이 구조적으로 배치된 미니멀 발표자료형 이미지.",
 
-    imgData: "./assets/images/frameworks/prep.webp"
+    imgData: "./assets/images/frameworks/PREP.webp"
   },
   {
     id: "crispe",
@@ -463,7 +463,7 @@ export const FRAMEWORKS = [
 
     imgDesc: "역할과 통찰, 표현 톤, 실험적 요소가 층위 있게 표현된 고급 전략형 이미지.",
 
-    imgData: "./assets/images/frameworks/crispe.webp"
+    imgData: "./assets/images/frameworks/CRISPE.webp"
   },
   {
     id: "trace",
@@ -499,6 +499,6 @@ export const FRAMEWORKS = [
 
     imgDesc: "기존 스타일을 참고해 정돈된 구성과 정보 계층을 살린 기업형 포스터/배너 이미지.",
 
-    imgData: "./assets/images/frameworks/trace.webp"
+    imgData: "./assets/images/frameworks/TRACE.webp"
   }
 ];
