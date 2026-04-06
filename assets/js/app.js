@@ -160,6 +160,7 @@ function bindExcelEvents() {
       state.currentExcelCategory = Number(e.currentTarget.dataset.excelCategory);
       state.currentExcelPromptId = null;
       renderApp();
+      window.scrollTo({ top:0, behavior: "smooth" });
     });
   });
 
