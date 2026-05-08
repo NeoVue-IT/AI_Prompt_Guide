@@ -33,6 +33,10 @@ export function renderApp() {
       bindExcelEvents();
       break;
 
+    case "best-practices":
+      renderBestPracticesSection(app);
+      break;  
+
     case "agents":
       app.innerHTML = renderAgents();
       break;
@@ -210,6 +214,42 @@ function bindExcelEvents() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   });
+}
+
+function bindPromptPatternEvents() {
+  document.querySelectorAll("[data-pattern-lang]").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const nextMode = e.currentTarget.dataset.patternLang;
+      if (!nextMode) return;
+
+      state.promptPatternsLangMode = nextMode;
+      renderApp();
+    });
+  });
+}
+
+function renderBestPracticesSection(app) {
+  switch (state.currentSubTab) {
+    case "prompt-patterns":
+      app.innerHTML = renderPromptPatterns();
+      bindPromptPatternEvents();
+      break;
+
+    /*case "hallucination-guide":
+      app.innerHTML = renderHallucinationGuide();
+      // bindHallucinationGuideEvents();
+      break;
+
+    case "common-mistakes":
+      app.innerHTML = renderCommonMistakes();
+      // bindCommonMistakesEvents();
+      break;*/
+
+    case "overview":
+    default:
+      app.innerHTML = renderBestPracticesOverview();
+      break;
+  }
 }
 
 

@@ -11,7 +11,18 @@ const MAIN_TABS = [
   { id: "frameworks", label: "Frameworks" },
   { id: "quick-prompts", label: "Quick Prompts" },
   { id: "excel", label: "Excel" },
+  { id: "best-practices", label: "Best Practices" },
   { id: "agents", label: "Agent Guide" }
+];
+
+/* =========================
+   BEST PRACTICES SUB NAV
+========================= */
+const BEST_PRACTICES_TABS = [
+  { id: "overview", label: "Overview" },
+  { id: "prompt-patterns", label: "Prompt Patterns" },
+  { id: "hallucination-guide", label: "Hallucination Guide" },
+  { id: "common-mistakes", label: "Common Mistakes" }
 ];
 
 /* =========================
@@ -65,6 +76,9 @@ export function renderSubNav() {
 
   if (state.currentMainTab === "frameworks") {
     renderFrameworkSubNav(subNav);
+    return;
+  } else if (state.currentMainTab === "best-practices") {
+    renderBestPracticesSubNav(subNav);
     return;
   }
 
@@ -145,4 +159,33 @@ function renderFrameworkSubNav(container) {
       renderApp();
     });
   }
+}
+
+/* =========================
+   BEST PRACTICES SUB NAV
+========================= */
+function renderBestPracticesSubNav(container) {
+  container.innerHTML = `
+    <div class="tab-row sub-tab-row">
+      ${BEST_PRACTICES_TABS.map(item => `
+        <button
+          type="button"
+          class="tab-btn ${state.currentSubTab === item.id ? "active" : ""}"
+          data-sub-tab="${item.id}"
+        >
+          ${item.label}
+        </button>
+      `).join("")}
+    </div>
+  `;
+
+  container.querySelectorAll("[data-sub-tab]").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const nextSubTab = e.currentTarget.dataset.subTab;
+      if (!nextSubTab) return;
+
+      state.currentSubTab = nextSubTab;
+      renderApp();
+    });
+  });
 }

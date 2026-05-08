@@ -5,5 +5,6 @@ export const state = {
   currentQuickPromptId: null,
   currentExcelCategory: 0,
   currentExcelPromptId: null,
-  showAllFrameworks: false
+  showAllFrameworks: false,
+  promptPatternsLangMode: "both"
 };
