@@ -61,13 +61,13 @@ function renderMistakeCard(item) {
 
 function renderMistakeSection(section) {
   return `
-    <section class="guide-section">
-      <div class="section-heading">
+    <section class="guide-section ai-mistake-section">
+      <div class="section-card">
         <h2>${escapeHtml(section.section)}</h2>
         <p>${escapeHtml(section.description)}</p>
       </div>
 
-      <div class="guide-grid">
+      <div class="content-stack">
         ${section.items.map(renderMistakeCard).join("")}
       </div>
     </section>
@@ -76,7 +76,7 @@ function renderMistakeSection(section) {
 
 export function renderAiMistakes() {
   return `
-    <section class="page-hero">
+    <section class="page-hero page-hero-card">
       <p class="eyebrow">AI Usage Mistakes</p>
       <h1>AI 사용 시 흔한 실수</h1>
       <p>
