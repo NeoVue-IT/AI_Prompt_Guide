@@ -887,3 +887,30 @@ tr:hover td {
     flex-direction: column;
   }
 }
+
+.prompt-compare {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 16px 0;
+}
+
+.prompt-box-bad,
+.prompt-box-good {
+  border-radius: 14px;
+  padding: 14px 16px;
+}
+
+.prompt-box-bad {
+  border-left: 4px solid #ef4444;
+}
+
+.prompt-box-good {
+  border-left: 4px solid #22c55e;
+}
+
+@media (max-width: 768px) {
+  .prompt-compare {
+    grid-template-columns: 1fr;
+  }
+}

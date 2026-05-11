@@ -36,14 +36,16 @@ function renderMistakeCard(item) {
       <p><strong>문제점:</strong> ${escapeHtml(item.problem)}</p>
       <p><strong>개선 방법:</strong> ${escapeHtml(item.better)}</p>
 
-      <div class="prompt-box">
-        <strong>나쁜 예시</strong>
-        <p>${escapeHtml(item.badPrompt)}</p>
-      </div>
+      <div class="prompt-compare">
+        <div class="prompt-box prompt-box-bad">
+            <strong>나쁜 예시</strong>
+            <p>${escapeHtml(item.badPrompt)}</p>
+        </div>
 
-      <div class="prompt-box">
-        <strong>좋은 예시</strong>
-        <p>${escapeHtml(item.goodPrompt)}</p>
+        <div class="prompt-box prompt-box-good">
+            <strong>좋은 예시</strong>
+            <p>${escapeHtml(item.goodPrompt)}</p>
+        </div>
       </div>
 
       <p><strong>Tip:</strong> ${escapeHtml(item.tip)}</p>
