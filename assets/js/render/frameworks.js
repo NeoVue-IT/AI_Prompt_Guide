@@ -1,6 +1,6 @@
 import { state } from "../state.js";
 import { FRAMEWORKS } from "../../data/frameworks.js";
-import { escapeHtml } from "../utils.js";
+import { escapeHtml, copyBox } from "../utils.js";
 import { diffClass, renderTags } from "../ui.js";
 
 export function renderFrameworks() {
@@ -90,7 +90,7 @@ function renderFrameworkDetail(fw) {
             </div>
           </div>
 
-          <div class="prompt-box">${escapeHtml(fw.docPrompt || "-")}</div>
+         ${copyBox(`fw-doc-${fw.id}`, escapeHtml(fw.docPrompt || "-"))}
         </div>
 
         <div class="content-card">
@@ -118,11 +118,11 @@ function renderFrameworkDetail(fw) {
           </div>
 
           <h4 style="margin-bottom:8px">🇺🇸 이미지 프롬프트 (영문)</h4>
-          <div class="prompt-box">${escapeHtml(fw.imgPromptEn || "-")}</div>
+          ${copyBox(`fw-img-en-${fw.id}`, escapeHtml(fw.imgPromptEn || "-"))}
 
           <div style="margin-top:12px">
             <h4 style="margin-bottom:8px">🇰🇷 이미지 프롬프트 (한글)</h4>
-            <div class="prompt-box">${escapeHtml(fw.imgPromptKo || "-")}</div>
+            ${copyBox(`fw-img-ko-${fw.id}`, escapeHtml(fw.imgPromptKo || "-"))}
           </div>
         </div>
 
