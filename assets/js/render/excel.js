@@ -1,6 +1,6 @@
 import { state } from "../state.js";
 import { EXCEL_PROMPTS } from "../../data/excelPrompts.js";
-import { escapeHtml } from "../utils.js";
+import { escapeHtml, copyBox } from "../utils.js";
 
 export function renderExcel() {
   if (state.currentExcelPromptId) {
@@ -149,7 +149,7 @@ function renderExcelPromptDetail() {
         </div>
 
         <h4 style="margin-top:16px">🧠 추천 프롬프트</h4>
-        <div class="prompt-box">${escapeHtml(item.prompt || "-")}</div>
+        ${copyBox(`excel-prompt-${item.id}`, escapeHtml(item.prompt || "-"))}
       </div>
 
       <div class="content-card">
