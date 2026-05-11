@@ -1,4 +1,4 @@
-import { aiMistakes } from "../../data/aiMistakes.js";
+import { aiMistakes } from "../../data/bestPractices/aiMistakes.js";
 import { escapeHtml } from "../utils.js";
 
 const difficultyLabels = {

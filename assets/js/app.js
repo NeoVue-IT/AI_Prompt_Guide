@@ -5,6 +5,7 @@ import { renderOverview } from "./render/overview.js";
 import { renderFrameworks } from "./render/frameworks.js";
 import { renderQuickPrompts } from "./render/quickPrompts.js";
 import { renderExcel } from "./render/excel.js";
+import { renderAiMistakes } from "./render/aiMistakes.js";
 
 function renderAgents() {
   return `<section><h2>Agent Guide</h2><p>Agent guide section here</p></section>`;
@@ -235,15 +236,10 @@ function renderBestPracticesSection(app) {
       bindPromptPatternEvents();
       break;
 
-    /*case "hallucination-guide":
-      app.innerHTML = renderHallucinationGuide();
-      // bindHallucinationGuideEvents();
-      break;
-
     case "common-mistakes":
-      app.innerHTML = renderCommonMistakes();
+      app.innerHTML = renderAiMistakes();
       // bindCommonMistakesEvents();
-      break;*/
+      break;
 
     case "overview":
     default:
