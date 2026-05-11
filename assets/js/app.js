@@ -47,6 +47,8 @@ export function renderApp() {
       bindOverviewEvents();
       break;
   }
+
+    bindCopyButtons();
 }
 
 function bindOverviewEvents() {
@@ -160,20 +162,6 @@ function bindQuickPromptEvents() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   });
-
-  qsa("[data-copy-target]").forEach(btn => {
-    btn.addEventListener("click", async (e) => {
-      const targetId = e.currentTarget.dataset.copyTarget;
-      const target = qs(`#${targetId}`);
-      if (!target) return;
-
-      await navigator.clipboard.writeText(target.innerText);
-      e.currentTarget.innerHTML = "✓";
-      setTimeout(() => {
-        e.currentTarget.innerHTML = copyIconSVG();
-      }, 1000);
-    });
-  });
 }
 
 function bindExcelEvents() {
@@ -237,9 +225,12 @@ function bindCopyButtons() {
       if (!target) return;
 
       await navigator.clipboard.writeText(target.innerText);
+
+      e.currentTarget.classList.add("copied");
       e.currentTarget.innerHTML = "✓";
 
       setTimeout(() => {
+        e.currentTarget.classList.remove("copied");
         e.currentTarget.innerHTML = copyIconSVG();
       }, 1000);
     });
@@ -255,7 +246,6 @@ function renderBestPracticesSection(app) {
 
     case "common-mistakes":
       app.innerHTML = renderAiMistakes();
-      bindCopyButtons();
       break;
 
     case "overview":
