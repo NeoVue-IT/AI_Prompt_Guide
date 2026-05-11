@@ -6,6 +6,7 @@ import { renderFrameworks } from "./render/frameworks.js";
 import { renderQuickPrompts } from "./render/quickPrompts.js";
 import { renderExcel } from "./render/excel.js";
 import { renderAiMistakes } from "./render/aiMistakes.js";
+import { renderHallucinationGuide } from "./render/hallucinationGuide.js";
 
 function renderAgents() {
   return `<section><h2>Agent Guide</h2><p>Agent guide section here</p></section>`;
@@ -246,6 +247,10 @@ function renderBestPracticesSection(app) {
 
     case "common-mistakes":
       app.innerHTML = renderAiMistakes();
+      break;
+
+    case "hallucination-guide":
+      app.innerHTML = renderHallucinationGuide();
       break;
 
     case "overview":
