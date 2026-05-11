@@ -817,47 +817,42 @@ tr:hover td {
 ========================================= */
 .copy-box {
   position: relative;
-  background: #0f172a;
-  color: #e2e8f0;
-  border-radius: 10px;
-  padding: 14px;
-  margin-top: 6px;
-  font-size: 13px;
-  line-height: 1.5;
+  margin: 12px 0;
 }
 
 .copy-box pre {
   margin: 0;
+  padding: 16px 44px 16px 16px;
   white-space: pre-wrap;
   word-break: break-word;
-  font-family: "Consolas", monospace;
-  background: transparent;
-  border: none;
-  min-height: auto;
-  padding: 0;
-  color: inherit;
 }
 
 .copy-btn {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  background: transparent;
-  border: none;
+  top: 10px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--border-color, #d0d7de);
+  border-radius: 8px;
+  background: var(--card-bg, #fff);
   cursor: pointer;
-  padding: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.copy-icon {
-  width: 18px;
-  height: 18px;
-  fill: #94a3b8;
-  transition: all 0.2s ease;
+.copy-btn:hover {
+  background: var(--soft-bg, #f6f8fa);
 }
 
-.copy-btn:hover .copy-icon {
-  fill: #2563eb;
-  transform: scale(1.1);
+.copy-btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+.copy-btn.copied {
+  color: #16a34a;
 }
 
 /* =========================================
