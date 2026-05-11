@@ -17,14 +17,15 @@ const severityLabels = {
 function renderTags(tags = []) {
   return tags
     .map((tag) => `<span class="mini-tag">${escapeHtml(tag)}</span>`)
-    .join("");
+    .join(" ");
 }
 
 function renderMistakeCard(item) {
   return `
-    <article class="guide-item">
+    <article class="guide-item ai-mistake-card">
       <div class="guide-item-header">
         <h3>${escapeHtml(item.title)}</h3>
+
         <div class="tag-row">
           <span class="mini-tag">${escapeHtml(difficultyLabels[item.difficulty] || "기본")}</span>
           <span class="mini-tag">위험도: ${escapeHtml(severityLabels[item.severity] || "보통")}</span>
@@ -32,23 +33,28 @@ function renderMistakeCard(item) {
         </div>
       </div>
 
-      <p><strong>실수:</strong> ${escapeHtml(item.mistake)}</p>
-      <p><strong>문제점:</strong> ${escapeHtml(item.problem)}</p>
-      <p><strong>개선 방법:</strong> ${escapeHtml(item.better)}</p>
+      <div class="mistake-summary">
+        <p><strong>실수</strong><span>${escapeHtml(item.mistake)}</span></p>
+        <p><strong>문제점</strong><span>${escapeHtml(item.problem)}</span></p>
+        <p><strong>개선 방법</strong><span>${escapeHtml(item.better)}</span></p>
+      </div>
 
       <div class="prompt-compare">
-        <div>
-            <div class="guide-label">나쁜 예시</div>
-            ${copyBox(`mistake-bad-${item.id}`, escapeHtml(item.badPrompt))}
+        <div class="prompt-example-col">
+          <div class="guide-label">나쁜 예시</div>
+          ${copyBox(`mistake-bad-${item.id}`, escapeHtml(item.badPrompt))}
         </div>
 
-        <div>
-            <div class="guide-label">좋은 예시</div>
-            ${copyBox(`mistake-good-${item.id}`, escapeHtml(item.goodPrompt))}
+        <div class="prompt-example-col">
+          <div class="guide-label">좋은 예시</div>
+          ${copyBox(`mistake-good-${item.id}`, escapeHtml(item.goodPrompt))}
         </div>
       </div>
 
-      <p><strong>Tip:</strong> ${escapeHtml(item.tip)}</p>
+      <div class="tip-box">
+        <strong>Tip</strong>
+        <span>${escapeHtml(item.tip)}</span>
+      </div>
     </article>
   `;
 }
