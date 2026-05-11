@@ -890,6 +890,34 @@ tr:hover td {
   margin: 16px 0;
 }
 
+.prompt-box,
+.copy-box {
+  border: 1px solid var(--border-color, #d0d7de);
+  border-radius: 14px;
+  background: var(--card-bg, #ffffff);
+  overflow: hidden;
+}
+
+.copy-box pre {
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.guide-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--muted-text, #64748b);
+  margin: 12px 0 6px;
+}
+
+.prompt-compare {
+  align-items: stretch;
+}
+
+.prompt-compare .copy-box {
+  height: 100%;
+}
+
 .prompt-box-bad,
 .prompt-box-good {
   border-radius: 14px;
@@ -908,4 +936,25 @@ tr:hover td {
   .prompt-compare {
     grid-template-columns: 1fr;
   }
+}
+
+.content-stack {
+  display: grid;
+  gap: 28px;
+}
+
+.guide-section {
+  margin-top: 24px;
+}
+
+.section-heading {
+  margin-bottom: 16px;
+}
+
+.section-heading h2 {
+  margin-bottom: 6px;
+}
+
+.section-heading p {
+  color: var(--muted-text, #64748b);
 }
