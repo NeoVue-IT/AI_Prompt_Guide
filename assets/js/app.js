@@ -229,6 +229,23 @@ function bindPromptPatternEvents() {
   });
 }
 
+function bindCopyButtons() {
+  qsa("[data-copy-target]").forEach(btn => {
+    btn.addEventListener("click", async (e) => {
+      const targetId = e.currentTarget.dataset.copyTarget;
+      const target = qs(`#${targetId}`);
+      if (!target) return;
+
+      await navigator.clipboard.writeText(target.innerText);
+      e.currentTarget.innerHTML = "✓";
+
+      setTimeout(() => {
+        e.currentTarget.innerHTML = copyIconSVG();
+      }, 1000);
+    });
+  });
+}
+
 function renderBestPracticesSection(app) {
   switch (state.currentSubTab) {
     case "prompt-patterns":
@@ -238,7 +255,7 @@ function renderBestPracticesSection(app) {
 
     case "common-mistakes":
       app.innerHTML = renderAiMistakes();
-      // bindCommonMistakesEvents();
+      bindCopyButtons();
       break;
 
     case "overview":
@@ -250,3 +267,4 @@ function renderBestPracticesSection(app) {
 
 
 renderApp();
+

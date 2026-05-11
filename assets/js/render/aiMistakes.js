@@ -1,5 +1,5 @@
 import { aiMistakes } from "../../data/bestPractices/aiMistakes.js";
-import { escapeHtml } from "../utils.js";
+import { escapeHtml, copyBox } from "../utils.js";
 
 const difficultyLabels = {
   beginner: "초급",
@@ -37,14 +37,14 @@ function renderMistakeCard(item) {
       <p><strong>개선 방법:</strong> ${escapeHtml(item.better)}</p>
 
       <div class="prompt-compare">
-        <div class="prompt-box prompt-box-bad">
-            <strong>나쁜 예시</strong>
-            <p>${escapeHtml(item.badPrompt)}</p>
+        <div>
+            <div class="guide-label">나쁜 예시</div>
+            ${copyBox(`mistake-bad-${item.id}`, escapeHtml(item.badPrompt))}
         </div>
 
-        <div class="prompt-box prompt-box-good">
-            <strong>좋은 예시</strong>
-            <p>${escapeHtml(item.goodPrompt)}</p>
+        <div>
+            <div class="guide-label">좋은 예시</div>
+            ${copyBox(`mistake-good-${item.id}`, escapeHtml(item.goodPrompt))}
         </div>
       </div>
 
