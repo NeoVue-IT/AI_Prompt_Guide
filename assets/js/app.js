@@ -9,6 +9,7 @@ import { renderAiMistakes } from "./render/aiMistakes.js";
 import { renderHallucinationGuide } from "./render/hallucinationGuide.js";
 import { renderPromptPatterns } from "./render/promptPatterns.js";
 import { renderBestPracticesOverview } from "./render/bestPracticesOverview.js";
+import { renderWrksAI } from "./render/wrksai/renderWrksAI.js";
 
 function renderAgents() {
   return `<section><h2>Agent Guide</h2><p>Agent guide section here</p></section>`;
@@ -44,6 +45,11 @@ export function renderApp() {
     case "agents":
       app.innerHTML = renderAgents();
       break;
+
+    case "wrksai":
+      app.innerHTML = renderWrksAI();
+      bindWrksAIEvents();
+      break;  
 
     default:
       app.innerHTML = renderOverview();
@@ -227,6 +233,19 @@ function bindBestPracticesOverviewEvents() {
       if (!tab) return;
 
       state.currentSubTab = tab;
+      renderApp();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+}
+
+function bindWrksAIEvents() {
+  qsa("[data-wrksai-id]").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const id = e.currentTarget.dataset.wrksaiId;
+      if (!id) return;
+
+      state.currentSubTab = id;
       renderApp();
       window.scrollTo({ top: 0, behavior: "smooth" });
     });

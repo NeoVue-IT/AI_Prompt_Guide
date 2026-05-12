@@ -12,7 +12,8 @@ const MAIN_TABS = [
   { id: "quick-prompts", label: "Quick Prompts" },
   { id: "excel", label: "Excel" },
   { id: "best-practices", label: "Best Practices" },
-  { id: "agents", label: "Agent Guide" }
+  { id: "agents", label: "Agent Guide" },
+  { id: "wrksai", label: "웍스AI Guide"}
 ];
 
 /* =========================
@@ -23,6 +24,22 @@ const BEST_PRACTICES_TABS = [
   { id: "prompt-patterns", label: "Prompt Patterns" },
   { id: "hallucination-guide", label: "Hallucination Guide" },
   { id: "common-mistakes", label: "Common Mistakes" }
+];
+
+const WRKSAI_TABS = [
+  { id: "overview", label: "Overview" },
+  { id: "usage-principles", label: "AI Usage Principles" },
+  { id: "model-selection", label: "Model Selection" },
+  { id: "model-switching", label: "Model Switching" },
+  { id: "workflow-chains", label: "Workflow Chains" },
+  { id: "agent-creation", label: "Agent Creation" },
+  { id: "token-optimization", label: "Token Optimization" },
+  { id: "department-workflows", label: "Department Workflows" },
+  { id: "recommended-agents", label: "Recommended Agents" },
+  { id: "cost-optimization", label: "Cost Optimization" },
+  { id: "failure-cases", label: "Failure Cases" },
+  { id: "advanced-prompting", label: "Advanced Prompting" },
+  { id: "enterprise-examples", label: "Enterprise Examples" }
 ];
 
 /* =========================
@@ -79,6 +96,9 @@ export function renderSubNav() {
     return;
   } else if (state.currentMainTab === "best-practices") {
     renderBestPracticesSubNav(subNav);
+    return;
+  } else if (state.currentMainTab === "wrksai") {
+    renderWrksAISubNav(subNav);
     return;
   }
 
@@ -168,6 +188,32 @@ function renderBestPracticesSubNav(container) {
   container.innerHTML = `
     <div class="tab-row sub-tab-row">
       ${BEST_PRACTICES_TABS.map(item => `
+        <button
+          type="button"
+          class="tab-btn ${state.currentSubTab === item.id ? "active" : ""}"
+          data-sub-tab="${item.id}"
+        >
+          ${item.label}
+        </button>
+      `).join("")}
+    </div>
+  `;
+
+  container.querySelectorAll("[data-sub-tab]").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const nextSubTab = e.currentTarget.dataset.subTab;
+      if (!nextSubTab) return;
+
+      state.currentSubTab = nextSubTab;
+      renderApp();
+    });
+  });
+}
+
+function renderWrksAISubNav(container) {
+  container.innerHTML = `
+    <div class="tab-row sub-tab-row">
+      ${WRKSAI_TABS.map(item => `
         <button
           type="button"
           class="tab-btn ${state.currentSubTab === item.id ? "active" : ""}"

@@ -109,6 +109,16 @@ export function renderOverview() {
           tags: ["가이드", "활용법", "추가 예정"],
           actionId: "agents"
         })}
+
+        ${renderLibraryCard({
+          badge: "WRKSAI",
+          badgeLabel: "Enterprise",
+          title: "웍스AI Guide",
+          subtitle: "사내 AI 운영 및 활용 가이드",
+          desc: "모델 선택, 모델 전환, 토큰 최적화, 에이전트 생성, 부서별 워크플로우를 다루는 고급 가이드입니다.",
+          tags: ["운영 가이드", "비용 최적화", "업무 자동화"],
+          actionId: "wrksai"
+        })}
       </div>
     </div>
   `;
