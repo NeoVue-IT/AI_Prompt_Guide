@@ -7,6 +7,8 @@ import { renderQuickPrompts } from "./render/quickPrompts.js";
 import { renderExcel } from "./render/excel.js";
 import { renderAiMistakes } from "./render/aiMistakes.js";
 import { renderHallucinationGuide } from "./render/hallucinationGuide.js";
+import { renderPromptPatterns } from "./render/promptPatterns.js";
+import { renderBestPracticesOverview } from "./render/bestPracticesOverview.js";
 
 function renderAgents() {
   return `<section><h2>Agent Guide</h2><p>Agent guide section here</p></section>`;
@@ -218,6 +220,19 @@ function bindPromptPatternEvents() {
   });
 }
 
+function bindBestPracticesOverviewEvents() {
+  qsa("[data-best-practice-tab]").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const tab = e.currentTarget.dataset.bestPracticeTab;
+      if (!tab) return;
+
+      state.currentSubTab = tab;
+      renderApp();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+}
+
 function bindCopyButtons() {
   qsa("[data-copy-target]").forEach(btn => {
     btn.addEventListener("click", async (e) => {
@@ -256,6 +271,7 @@ function renderBestPracticesSection(app) {
     case "overview":
     default:
       app.innerHTML = renderBestPracticesOverview();
+      bindBestPracticesOverviewEvents();
       break;
   }
 }

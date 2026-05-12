@@ -1171,3 +1171,61 @@ tr:hover td {
   display: grid;
   gap: 18px;
 }
+
+/* =========================================
+   PROMPT PATTERNS
+========================================= */
+
+.prompt-pattern-card {
+  padding: 22px;
+}
+
+.prompt-pattern-card .guide-item-header {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.prompt-pattern-card h3 {
+  margin: 0;
+}
+
+.prompt-pattern-card .copy-box {
+  height: auto;
+  min-height: unset;
+}
+
+.prompt-pattern-card .copy-box pre {
+  min-height: unset;
+  height: auto;
+  margin: 0;
+  padding: 14px 44px 14px 16px;
+  white-space: pre-wrap;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  line-height: 1.65;
+}
+
+.language-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.lang-btn {
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 8px 13px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #475569;
+  cursor: pointer;
+}
+
+.lang-btn.active {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+}
