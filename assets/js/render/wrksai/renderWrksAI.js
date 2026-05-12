@@ -7,6 +7,7 @@ import { renderModelSwitching } from "./renderModelSwitching.js";
 import { renderTokenOptimization } from "./renderTokenOptimization.js";
 import { renderWorkflowChains } from "./renderWorkflowChains.js";
 import { renderRecommendedAgents } from "./renderRecommendedAgents.js";
+import { renderAgentCreation } from "./renderAgentCreation.js";
 
 export function renderWrksAI() {
   switch (state.currentSubTab) {
@@ -27,6 +28,9 @@ export function renderWrksAI() {
 
     case "recommended-agents":
       return renderRecommendedAgents();
+
+    case "agent-creation":
+      return renderAgentCreation();  
 
     default:
       return renderWrksAIGeneric();

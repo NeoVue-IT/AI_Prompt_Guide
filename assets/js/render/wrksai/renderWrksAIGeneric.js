@@ -3,7 +3,6 @@ import { escapeHtml } from "../../utils.js";
 import { renderHero } from "./wrksAIRenderUtils.js";
 
 import { usagePrinciples } from "../../../data/wrksai/usagePrinciples.js";
-import { agentCreation } from "../../../data/wrksai/agentCreation.js";
 import { departmentWorkflows } from "../../../data/wrksai/departmentWorkflows.js";
 import { costOptimization } from "../../../data/wrksai/costOptimization.js";
 import { failureCases } from "../../../data/wrksai/failureCases.js";
@@ -12,7 +11,6 @@ import { enterpriseExamples } from "../../../data/wrksai/enterpriseExamples.js";
 
 const GENERIC_SECTION_MAP = {
   "usage-principles": usagePrinciples,
-  "agent-creation": agentCreation,
   "department-workflows": departmentWorkflows,
   "cost-optimization": costOptimization,
   "failure-cases": failureCases,
