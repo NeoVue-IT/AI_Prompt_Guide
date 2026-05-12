@@ -39,6 +39,9 @@ export function renderWrksAI() {
     return renderModelSelection();
   }
 
+  if (state.currentSubTab === "model-switching") {
+    return renderModelSwitching();
+  }
   const section = WRKSAI_SECTION_MAP[state.currentSubTab];
 
   if (!section) {
@@ -119,6 +122,177 @@ function renderModelSelection() {
       ${renderMistakes()}
       ${renderQuickDecisions()}
     </div>
+  `;
+}
+
+function renderModelSwitching() {
+  return `
+    <section class="page-hero page-hero-card">
+      <p class="eyebrow">${escapeHtml(modelSwitching.eyebrow)}</p>
+      <h1>${escapeHtml(modelSwitching.title)}</h1>
+      <p>${escapeHtml(modelSwitching.description)}</p>
+    </section>
+
+    <div class="guide-layout">
+      ${renderSwitchingCoreMessage()}
+      ${renderWhySwitchingMatters()}
+      ${renderSwitchingPatterns()}
+      ${renderSwitchingWorkflow()}
+      ${renderSwitchingExamples()}
+      ${renderSwitchingMistakes()}
+      ${renderSwitchingQuickRules()}
+    </div>
+  `;
+}
+
+function renderSwitchingCoreMessage() {
+  return `
+    <section class="guide-section">
+      <div class="section-card">
+        <h2>${escapeHtml(modelSwitching.coreMessage.title)}</h2>
+        <p>${escapeHtml(modelSwitching.coreMessage.body)}</p>
+      </div>
+    </section>
+  `;
+}
+
+function renderWhySwitchingMatters() {
+  return `
+    <section class="guide-section">
+      <div class="section-card">
+        <h2>Why Model Switching Matters</h2>
+        <p>모델 전환은 품질 향상뿐만 아니라 비용 관리와 업무 속도 개선에도 직접적인 영향을 줍니다.</p>
+      </div>
+
+      <div class="overview-grid">
+        ${modelSwitching.whyItMatters.map(item => `
+          <article class="fw-card">
+            <h3>${escapeHtml(item.title)}</h3>
+            <p>${escapeHtml(item.body)}</p>
+          </article>
+        `).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderSwitchingPatterns() {
+  return `
+    <section class="guide-section">
+      <div class="section-card">
+        <h2>Recommended Switching Patterns</h2>
+        <p>업무 흐름에 따라 모델을 단계적으로 배치하는 대표 패턴입니다.</p>
+      </div>
+
+      <div class="content-stack">
+        ${modelSwitching.switchingPatterns.map(pattern => `
+          <article class="guide-item">
+            <div class="guide-item-header">
+              <h3>${escapeHtml(pattern.title)}</h3>
+              <p>${escapeHtml(pattern.useCase)}</p>
+            </div>
+
+            <div class="flow-row">
+              ${pattern.flow.map((step, index) => `
+                <span class="flow-pill">${escapeHtml(step)}</span>
+                ${index < pattern.flow.length - 1 ? `<span class="flow-arrow">→</span>` : ""}
+              `).join("")}
+            </div>
+
+            <p>${escapeHtml(pattern.explanation)}</p>
+          </article>
+        `).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderSwitchingWorkflow() {
+  return `
+    <section class="guide-section">
+      <div class="section-card">
+        <h2>Model Switching Workflow</h2>
+        <p>모델을 전환할 때는 단계별 목적과 전달할 정보를 명확히 구분해야 합니다.</p>
+      </div>
+
+      <div class="content-stack">
+        ${modelSwitching.workflowSteps.map(item => `
+          <article class="guide-item">
+            <div class="guide-item-header">
+              <span class="badge badge-id">STEP ${escapeHtml(item.step)}</span>
+              <h3>${escapeHtml(item.title)}</h3>
+              <p>${escapeHtml(item.body)}</p>
+            </div>
+          </article>
+        `).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderSwitchingExamples() {
+  return `
+    <section class="guide-section">
+      <div class="section-card">
+        <h2>Before / After Examples</h2>
+        <p>잘못된 사용 방식과 개선된 모델 전환 방식을 비교합니다.</p>
+      </div>
+
+      <div class="content-stack">
+        ${modelSwitching.examples.map(example => `
+          <article class="guide-item">
+            <h3>${escapeHtml(example.title)}</h3>
+
+            <div class="compare-grid">
+              <div class="compare-card compare-bad">
+                <strong>Before</strong>
+                <p>${escapeHtml(example.before)}</p>
+              </div>
+
+              <div class="compare-card compare-good">
+                <strong>After</strong>
+                <p>${escapeHtml(example.after)}</p>
+              </div>
+            </div>
+          </article>
+        `).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderSwitchingMistakes() {
+  return `
+    <section class="guide-section">
+      <div class="section-card">
+        <h2>Common Mistakes</h2>
+        <p>모델 전환을 사용할 때 자주 발생하는 실수입니다.</p>
+      </div>
+
+      <article class="guide-item">
+        ${renderList(modelSwitching.mistakes)}
+      </article>
+    </section>
+  `;
+}
+
+function renderSwitchingQuickRules() {
+  return `
+    <section class="guide-section">
+      <div class="section-card">
+        <h2>Quick Rules</h2>
+        <p>업무자가 빠르게 기억할 수 있는 모델 전환 기준입니다.</p>
+      </div>
+
+      <div class="overview-grid">
+        ${modelSwitching.quickRules.map(item => `
+          <article class="fw-card">
+            <h3>${escapeHtml(item.rule)}</h3>
+            <p>${escapeHtml(item.detail)}</p>
+          </article>
+        `).join("")}
+      </div>
+    </section>
   `;
 }
 
