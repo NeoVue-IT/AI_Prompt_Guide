@@ -9,6 +9,7 @@ import { renderWorkflowChains } from "./renderWorkflowChains.js";
 import { renderRecommendedAgents } from "./renderRecommendedAgents.js";
 import { renderAgentCreation } from "./renderAgentCreation.js";
 import { renderDepartmentWorkflows } from "./renderDepartmentWorkflows.js";
+import { renderUsagePrinciples } from "./renderUsagePrinciples.js";
 
 export function renderWrksAI() {
   switch (state.currentSubTab) {
@@ -35,6 +36,9 @@ export function renderWrksAI() {
 
     case "department-workflows":
       return renderDepartmentWorkflows();  
+
+    case "usage-principles":
+      return renderUsagePrinciples();  
 
     default:
       return renderWrksAIGeneric();
