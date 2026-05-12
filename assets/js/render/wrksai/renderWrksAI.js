@@ -8,6 +8,7 @@ import { renderTokenOptimization } from "./renderTokenOptimization.js";
 import { renderWorkflowChains } from "./renderWorkflowChains.js";
 import { renderRecommendedAgents } from "./renderRecommendedAgents.js";
 import { renderAgentCreation } from "./renderAgentCreation.js";
+import { renderDepartmentWorkflows } from "./renderDepartmentWorkflows.js";
 
 export function renderWrksAI() {
   switch (state.currentSubTab) {
@@ -31,6 +32,9 @@ export function renderWrksAI() {
 
     case "agent-creation":
       return renderAgentCreation();  
+
+    case "department-workflows":
+      return renderDepartmentWorkflows();  
 
     default:
       return renderWrksAIGeneric();
