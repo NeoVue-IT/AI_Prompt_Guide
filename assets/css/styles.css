@@ -940,7 +940,58 @@ tr:hover td {
 
 .content-stack {
   display: grid;
-  gap: 28px;
+  gap: 18px;
+}
+
+.page-hero-card,
+.section-card,
+.guide-item {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.page-hero-card {
+  margin-bottom: 18px;
+}
+
+.guide-section {
+  display: grid;
+  gap: 14px;
+}
+
+.section-card {
+  margin-bottom: 0;
+}
+
+.hallucination-card {
+  padding: 22px;
+}
+
+.hallucination-card .guide-item-header {
+  margin-bottom: 16px;
+}
+
+.hallucination-card .guide-item-header h3 {
+  margin-bottom: 6px;
+}
+
+.guide-block {
+  margin-top: 14px;
+}
+
+.guide-block strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.guide-list {
+  margin: 0;
+  padding-left: 20px;
+  line-height: 1.7;
+}
+
+.guide-list li + li {
+  margin-top: 6px;
 }
 
 .guide-section {
@@ -957,6 +1008,11 @@ tr:hover td {
 
 .section-heading p {
   color: var(--muted-text, #64748b);
+}
+
+.guide-layout {
+  display: grid;
+  gap: 22px;
 }
 
 /* =========================================

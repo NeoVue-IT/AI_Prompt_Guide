@@ -61,7 +61,7 @@ export function renderHallucinationGuide() {
       </p>
     </section>
 
-    <div class="content-stack">
+    <div class="guide-layout">
       ${hallucinationGuide.map(renderHallucinationSection).join("")}
     </div>
   `;
