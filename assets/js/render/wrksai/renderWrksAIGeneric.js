@@ -2,14 +2,11 @@ import { state } from "../../state.js";
 import { escapeHtml } from "../../utils.js";
 import { renderHero } from "./wrksAIRenderUtils.js";
 
-
-import { costOptimization } from "../../../data/wrksai/costOptimization.js";
 import { failureCases } from "../../../data/wrksai/failureCases.js";
 import { advancedPrompting } from "../../../data/wrksai/advancedPrompting.js";
 import { enterpriseExamples } from "../../../data/wrksai/enterpriseExamples.js";
 
 const GENERIC_SECTION_MAP = {
-  "cost-optimization": costOptimization,
   "failure-cases": failureCases,
   "advanced-prompting": advancedPrompting,
   "enterprise-examples": enterpriseExamples
