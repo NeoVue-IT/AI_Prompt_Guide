@@ -115,3 +115,58 @@ https://neovue-it.github.io/AI_Prompt_Guide/
 - 프롬프트 작성 방법 표준화
 - 실무 생산성 향상
 - 조직 내 AI 활용 확대
+
+---
+
+# 문서 안내
+
+## English Documentation
+
+- [Project Progress](./docs/en/PROGRESS.md)
+- [Project Roadmap](./docs/en/ROADMAP.md)
+
+## 한국어 문서
+
+- [프로젝트 진행 현황](./docs/kr/PROGRESS_KR.md)
+- [프로젝트 개발 로드맵](./docs/kr/ROADMAP_KR.md)
+
+---
+
+# 브랜치 구조
+
+## `main`
+
+기존 단일 페이지 기반 레거시 버전입니다.  
+현재는 참고용으로만 유지됩니다.
+
+## `second`
+
+현재 메인 개발 브랜치이자 실제 작업 기준 브랜치입니다.
+
+주요 방향:
+- 모듈형 구조
+- Shared Rendering 시스템
+- Workflow 중심 UI
+- 웍스AI Enterprise Workflow Guide
+
+## `third` (예정)
+
+향후 `second` 브랜치를 기반으로 생성될 사내용 Enterprise 배포 브랜치입니다.
+
+---
+
+# 개발 방향
+
+본 프로젝트는 단순 AI Prompt Reference 사이트에서 시작하여, 현재는 모듈형 Workflow 기반 Enterprise AI Adoption Platform 형태로 확장 중입니다.
+
+현재 주요 개발 방향:
+
+- Foundation AI 교육
+- Prompt Engineering 가이드
+- Workflow 기반 AI 활용
+- 웍스AI 운영 가이드
+- Enterprise AI 온보딩
+- 부서별 AI Workflow 예제
+- Shared Rendering 구조 개선
+
+---
