@@ -3,19 +3,16 @@ import { recommendedAgents } from "../../../data/wrksai/recommendedAgents.js";
 import {
   renderHero,
   renderCoreMessage,
-  renderList
+  renderList,
+  renderPromptBox
 } from "./wrksAIRenderUtils.js";
 
 export function renderRecommendedAgents() {
   return `
-    <section class="page-hero page-hero-card">
-      <p class="eyebrow">${escapeHtml(recommendedAgents.eyebrow)}</p>
-      <h1>${escapeHtml(recommendedAgents.title)}</h1>
-      <p>${escapeHtml(recommendedAgents.description)}</p>
-    </section>
+    ${renderHero(recommendedAgents)}
 
-    <div class="guide-layout">
-      ${renderRecommendedAgentsCore()}
+    <div class="guide-layout">  
+      ${renderCoreMessage(recommendedAgents.coreMessage)}
       ${renderAgentPrinciples()}
       ${renderAgentCards()}
       ${renderAgentChecklist()}
@@ -27,16 +24,6 @@ export function renderRecommendedAgents() {
   `;
 }
 
-function renderRecommendedAgentsCore() {
-  return `
-    <section class="guide-section">
-      <div class="section-card">
-        <h2>${escapeHtml(recommendedAgents.coreMessage.title)}</h2>
-        <p>${escapeHtml(recommendedAgents.coreMessage.body)}</p>
-      </div>
-    </section>
-  `;
-}
 
 function renderAgentPrinciples() {
   return `
@@ -171,9 +158,7 @@ function renderAgentPromptTemplate() {
       </div>
 
       <article class="guide-item">
-        <div class="copy-box">
-          <pre><code>${escapeHtml(recommendedAgents.promptTemplate.prompt)}</code></pre>
-        </div>
+        ${renderPromptBox(recommendedAgents.promptTemplate.prompt)}
       </article>
     </section>
   `;

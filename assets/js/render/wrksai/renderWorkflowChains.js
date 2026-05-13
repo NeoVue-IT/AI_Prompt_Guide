@@ -3,19 +3,16 @@ import { workflowChains } from "../../../data/wrksai/workflowChains.js";
 import {
   renderHero,
   renderCoreMessage,
-  renderList
+  renderList,
+  renderPromptBox
 } from "./wrksAIRenderUtils.js";
 
 export function renderWorkflowChains() {
   return `
-    <section class="page-hero page-hero-card">
-      <p class="eyebrow">${escapeHtml(workflowChains.eyebrow)}</p>
-      <h1>${escapeHtml(workflowChains.title)}</h1>
-      <p>${escapeHtml(workflowChains.description)}</p>
-    </section>
+    ${renderHero(workflowChains)}
 
     <div class="guide-layout">
-      ${renderWorkflowChainsCore()}
+      ${renderCoreMessage(workflowChains.coreMessage)}
       ${renderWorkflowChainPrinciples()}
       ${renderChainPatterns()}
       ${renderWorkflowChainSteps()}
@@ -25,17 +22,6 @@ export function renderWorkflowChains() {
       ${renderWorkflowChainMistakes()}
       ${renderWorkflowChainQuickRules()}
     </div>
-  `;
-}
-
-function renderWorkflowChainsCore() {
-  return `
-    <section class="guide-section">
-      <div class="section-card">
-        <h2>${escapeHtml(workflowChains.coreMessage.title)}</h2>
-        <p>${escapeHtml(workflowChains.coreMessage.body)}</p>
-      </div>
-    </section>
   `;
 }
 
@@ -188,9 +174,7 @@ function renderWorkflowChainPrompts() {
         ${workflowChains.promptPatterns.map(item => `
           <article class="guide-item">
             <h3>${escapeHtml(item.title)}</h3>
-            <div class="copy-box">
-              <pre><code>${escapeHtml(item.prompt)}</code></pre>
-            </div>
+            ${renderPromptBox(item.prompt)}
           </article>
         `).join("")}
       </div>

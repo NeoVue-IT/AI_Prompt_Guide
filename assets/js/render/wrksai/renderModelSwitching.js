@@ -3,21 +3,16 @@ import { modelSwitching } from "../../../data/wrksai/modelSwitching.js";
 import {
   renderHero,
   renderCoreMessage,
-  renderSectionHeader,
   renderList
 } from "./wrksAIRenderUtils.js";
 
 
 export function renderModelSwitching() {
   return `
-    <section class="page-hero page-hero-card">
-      <p class="eyebrow">${escapeHtml(modelSwitching.eyebrow)}</p>
-      <h1>${escapeHtml(modelSwitching.title)}</h1>
-      <p>${escapeHtml(modelSwitching.description)}</p>
-    </section>
-
+    ${renderHero(modelSwitching)}
+    
     <div class="guide-layout">
-      ${renderSwitchingCoreMessage()}
+      ${renderCoreMessage(modelSwitching.coreMessage)}
       ${renderWhySwitchingMatters()}
       ${renderSwitchingPatterns()}
       ${renderSwitchingWorkflow()}
@@ -25,17 +20,6 @@ export function renderModelSwitching() {
       ${renderSwitchingMistakes()}
       ${renderSwitchingQuickRules()}
     </div>
-  `;
-}
-
-function renderSwitchingCoreMessage() {
-  return `
-    <section class="guide-section">
-      <div class="section-card">
-        <h2>${escapeHtml(modelSwitching.coreMessage.title)}</h2>
-        <p>${escapeHtml(modelSwitching.coreMessage.body)}</p>
-      </div>
-    </section>
   `;
 }
 

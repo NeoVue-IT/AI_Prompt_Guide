@@ -3,20 +3,17 @@ import { tokenOptimization } from "../../../data/wrksai/tokenOptimization.js";
 import {
   renderHero,
   renderCoreMessage,
-  renderList
+  renderList,
+  renderPromptBox
 } from "./wrksAIRenderUtils.js";
 
 
 export function renderTokenOptimization() {
   return `
-    <section class="page-hero page-hero-card">
-      <p class="eyebrow">${escapeHtml(tokenOptimization.eyebrow)}</p>
-      <h1>${escapeHtml(tokenOptimization.title)}</h1>
-      <p>${escapeHtml(tokenOptimization.description)}</p>
-    </section>
+    ${renderHero(tokenOptimization)}
 
     <div class="guide-layout">
-      ${renderTokenCoreMessage()}
+      ${renderCoreMessage(tokenOptimization.coreMessage)}
       ${renderTokenPrinciples()}
       ${renderTokenStrategies()}
       ${renderTokenWorkflow()}
@@ -28,16 +25,6 @@ export function renderTokenOptimization() {
   `;
 }
 
-function renderTokenCoreMessage() {
-  return `
-    <section class="guide-section">
-      <div class="section-card">
-        <h2>${escapeHtml(tokenOptimization.coreMessage.title)}</h2>
-        <p>${escapeHtml(tokenOptimization.coreMessage.body)}</p>
-      </div>
-    </section>
-  `;
-}
 
 function renderTokenPrinciples() {
   return `
@@ -157,9 +144,7 @@ function renderTokenPromptPatterns() {
         ${tokenOptimization.promptPatterns.map(item => `
           <article class="guide-item">
             <h3>${escapeHtml(item.title)}</h3>
-            <div class="copy-box">
-              <pre><code>${escapeHtml(item.prompt)}</code></pre>
-            </div>
+            ${renderPromptBox(item.prompt)}
           </article>
         `).join("")}
       </div>

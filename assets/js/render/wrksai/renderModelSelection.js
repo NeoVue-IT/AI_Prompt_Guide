@@ -2,36 +2,22 @@ import { escapeHtml } from "../../utils.js";
 import { modelSelection } from "../../../data/wrksai/modelSelection.js";
 import {
   renderHero,
-  renderSectionHeader
+  renderCoreMessage,
+  renderList
 } from "./wrksAIRenderUtils.js";
 
 export function renderModelSelection() {
   return `
-    <section class="page-hero page-hero-card">
-      <p class="eyebrow">${escapeHtml(modelSelection.eyebrow)}</p>
-      <h1>${escapeHtml(modelSelection.title)}</h1>
-      <p>${escapeHtml(modelSelection.description)}</p>
-    </section>
+    ${renderHero(modelSelection)}
 
-    <div class="guide-layout">
-      ${renderCoreMessage()}
+    <div class="guide-layout">  
+      ${renderCoreMessage(modelSelection.coreMessage)}
       ${renderModelCategories()}
       ${renderTaskMatrix()}
       ${renderWorkflow()}
       ${renderMistakes()}
       ${renderQuickDecisions()}
     </div>
-  `;
-}
-
-function renderCoreMessage() {
-  return `
-    <section class="guide-section">
-      <div class="section-card">
-        <h2>${escapeHtml(modelSelection.coreMessage.title)}</h2>
-        <p>${escapeHtml(modelSelection.coreMessage.body)}</p>
-      </div>
-    </section>
   `;
 }
 
@@ -154,13 +140,5 @@ function renderQuickDecisions() {
         `).join("")}
       </div>
     </section>
-  `;
-}
-
-function renderList(items = []) {
-  return `
-    <ul class="guide-list">
-      ${items.map(item => `<li>${escapeHtml(item)}</li>`).join("")}
-    </ul>
   `;
 }

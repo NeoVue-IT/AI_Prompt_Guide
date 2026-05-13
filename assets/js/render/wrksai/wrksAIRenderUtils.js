@@ -1,4 +1,4 @@
-import { escapeHtml } from "../../utils.js";
+import { escapeHtml, copyBox } from "../../utils.js";
 
 export function renderHero(section) {
   return `
@@ -65,18 +65,9 @@ export function renderBeforeAfter(before, after) {
   `;
 }
 
-export function renderPromptBox(prompt) {
-  return `
-    <div class="copy-box">
-      <button
-        type="button"
-        class="copy-btn"
-        data-copy-text="${escapeHtml(prompt)}"
-      >
-        Copy
-      </button>
+let promptBoxCounter = 0;
 
-      <pre><code>${escapeHtml(prompt)}</code></pre>
-    </div>
-  `;
+export function renderPromptBox(prompt) {
+  promptBoxCounter += 1;
+  return copyBox(`wrks-prompt-${promptBoxCounter}`, escapeHtml(prompt));
 }

@@ -253,22 +253,30 @@ function bindWrksAIEvents() {
 }
 
 function bindCopyButtons() {
-  qsa("[data-copy-text]").forEach(btn => {
+  qsa("[data-copy-target], [data-copy-text]").forEach(btn => {
     btn.addEventListener("click", async (e) => {
-      const text = e.currentTarget.dataset.copyText;
+      const button = e.currentTarget;
+      const targetId = button.dataset.copyTarget;
+      const target = targetId ? document.getElementById(targetId) : null;
+      const text = target ? target.innerText : button.dataset.copyText;
+
       if (!text) return;
 
       try {
         await navigator.clipboard.writeText(text);
-        e.currentTarget.textContent = "Copied";
+        button.classList.add("copied");
+        button.setAttribute("aria-label", "Copied");
+
         setTimeout(() => {
-          e.currentTarget.textContent = "Copy";
+          button.classList.remove("copied");
+          button.setAttribute("aria-label", "Copy");
         }, 1200);
       } catch (error) {
         console.error("Copy failed:", error);
-        e.currentTarget.textContent = "Failed";
+        button.setAttribute("aria-label", "Copy failed");
+
         setTimeout(() => {
-          e.currentTarget.textContent = "Copy";
+          button.setAttribute("aria-label", "Copy");
         }, 1200);
       }
     });
