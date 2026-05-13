@@ -12,8 +12,8 @@ import { renderDepartmentWorkflows } from "./renderDepartmentWorkflows.js";
 import { renderUsagePrinciples } from "./renderUsagePrinciples.js";
 import { renderCostOptimization } from "./renderCostOptimization.js";
 import { renderFailureCases } from "./renderFailureCases.js";
-
-
+import { renderAdvancedPrompting } from "./renderAdvancedPrompting.js";
+import { renderEnterpriseExamples } from "./renderEnterpriseExamples.js";
 
 
 
@@ -51,6 +51,12 @@ export function renderWrksAI() {
     
     case "failure-cases":
       return renderFailureCases();  
+
+    case "advanced-prompting":
+      return renderAdvancedPrompting();
+
+    case "enterprise-examples":
+      return renderEnterpriseExamples();  
 
     default:
       return renderWrksAIGeneric();

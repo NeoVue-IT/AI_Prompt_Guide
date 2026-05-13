@@ -2,12 +2,10 @@ import { state } from "../../state.js";
 import { escapeHtml } from "../../utils.js";
 import { renderHero } from "./wrksAIRenderUtils.js";
 
-import { advancedPrompting } from "../../../data/wrksai/advancedPrompting.js";
-import { enterpriseExamples } from "../../../data/wrksai/enterpriseExamples.js";
+
 
 const GENERIC_SECTION_MAP = {
-  "advanced-prompting": advancedPrompting,
-  "enterprise-examples": enterpriseExamples
+
 };
 
 export function renderWrksAIGeneric() {
