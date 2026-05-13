@@ -1643,3 +1643,50 @@ tr:hover td {
     align-items: flex-start;
   }
 }
+
+/*===============================
+COPY BOX
+===============================*/
+
+.copy-box {
+  position: relative;
+  margin-top: 1rem;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.04);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  overflow: hidden;
+}
+
+.copy-box pre {
+  margin: 0;
+  padding: 1.25rem;
+  padding-top: 3rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+
+.copy-box code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+
+  border: 1px solid rgba(99, 102, 241, 0.18);
+  background: rgba(99, 102, 241, 0.08);
+
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.copy-btn:hover {
+  background: rgba(99, 102, 241, 0.14);
+}

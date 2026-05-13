@@ -253,21 +253,24 @@ function bindWrksAIEvents() {
 }
 
 function bindCopyButtons() {
-  qsa("[data-copy-target]").forEach(btn => {
+  qsa("[data-copy-text]").forEach(btn => {
     btn.addEventListener("click", async (e) => {
-      const targetId = e.currentTarget.dataset.copyTarget;
-      const target = qs(`#${targetId}`);
-      if (!target) return;
+      const text = e.currentTarget.dataset.copyText;
+      if (!text) return;
 
-      await navigator.clipboard.writeText(target.innerText);
-
-      e.currentTarget.classList.add("copied");
-      e.currentTarget.innerHTML = "✓";
-
-      setTimeout(() => {
-        e.currentTarget.classList.remove("copied");
-        e.currentTarget.innerHTML = copyIconSVG();
-      }, 1000);
+      try {
+        await navigator.clipboard.writeText(text);
+        e.currentTarget.textContent = "Copied";
+        setTimeout(() => {
+          e.currentTarget.textContent = "Copy";
+        }, 1200);
+      } catch (error) {
+        console.error("Copy failed:", error);
+        e.currentTarget.textContent = "Failed";
+        setTimeout(() => {
+          e.currentTarget.textContent = "Copy";
+        }, 1200);
+      }
     });
   });
 }

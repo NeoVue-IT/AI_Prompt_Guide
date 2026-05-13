@@ -68,6 +68,14 @@ export function renderBeforeAfter(before, after) {
 export function renderPromptBox(prompt) {
   return `
     <div class="copy-box">
+      <button
+        type="button"
+        class="copy-btn"
+        data-copy-text="${escapeHtml(prompt)}"
+      >
+        Copy
+      </button>
+
       <pre><code>${escapeHtml(prompt)}</code></pre>
     </div>
   `;
