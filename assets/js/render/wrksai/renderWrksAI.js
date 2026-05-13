@@ -11,6 +11,11 @@ import { renderAgentCreation } from "./renderAgentCreation.js";
 import { renderDepartmentWorkflows } from "./renderDepartmentWorkflows.js";
 import { renderUsagePrinciples } from "./renderUsagePrinciples.js";
 import { renderCostOptimization } from "./renderCostOptimization.js";
+import { renderFailureCases } from "./renderFailureCases.js";
+
+
+
+
 
 export function renderWrksAI() {
   switch (state.currentSubTab) {
@@ -43,6 +48,9 @@ export function renderWrksAI() {
 
     case "cost-optimization":
       return renderCostOptimization();  
+    
+    case "failure-cases":
+      return renderFailureCases();  
 
     default:
       return renderWrksAIGeneric();
