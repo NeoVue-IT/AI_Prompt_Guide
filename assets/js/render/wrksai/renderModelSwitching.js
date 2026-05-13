@@ -4,8 +4,10 @@ import {
   renderHero,
   renderCoreMessage,
   renderList,
-  renderPreviewSection
+  renderPreviewSection,
+  renderWorkflowSteps
 } from "./wrksAIRenderUtils.js";
+import { renderWorkflowChains } from "./renderWorkflowChains.js";
 
 
 export function renderModelSwitching() {
@@ -17,7 +19,7 @@ export function renderModelSwitching() {
       ${renderPreviewSection(modelSwitching)}
       ${renderWhySwitchingMatters()}
       ${renderSwitchingPatterns()}
-      ${renderSwitchingWorkflow()}
+      ${renderWorkflowSteps(modelSwitching.workflowSteps)}
       ${renderSwitchingExamples()}
       ${renderSwitchingMistakes()}
       ${renderSwitchingQuickRules()}
@@ -69,29 +71,6 @@ function renderSwitchingPatterns() {
             </div>
 
             <p>${escapeHtml(pattern.explanation)}</p>
-          </article>
-        `).join("")}
-      </div>
-    </section>
-  `;
-}
-
-function renderSwitchingWorkflow() {
-  return `
-    <section class="guide-section">
-      <div class="section-card">
-        <h2>Model Switching Workflow</h2>
-        <p>모델을 전환할 때는 단계별 목적과 전달할 정보를 명확히 구분해야 합니다.</p>
-      </div>
-
-      <div class="content-stack">
-        ${modelSwitching.workflowSteps.map(item => `
-          <article class="guide-item">
-            <div class="guide-item-header">
-              <span class="badge badge-id">STEP ${escapeHtml(item.step)}</span>
-              <h3>${escapeHtml(item.title)}</h3>
-              <p>${escapeHtml(item.body)}</p>
-            </div>
           </article>
         `).join("")}
       </div>

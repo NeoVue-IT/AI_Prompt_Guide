@@ -5,7 +5,8 @@ import {
   renderCoreMessage,
   renderList,
   renderPromptBox,
-  renderPreviewSection
+  renderPreviewSection,
+  renderWorkflowSteps
 } from "./wrksAIRenderUtils.js";
 
 export function renderWorkflowChains() {
@@ -17,7 +18,7 @@ export function renderWorkflowChains() {
       ${renderPreviewSection(workflowChains)}
       ${renderWorkflowChainPrinciples()}
       ${renderChainPatterns()}
-      ${renderWorkflowChainSteps()}
+      ${renderWorkflowSteps(workflowChains.workflowSteps)}
       ${renderWorkflowChainExamples()}
       ${renderRecommendedChains()}
       ${renderWorkflowChainPrompts()}

@@ -5,7 +5,8 @@ import {
   renderCoreMessage,
   renderList,
   renderPromptBox,
-  renderPreviewSection
+  renderPreviewSection,
+  renderWorkflowSteps
 } from "./wrksAIRenderUtils.js";
 
 export function renderAgentCreation() {
@@ -16,7 +17,7 @@ export function renderAgentCreation() {
       ${renderCoreMessage(agentCreation.coreMessage)}
       ${renderPreviewSection(agentCreation)}
       ${renderAgentCreationPrinciples()}
-      ${renderAgentCreationSteps()}
+      ${renderWorkflowSteps(agentCreation.creationSteps)}
       ${renderAgentTypes()}
       ${renderAgentInstructionTemplate()}
       ${renderAgentCreationExamples()}

@@ -4,7 +4,8 @@ import {
   renderHero,
   renderCoreMessage,
   renderList,
-  renderPromptBox
+  renderPromptBox,
+  renderWorkflowSteps
 } from "./wrksAIRenderUtils.js";
 
 export function renderUsagePrinciples() {
@@ -16,7 +17,7 @@ export function renderUsagePrinciples() {
       ${renderPrincipleCards()}
       ${renderSafeUseRules()}
       ${renderDoDontTable()}
-      ${renderUsageWorkflow()}
+      ${renderWorkflowSteps(usagePrinciples.workflow)}
       ${renderRiskCases()}
       ${renderUsagePromptPatterns()}
       ${renderUsageMistakes()}

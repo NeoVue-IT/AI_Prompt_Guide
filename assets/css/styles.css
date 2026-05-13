@@ -1644,6 +1644,233 @@ tr:hover td {
   }
 }
 
-/*===============================
-COPY BOX
-===============================*/
+/* =========================================================
+   Preview / Visual Guide Section
+========================================================= */
+
+.guide-preview-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 2rem 0 3rem;
+}
+
+/* =========================================================
+   Screenshot / Visual Guide Grid
+========================================================= */
+
+.guide-visual-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.guide-visual-placeholder {
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+
+  min-height: 240px;
+
+  padding: 1.4rem;
+
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.03),
+      rgba(255,255,255,0.015)
+    );
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.guide-visual-placeholder:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(99, 102, 241, 0.35);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.18);
+}
+
+.visual-placeholder-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 60px;
+  height: 60px;
+
+  border-radius: 14px;
+
+  font-size: 1.8rem;
+
+  background:
+    rgba(99, 102, 241, 0.12);
+
+  border:
+    1px solid rgba(99, 102, 241, 0.18);
+}
+
+.guide-visual-placeholder h3 {
+  margin: 0;
+
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.guide-visual-placeholder p {
+  margin: 0;
+
+  color: var(--text-muted);
+
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.visual-file-name {
+  margin-top: auto;
+
+  display: inline-flex;
+  align-items: center;
+
+  width: fit-content;
+
+  padding: 0.45rem 0.7rem;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255,255,255,0.05);
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+  color: var(--text-muted);
+
+  font-size: 0.82rem;
+  font-family: monospace;
+}
+
+/* =========================================================
+   Expected Results
+========================================================= */
+
+.expected-result-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.expected-result-card h3 {
+  margin: 0;
+
+  font-size: 1.2rem;
+}
+
+/* =========================================================
+   Workflow Steps
+========================================================= */
+
+.workflow-steps-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  margin: 2rem 0 3rem;
+}
+
+.workflow-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.2rem;
+}
+
+.workflow-step-card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  padding: 1.4rem;
+
+  border-radius: 18px;
+
+  border:
+    1px solid var(--border-color);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.025),
+      rgba(255,255,255,0.015)
+    );
+
+  overflow: hidden;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.workflow-step-card:hover {
+  transform: translateY(-3px);
+
+  border-color:
+    rgba(99, 102, 241, 0.35);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.18);
+}
+
+.workflow-step-card h3 {
+  margin: 0;
+
+  font-size: 1.05rem;
+  font-weight: 700;
+
+  line-height: 1.4;
+}
+
+.workflow-step-card p {
+  margin: 0;
+
+  color: var(--text-muted);
+
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.workflow-step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  border-radius: 12px;
+
+  background:
+    rgba(99, 102, 241, 0.14);
+
+  border:
+    1px solid rgba(99, 102, 241, 0.25);
+
+  color: #c7d2fe;
+
+  font-weight: 700;
+  font-size: 1rem;
+}

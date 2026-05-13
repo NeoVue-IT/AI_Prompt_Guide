@@ -5,7 +5,8 @@ import {
   renderCoreMessage,
   renderList,
   renderPromptBox,
-  renderFlowRow
+  renderFlowRow,
+  renderWorkflowSteps
 } from "./wrksAIRenderUtils.js";
 
 export function renderEnterpriseExamples() {
@@ -15,7 +16,7 @@ export function renderEnterpriseExamples() {
     <div class="guide-layout">
       ${renderCoreMessage(enterpriseExamples.coreMessage)}
       ${renderEnterpriseExampleCards()}
-      ${renderEnterpriseImplementationSteps()}
+      ${renderWorkflowSteps(enterpriseExamples.implementationSteps)}
       ${renderEnterpriseValueMatrix()}
       ${renderEnterprisePromptPatterns()}
       ${renderEnterpriseMistakes()}

@@ -119,3 +119,29 @@ export function renderPreviewSection(section) {
     </section>
   `;
 }
+
+export function renderWorkflowSteps(steps = []) {
+  if (!steps.length) return "";
+
+  return `
+    <section class="guide-section workflow-steps-section">
+      <div class="section-card">
+        <span class="section-label">WORKFLOW</span>
+        <h2>진행 흐름</h2>
+        <p>이 기능을 실제 업무에 적용할 때의 기본 진행 순서입니다.</p>
+      </div>
+
+      <div class="workflow-steps-grid">
+        ${steps.map((step, index) => `
+          <article class="guide-item workflow-step-card">
+            <div class="workflow-step-number">
+              ${escapeHtml(step.step || String(index + 1))}
+            </div>
+            <h3>${escapeHtml(step.title)}</h3>
+            <p>${escapeHtml(step.body)}</p>
+          </article>
+        `).join("")}
+      </div>
+    </section>
+  `;
+}

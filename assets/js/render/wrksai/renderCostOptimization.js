@@ -5,7 +5,8 @@ import {
   renderCoreMessage,
   renderList,
   renderPromptBox,
-  renderBeforeAfter
+  renderBeforeAfter,
+  renderWorkflowSteps
 } from "./wrksAIRenderUtils.js";
 
 export function renderCostOptimization() {
@@ -17,7 +18,7 @@ export function renderCostOptimization() {
       ${renderCostPrinciples()}
       ${renderCostDrivers()}
       ${renderUsageTiers()}
-      ${renderCostWorkflow()}
+      ${renderWorkflowSteps(costOptimization.optimizationWorkflow)}
       ${renderGovernanceRules()}
       ${renderCostWasteExamples()}
       ${renderCostPromptPatterns()}

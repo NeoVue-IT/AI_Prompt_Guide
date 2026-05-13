@@ -3,7 +3,8 @@ import { modelSelection } from "../../../data/wrksai/modelSelection.js";
 import {
   renderHero,
   renderCoreMessage,
-  renderList
+  renderList,
+  renderWorkflowSteps
 } from "./wrksAIRenderUtils.js";
 
 export function renderModelSelection() {
@@ -14,7 +15,7 @@ export function renderModelSelection() {
       ${renderCoreMessage(modelSelection.coreMessage)}
       ${renderModelCategories()}
       ${renderTaskMatrix()}
-      ${renderWorkflow()}
+      ${renderWorkflowSteps(modelSelection.workflow)}
       ${renderMistakes()}
       ${renderQuickDecisions()}
     </div>

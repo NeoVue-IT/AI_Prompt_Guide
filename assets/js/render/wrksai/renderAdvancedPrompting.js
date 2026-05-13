@@ -5,7 +5,8 @@ import {
   renderCoreMessage,
   renderList,
   renderPromptBox,
-  renderBeforeAfter
+  renderBeforeAfter,
+  renderWorkflowSteps
 } from "./wrksAIRenderUtils.js";
 
 export function renderAdvancedPrompting() {
@@ -17,7 +18,7 @@ export function renderAdvancedPrompting() {
       ${renderAdvancedPrinciples()}
       ${renderPromptStructures()}
       ${renderPromptTechniques()}
-      ${renderAdvancedWorkflow()}
+      ${renderWorkflowSteps(advancedPrompting.workflow)}
       ${renderAdvancedExamples()}
       ${renderAdvancedPromptTemplates()}
       ${renderAdvancedMistakes()}

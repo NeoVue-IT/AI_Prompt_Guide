@@ -5,7 +5,8 @@ import {
   renderCoreMessage,
   renderList,
   renderPromptBox,
-  renderPreviewSection
+  renderPreviewSection,
+  renderWorkflowSteps
 } from "./wrksAIRenderUtils.js";
 
 
@@ -18,7 +19,7 @@ export function renderTokenOptimization() {
       ${renderPreviewSection(tokenOptimization)}
       ${renderTokenPrinciples()}
       ${renderTokenStrategies()}
-      ${renderTokenWorkflow()}
+      ${renderWorkflowSteps(tokenOptimization.workflow)}
       ${renderCostWasteCases()}
       ${renderTokenPromptPatterns()}
       ${renderTokenMistakes()}
