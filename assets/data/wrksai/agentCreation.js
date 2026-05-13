@@ -9,6 +9,32 @@ export const agentCreation = {
     body: "에이전트는 단순히 프롬프트를 저장하는 기능이 아니라, 반복 업무의 처리 방식을 표준화하는 업무 도구입니다."
   },
 
+  visualGuides: [
+  {
+    title: "에이전트 생성 단계 예시",
+    description: "목적 정의 → 지침 작성 → 테스트 → 수정 흐름 예시입니다.",
+    filename: "agent-creation-process.png"
+  },
+  {
+    title: "프롬프트 지침 구조 예시",
+    description: "역할, 목적, 출력 형식, 제한사항 등을 포함한 에이전트 지침 예시입니다.",
+    filename: "agent-prompt-structure.png"
+  },
+  {
+    title: "실제 업무 에이전트 예시",
+    description: "회의록 정리, 보고서 생성, 데이터 분석용 에이전트 예시 화면입니다.",
+    filename: "real-agent-example.png"
+  }
+],
+
+expectedResults: [
+  "반복적으로 사용하는 프롬프트를 재사용 가능",
+  "출력 형식을 일정하게 유지 가능",
+  "업무 목적에 맞는 AI 응답 유도 가능",
+  "직원별 AI 사용 편차 감소",
+  "실무 중심의 AI 자동화 환경 구축 가능"
+],
+
   principles: [
     {
       title: "역할을 좁게 정의",

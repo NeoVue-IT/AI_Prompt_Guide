@@ -9,6 +9,32 @@ export const workflowChains = {
     body: "좋은 AI 활용은 한 번의 질문이 아니라, 입력 → 정리 → 분석 → 검토 → 최종 산출물로 이어지는 업무 체인을 설계하는 것입니다."
   },
 
+  visualGuides: [
+  {
+    title: "Workflow Chain 전체 흐름",
+    description: "입력 → 정리 → 검토 → 최종 결과 생성까지의 업무 흐름 예시입니다.",
+    filename: "workflow-chain-overview.png"
+  },
+  {
+    title: "회의록 Workflow 예시",
+    description: "회의 녹취 → 요약 → 액션 아이템 정리 → 보고서 생성 흐름 예시입니다.",
+    filename: "meeting-workflow-example.png"
+  },
+  {
+    title: "데이터 처리 Workflow 예시",
+    description: "RAW 데이터 → 정리 → 분석 → ERP 업로드용 결과 생성 흐름 예시입니다.",
+    filename: "data-processing-workflow.png"
+  }
+],
+
+expectedResults: [
+  "반복 업무를 단계별 Workflow로 표준화 가능",
+  "업무 누락 및 중복 감소",
+  "중간 검토 단계를 통한 결과 품질 향상",
+  "AI를 단발성 질문이 아닌 업무 프로세스로 활용 가능",
+  "회의록, 보고서, 데이터 정리 업무 자동화 가능"
+],
+
   principles: [
     {
       title: "업무를 단계로 나눕니다",

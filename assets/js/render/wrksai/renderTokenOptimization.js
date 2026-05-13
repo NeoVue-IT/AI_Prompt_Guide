@@ -4,7 +4,8 @@ import {
   renderHero,
   renderCoreMessage,
   renderList,
-  renderPromptBox
+  renderPromptBox,
+  renderPreviewSection
 } from "./wrksAIRenderUtils.js";
 
 
@@ -14,6 +15,7 @@ export function renderTokenOptimization() {
 
     <div class="guide-layout">
       ${renderCoreMessage(tokenOptimization.coreMessage)}
+      ${renderPreviewSection(tokenOptimization)}
       ${renderTokenPrinciples()}
       ${renderTokenStrategies()}
       ${renderTokenWorkflow()}

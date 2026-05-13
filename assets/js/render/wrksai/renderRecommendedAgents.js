@@ -4,7 +4,8 @@ import {
   renderHero,
   renderCoreMessage,
   renderList,
-  renderPromptBox
+  renderPromptBox,
+  renderPreviewSection
 } from "./wrksAIRenderUtils.js";
 
 export function renderRecommendedAgents() {
@@ -13,6 +14,7 @@ export function renderRecommendedAgents() {
 
     <div class="guide-layout">  
       ${renderCoreMessage(recommendedAgents.coreMessage)}
+      ${renderPreviewSection(recommendedAgents)}
       ${renderAgentPrinciples()}
       ${renderAgentCards()}
       ${renderAgentChecklist()}

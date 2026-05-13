@@ -9,6 +9,21 @@ export const modelSwitching = {
     body: "Model Switching은 여러 AI 모델을 무작정 바꾸는 것이 아니라, 업무 단계별로 가장 적합한 모델을 배치하는 방식입니다."
   },
 
+  visualGuides: [
+    {
+      title: "모델 전환 화면 예시",
+      description: "하나의 업무 안에서 모델을 바꾸며 결과를 개선하는 흐름 예시입니다.",
+      filename: "model-switching-flow.png"
+    }
+  ],
+
+  expectedResults: [
+    "업무 단계별로 적합한 모델을 선택할 수 있음",
+    "불필요한 고성능 모델 사용을 줄일 수 있음",
+    "초안, 검토, 최종 정리 흐름을 구분할 수 있음",
+    "토큰 사용량과 결과 품질을 함께 관리할 수 있음"
+  ],
+
   whyItMatters: [
     {
       title: "토큰 낭비 감소",

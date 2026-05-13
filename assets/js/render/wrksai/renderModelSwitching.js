@@ -3,16 +3,18 @@ import { modelSwitching } from "../../../data/wrksai/modelSwitching.js";
 import {
   renderHero,
   renderCoreMessage,
-  renderList
+  renderList,
+  renderPreviewSection
 } from "./wrksAIRenderUtils.js";
 
 
 export function renderModelSwitching() {
   return `
     ${renderHero(modelSwitching)}
-    
+
     <div class="guide-layout">
       ${renderCoreMessage(modelSwitching.coreMessage)}
+      ${renderPreviewSection(modelSwitching)}
       ${renderWhySwitchingMatters()}
       ${renderSwitchingPatterns()}
       ${renderSwitchingWorkflow()}

@@ -9,6 +9,32 @@ export const tokenOptimization = {
     body: "토큰 최적화는 AI 사용을 줄이는 것이 아니라, 불필요한 입력·반복·모델 낭비를 줄여 같은 비용으로 더 좋은 결과를 얻는 방식입니다."
   },
 
+  visualGuides: [
+  {
+    title: "토큰 사용량 비교 예시",
+    description: "짧고 명확한 프롬프트와 불필요하게 긴 프롬프트의 차이를 비교하는 화면 예시입니다.",
+    filename: "token-usage-comparison.png"
+  },
+  {
+    title: "모델별 토큰 소비 흐름",
+    description: "고성능 모델과 경량 모델 사용 시 토큰 소비 차이를 보여주는 예시입니다.",
+    filename: "model-token-cost-example.png"
+  },
+  {
+    title: "업무 단계별 모델 사용 예시",
+    description: "초안 생성, 검토, 최종 정리 단계에서 모델을 나누어 사용하는 흐름 예시입니다.",
+    filename: "workflow-token-saving-example.png"
+  }
+],
+
+expectedResults: [
+  "불필요한 토큰 낭비 감소",
+  "고성능 모델 사용 횟수 최적화",
+  "업무 단계별 적절한 모델 선택 가능",
+  "긴 대화에서도 비용 관리 가능",
+  "사내 AI 사용량 제한 환경에서도 효율적 운영 가능"
+],
+
   principles: [
     {
       title: "필요한 정보만 입력",

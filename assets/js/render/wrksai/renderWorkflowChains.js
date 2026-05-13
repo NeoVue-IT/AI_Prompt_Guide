@@ -4,7 +4,8 @@ import {
   renderHero,
   renderCoreMessage,
   renderList,
-  renderPromptBox
+  renderPromptBox,
+  renderPreviewSection
 } from "./wrksAIRenderUtils.js";
 
 export function renderWorkflowChains() {
@@ -13,6 +14,7 @@ export function renderWorkflowChains() {
 
     <div class="guide-layout">
       ${renderCoreMessage(workflowChains.coreMessage)}
+      ${renderPreviewSection(workflowChains)}
       ${renderWorkflowChainPrinciples()}
       ${renderChainPatterns()}
       ${renderWorkflowChainSteps()}

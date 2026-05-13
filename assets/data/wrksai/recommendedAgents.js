@@ -9,6 +9,32 @@ export const recommendedAgents = {
     body: "좋은 에이전트는 특정 업무를 반복적으로 처리할 수 있도록 역할, 입력 기준, 출력 형식, 주의사항이 명확하게 정의되어 있어야 합니다."
   },
 
+  visualGuides: [
+  {
+    title: "부서별 추천 에이전트 구성",
+    description: "생산, 영업, IT, 품질 부서별 추천 에이전트 예시 화면입니다.",
+    filename: "department-agent-examples.png"
+  },
+  {
+    title: "에이전트 생성 화면 예시",
+    description: "웍스AI 내 에이전트 생성 및 설정 흐름 예시입니다.",
+    filename: "agent-creation-screen.png"
+  },
+  {
+    title: "업무 자동화 에이전트 흐름",
+    description: "반복 업무를 AI 에이전트로 처리하는 흐름 예시입니다.",
+    filename: "automation-agent-workflow.png"
+  }
+],
+
+expectedResults: [
+  "반복 업무 시간 감소",
+  "부서별 공통 업무 표준화 가능",
+  "프롬프트 재사용성 향상",
+  "신입 직원도 일정 수준 이상의 결과 생성 가능",
+  "업무별 최적화된 AI 활용 방식 정착 가능"
+],
+
   principles: [
     {
       title: "반복 업무부터 에이전트화",

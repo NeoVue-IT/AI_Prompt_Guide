@@ -4,7 +4,8 @@ import {
   renderHero,
   renderCoreMessage,
   renderList,
-  renderPromptBox
+  renderPromptBox,
+  renderPreviewSection
 } from "./wrksAIRenderUtils.js";
 
 export function renderAgentCreation() {
@@ -13,6 +14,7 @@ export function renderAgentCreation() {
 
     <div class="guide-layout">
       ${renderCoreMessage(agentCreation.coreMessage)}
+      ${renderPreviewSection(agentCreation)}
       ${renderAgentCreationPrinciples()}
       ${renderAgentCreationSteps()}
       ${renderAgentTypes()}

@@ -71,3 +71,51 @@ export function renderPromptBox(prompt) {
   promptBoxCounter += 1;
   return copyBox(`wrks-prompt-${promptBoxCounter}`, escapeHtml(prompt));
 }
+
+export function renderGuideVisuals(items = []) {
+  if (!items.length) return "";
+
+  return `
+    <div class="overview-grid guide-visual-grid">
+      ${items.map(item => `
+        <article class="guide-visual-placeholder guide-item">
+          <div class="visual-placeholder-icon">🖼️</div>
+          <h3>${escapeHtml(item.title)}</h3>
+          <p>${escapeHtml(item.description)}</p>
+          <span class="visual-file-name">${escapeHtml(item.filename)}</span>
+        </article>
+      `).join("")}
+    </div>
+  `;
+}
+
+export function renderExpectedResults(items = []) {
+  if (!items.length) return "";
+
+  return `
+    <article class="guide-item expected-result-card">
+      <div class="section-label">EXPECTED RESULT</div>
+      <h3>예상 결과</h3>
+      ${renderList(items)}
+    </article>
+  `;
+}
+
+export function renderPreviewSection(section) {
+  if (!section?.visualGuides?.length && !section?.expectedResults?.length) return "";
+
+  return `
+    <section class="guide-section guide-preview-section">
+      <div class="section-card">
+        <span class="section-label">COMING SOON</span>
+        <h2>화면 예시 및 결과 미리보기</h2>
+        <p>
+          실제 웍스AI 사용 화면, 입력 예시, 예상 결과 이미지를 추가할 예정입니다.
+        </p>
+      </div>
+
+      ${renderGuideVisuals(section.visualGuides)}
+      ${renderExpectedResults(section.expectedResults)}
+    </section>
+  `;
+}
