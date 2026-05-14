@@ -14,7 +14,7 @@ import { renderCostOptimization } from "./renderCostOptimization.js";
 import { renderFailureCases } from "./renderFailureCases.js";
 import { renderAdvancedPrompting } from "./renderAdvancedPrompting.js";
 import { renderEnterpriseExamples } from "./renderEnterpriseExamples.js";
-import { renderCodingUsage } from "./wrksAI/renderCodingUsage.js";
+import { renderCodingUsage } from "./renderCodingUsage.js";
 
 
 export function renderWrksAI() {

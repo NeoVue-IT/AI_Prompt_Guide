@@ -1,226 +1,249 @@
-import { CODING_USAGE_GUIDE } from "../../data/wrksAI/codingUsage.js";
-import { escapeHtml, copyBox } from "../../utils.js";
+import { escapeHtml } from "../../utils.js";
+import { CODING_USAGE_GUIDE as codingUsage } from "../../../data/wrksai/codingUsage.js";
+
+import {
+  renderHero,
+  renderCoreMessage,
+  renderSectionHeader,
+  renderList,
+  renderPromptBox,
+  renderWorkflowSteps,
+  renderPreviewSection
+} from "./wrksAIRenderUtils.js";
 
 export function renderCodingUsage() {
-  const guide = CODING_USAGE_GUIDE;
+  return `
+    ${renderHero(codingUsage)}
+
+    <div class="guide-layout">
+      ${renderCoreMessage(codingUsage.coreMessage)}
+      ${renderModelGuide()}
+      ${renderWorkflowSteps(codingUsage.modelSwitchingWorkflow)}
+      ${renderTokenRules()}
+      ${renderInputMethods()}
+      ${renderPromptExamples()}
+      ${renderCLanguageGuide()}
+      ${renderMistakes()}
+      ${renderQuickRules()}
+      ${renderPreviewSection(codingUsage)}
+    </div>
+  `;
+}
+
+function renderModelGuide() {
+  return `
+    <section class="guide-section">
+      ${renderSectionHeader(
+        "모델 선택 기준",
+        "코딩 질문의 복잡도와 목적에 따라 적절한 모델을 선택합니다."
+      )}
+
+      <div class="content-stack">
+        ${codingUsage.modelGuide.map(model => `
+          <article class="guide-item">
+            <div class="section-label">${escapeHtml(model.category || "CODING MODEL")}</div>
+            <h3>${escapeHtml(model.model)}</h3>
+            <p>${escapeHtml(model.label)}</p>
+
+            <div class="guide-block">
+              <strong>Best For</strong>
+              ${renderList(model.bestFor)}
+            </div>
+
+            <div class="guide-block">
+              <strong>Strengths</strong>
+              ${renderList(model.strengths)}
+            </div>
+
+            <div class="guide-block">
+              <strong>Avoid For</strong>
+              ${renderList(model.weakFor)}
+            </div>
+
+            <div class="guide-block">
+              <strong>Token Advice</strong>
+              <p>${escapeHtml(model.tokenAdvice)}</p>
+            </div>
+
+            <div class="guide-block">
+              <strong>Usage Style</strong>
+              <p>${escapeHtml(model.usageStyle)}</p>
+            </div>
+
+            <div class="guide-block">
+              <strong>Recommended Prompt</strong>
+              ${renderPromptBox(model.recommendedPrompt)}
+            </div>
+          </article>
+        `).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderTokenRules() {
+  return `
+    <section class="guide-section">
+      ${renderSectionHeader(
+        "토큰 최적화 규칙",
+        "불필요한 전체 코드 재출력과 반복 질문을 줄이기 위한 기준입니다."
+      )}
+
+      <article class="guide-item">
+        ${renderList(codingUsage.tokenOptimizationRules)}
+      </article>
+    </section>
+  `;
+}
+
+function renderInputMethods() {
+  return `
+    <section class="guide-section">
+      ${renderSectionHeader(
+        "복사/붙여넣기 vs 파일 업로드",
+        "코드 질문은 상황에 따라 입력 방식을 다르게 선택해야 합니다."
+      )}
+
+      <div class="content-stack">
+        ${codingUsage.inputMethods.map(method => `
+          <article class="guide-item">
+            <h3>${escapeHtml(method.title)}</h3>
+
+            <div class="guide-block">
+              <strong>Best For</strong>
+              <p>${escapeHtml(method.bestFor)}</p>
+            </div>
+
+            <div class="guide-block">
+              <strong>Include</strong>
+              ${renderList(method.include)}
+            </div>
+
+            <div class="guide-block">
+              <strong>Avoid</strong>
+              ${renderList(method.avoid)}
+            </div>
+          </article>
+        `).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderPromptExamples() {
+  return `
+    <section class="guide-section">
+      ${renderSectionHeader(
+        "상황별 추천 프롬프트",
+        "직원들이 바로 복사해서 사용할 수 있는 코딩 질문 템플릿입니다."
+      )}
+
+      <div class="content-stack">
+        ${codingUsage.promptExamples.map(example => `
+          <article class="guide-item">
+            <h3>${escapeHtml(example.title)}</h3>
+
+            ${example.model ? `
+              <div class="section-label">${escapeHtml(example.model)}</div>
+            ` : ""}
+
+            ${example.situation ? `
+              <p>${escapeHtml(example.situation)}</p>
+            ` : ""}
+
+            <div class="guide-block">
+              <strong>Prompt</strong>
+              ${renderPromptBox(example.prompt)}
+            </div>
+
+            <div class="guide-block">
+              <strong>Expected Result</strong>
+              <p>${escapeHtml(example.expected || example.expectedOutput || "")}</p>
+            </div>
+          </article>
+        `).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderMistakes() {
+  if (!codingUsage.mistakes?.length) return "";
 
   return `
-    <section class="detail-hero">
-      <div class="detail-top">
-        <div class="detail-icon">${guide.icon}</div>
-        <div class="detail-title-wrap">
-          <h2>${escapeHtml(guide.title)}</h2>
-          <div class="detail-subtitle">${escapeHtml(guide.subtitle)}</div>
-        </div>
-      </div>
-      <p>${escapeHtml(guide.description)}</p>
-    </section>
+    <section class="guide-section">
+      ${renderSectionHeader(
+        "자주 하는 실수",
+        "토큰 낭비와 부정확한 답변을 유발하는 질문 방식입니다."
+      )}
 
-    <section class="section-block">
-      <div class="content-card">
-        <h3>핵심 기준</h3>
-        <div class="result-box">${escapeHtml(guide.keyMessage)}</div>
-      </div>
-    </section>
+      <div class="content-stack">
+        ${codingUsage.mistakes.map(item => `
+          <article class="guide-item">
+            <h3>${escapeHtml(item.title)}</h3>
 
-    <section class="section-block">
-      <div class="section-head">
-        <div>
-          <h3>모델 선택 기준</h3>
-          <p>코딩 질문의 복잡도에 따라 Opus와 Sonnet을 구분해서 사용합니다.</p>
-        </div>
-      </div>
-
-      <div class="card-grid">
-        ${guide.modelGuide.map(model => `
-          <div class="content-card">
-            <h4>${escapeHtml(model.model)}</h4>
-            <div class="fullname">${escapeHtml(model.label)}</div>
-
-            <div class="prompt-guide" style="margin-top:16px">
-              <div class="guide-item use-when">
-                <span class="guide-label">사용 상황</span>
-                <div class="guide-text">${escapeHtml(model.useWhen)}</div>
-              </div>
-
-              <div class="guide-item quick-example">
-                <span class="guide-label">주의</span>
-                <div class="guide-text">${escapeHtml(model.avoidWhen)}</div>
-              </div>
+            <div class="guide-block">
+              <strong>Problem</strong>
+              <p>${escapeHtml(item.problem)}</p>
             </div>
 
-            <div style="margin-top:16px">
-              <h4>적합한 작업</h4>
-              <div class="strengths">
-                ${model.bestFor.map(item => `
-                  <span class="strength-tag">${escapeHtml(item)}</span>
-                `).join("")}
-              </div>
+            <div class="guide-block">
+              <strong>Better</strong>
+              <p>${escapeHtml(item.better)}</p>
             </div>
-
-            <div style="margin-top:16px">
-              <h4>예시 질문</h4>
-              <div class="result-box">${escapeHtml(model.example)}</div>
-            </div>
-          </div>
+          </article>
         `).join("")}
       </div>
     </section>
+  `;
+}
 
-    <section class="section-block">
-        <div class="section-head">
-            <div>
-            <h3>추천 모델 스위칭 흐름</h3>
-            <p>하나의 모델만 사용하는 것보다 작업 단계별로 모델을 나누면 효율이 좋아집니다.</p>
-            </div>
-        </div>
+function renderQuickRules() {
+  if (!codingUsage.quickRules?.length) return "";
 
-        <div class="workflow-steps">
-            ${guide.modelSwitchingWorkflow.map(step => `
-            <div class="workflow-step">
-                <div class="workflow-step-number">${escapeHtml(step.step)}</div>
+  return `
+    <section class="guide-section">
+      ${renderSectionHeader(
+        "실무 사용 규칙 요약",
+        "코딩 질문 시 직원들이 기억해야 할 핵심 기준입니다."
+      )}
 
-                <div class="workflow-step-content">
-                <h4>${escapeHtml(step.model)}</h4>
-                <p>${escapeHtml(step.purpose)}</p>
-                </div>
-            </div>
-            `).join("")}
-        </div>
-        </section>
-
-        <section class="section-block">
-        <div class="content-card">
-            <h3>토큰 최적화 규칙</h3>
-
-            <ul>
-            ${guide.tokenOptimizationRules.map(rule => `
-                <li>${escapeHtml(rule)}</li>
-            `).join("")}
-            </ul>
-        </div>
-        </section>
-
-    <section class="section-block">
-      <div class="section-head">
-        <div>
-          <h3>복사/붙여넣기 vs 파일 업로드</h3>
-          <p>상황에 따라 입력 방식을 다르게 선택해야 토큰 사용량을 줄일 수 있습니다.</p>
-        </div>
-      </div>
-
-      <div class="card-grid">
-        ${guide.inputMethods.map(method => `
-          <div class="content-card">
-            <h4>${escapeHtml(method.title)}</h4>
-
-            <div class="prompt-guide">
-              <div class="guide-item use-when">
-                <span class="guide-label">적합한 경우</span>
-                <div class="guide-text">${escapeHtml(method.bestFor)}</div>
-              </div>
-            </div>
-
-            <div style="margin-top:16px">
-              <h4>포함하면 좋은 내용</h4>
-              <div class="strengths">
-                ${method.include.map(item => `
-                  <span class="strength-tag">${escapeHtml(item)}</span>
-                `).join("")}
-              </div>
-            </div>
-
-            <div style="margin-top:16px">
-              <h4>피해야 할 방식</h4>
-              <ul>
-                ${method.avoid.map(item => `
-                  <li>${escapeHtml(item)}</li>
-                `).join("")}
-              </ul>
-            </div>
-          </div>
-        `).join("")}
-      </div>
+      <article class="guide-item">
+        ${renderList(codingUsage.quickRules)}
+      </article>
     </section>
+  `;
+}
 
-    <section class="section-block">
-      <div class="section-head">
-        <div>
-          <h3>상황별 추천 프롬프트</h3>
-          <p>직원들이 바로 복사해서 사용할 수 있는 코딩 질문 템플릿입니다.</p>
-        </div>
+function renderCLanguageGuide() {
+  if (!codingUsage.cLanguageGuide?.length) return "";
+
+  return `
+    <section class="guide-section">
+      <div class="section-card">
+        <h2>C / C++ 실무 사용 가이드</h2>
+        <p>제조/장비/임베디드 환경에서 AI를 사용할 때의 추천 방식입니다.</p>
       </div>
 
-      <div class="excel-prompt-grid">
-        ${guide.promptExamples.map(example => `
-          <div class="excel-prompt-card">
-            <div class="excel-prompt-head">
-              <h4>${escapeHtml(example.title)}</h4>
-            </div>
+      <div class="content-stack">
+        ${codingUsage.cLanguageGuide.map(item => `
+          <article class="guide-item">
+            <h3>${escapeHtml(item.title)}</h3>
 
-            <div class="prompt-guide">
-              <div class="guide-item use-when">
-                <span class="guide-label">추천 모델</span>
-                <div class="guide-text">${escapeHtml(example.model)}</div>
+            ${item.points ? `
+              <div class="guide-block">
+                ${renderList(item.points)}
               </div>
+            ` : ""}
 
-              <div class="guide-item quick-example">
-                <span class="guide-label">사용 상황</span>
-                <div class="guide-text">${escapeHtml(example.situation)}</div>
+            ${item.example ? `
+              <div class="guide-block">
+                <strong>예시 프롬프트</strong>
+                ${renderPromptBox(item.example)}
               </div>
-            </div>
-
-            <div style="margin-top:16px">
-              <h4>추천 프롬프트</h4>
-              ${copyBox(`coding-${example.id}`, escapeHtml(example.prompt))}
-            </div>
-
-            <div style="margin-top:16px">
-              <h4>예상 결과</h4>
-              <div class="result-box">${escapeHtml(example.expectedOutput)}</div>
-            </div>
-          </div>
+            ` : ""}
+          </article>
         `).join("")}
-      </div>
-    </section>
-
-    <section class="section-block">
-      <div class="section-head">
-        <div>
-          <h3>자주 하는 실수</h3>
-          <p>토큰 낭비와 부정확한 답변을 줄이기 위해 피해야 할 질문 방식입니다.</p>
-        </div>
-      </div>
-
-      <div class="card-grid">
-        ${guide.mistakes.map(mistake => `
-          <div class="content-card">
-            <h4>${escapeHtml(mistake.title)}</h4>
-
-            <div class="prompt-guide">
-              <div class="guide-item quick-example">
-                <span class="guide-label">문제점</span>
-                <div class="guide-text">${escapeHtml(mistake.problem)}</div>
-              </div>
-
-              <div class="guide-item use-when">
-                <span class="guide-label">개선 방식</span>
-                <div class="guide-text">${escapeHtml(mistake.better)}</div>
-              </div>
-            </div>
-          </div>
-        `).join("")}
-      </div>
-    </section>
-
-    <section class="section-block">
-      <div class="content-card">
-        <h3>실무 사용 규칙 요약</h3>
-        <ul>
-          ${guide.quickRules.map(rule => `
-            <li>${escapeHtml(rule)}</li>
-          `).join("")}
-        </ul>
       </div>
     </section>
   `;

@@ -31,15 +31,16 @@ const WRKSAI_TABS = [
   { id: "usage-principles", label: "AI Usage Principles" },
   { id: "model-selection", label: "Model Selection" },
   { id: "model-switching", label: "Model Switching" },
-  { id: "workflow-chains", label: "Workflow Chains" },
-  { id: "agent-creation", label: "Agent Creation" },
   { id: "token-optimization", label: "Token Optimization" },
-  { id: "department-workflows", label: "Department Workflows" },
-  { id: "recommended-agents", label: "Recommended Agents" },
   { id: "cost-optimization", label: "Cost Optimization" },
-  { id: "failure-cases", label: "Failure Cases" },
   { id: "advanced-prompting", label: "Advanced Prompting" },
-  { id: "enterprise-examples", label: "Enterprise Examples" }
+  { id: "coding-usage", label: "Coding Usage" },
+  { id: "workflow-chains", label: "Workflow Chains" },
+  { id: "department-workflows", label: "Department Workflows" },
+  { id: "agent-creation", label: "Agent Creation" },
+  { id: "recommended-agents", label: "Recommended Agents" },
+  { id: "enterprise-examples", label: "Enterprise Examples" },
+  { id: "failure-cases", label: "Failure Cases" }
 ];
 
 /* =========================
