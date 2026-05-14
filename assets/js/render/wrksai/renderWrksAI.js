@@ -14,7 +14,7 @@ import { renderCostOptimization } from "./renderCostOptimization.js";
 import { renderFailureCases } from "./renderFailureCases.js";
 import { renderAdvancedPrompting } from "./renderAdvancedPrompting.js";
 import { renderEnterpriseExamples } from "./renderEnterpriseExamples.js";
-
+import { renderCodingUsage } from "./wrksAI/renderCodingUsage.js";
 
 
 export function renderWrksAI() {
@@ -56,7 +56,10 @@ export function renderWrksAI() {
       return renderAdvancedPrompting();
 
     case "enterprise-examples":
-      return renderEnterpriseExamples();  
+      return renderEnterpriseExamples();
+    
+    case "coding-usage":
+      return renderCodingUsage();  
 
     default:
       return renderWrksAIGeneric();
