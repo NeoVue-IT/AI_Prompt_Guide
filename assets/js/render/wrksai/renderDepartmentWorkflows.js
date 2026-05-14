@@ -4,14 +4,25 @@ import {
   renderHero,
   renderCoreMessage,
   renderList,
-  renderPromptBox
+  renderPromptBox,
+  renderSectionJumpNav
 } from "./wrksAIRenderUtils.js";
+
+// const departmentWorkflowsJumpLinks = [
+//   { id: "dept-overview", label: "개요" },
+//   { id: "dept-it", label: "IT" },
+//   { id: "dept-quality", label: "품질" },
+//   { id: "dept-production", label: "생산" },
+//   { id: "dept-sales", label: "영업" },
+//   { id: "dept-summary", label: "요약" }
+// ];
 
 export function renderDepartmentWorkflows() {
   return `
     ${renderHero(departmentWorkflows)}
 
     <div class="guide-layout">
+
       ${renderCoreMessage(departmentWorkflows.coreMessage)}
       ${renderDepartmentCards()}
       ${renderDepartmentWorkflowMatrix()}

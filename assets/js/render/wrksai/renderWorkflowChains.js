@@ -6,14 +6,24 @@ import {
   renderList,
   renderPromptBox,
   renderPreviewSection,
-  renderWorkflowSteps
+  renderWorkflowSteps,
+  renderSectionJumpNav
 } from "./wrksAIRenderUtils.js";
+
+const workflowChainsJumpLinks = [
+  { id: "workflow-concept", label: "개념" },
+  { id: "workflow-steps", label: "단계" },
+  { id: "workflow-examples", label: "예시" },
+  { id: "workflow-mistakes", label: "주의사항" },
+  { id: "workflow-summary", label: "요약" }
+];
 
 export function renderWorkflowChains() {
   return `
     ${renderHero(workflowChains)}
 
     <div class="guide-layout">
+      ${renderSectionJumpNav(workflowChainsJumpLinks)}
       ${renderCoreMessage(workflowChains.coreMessage)}
       ${renderPreviewSection(workflowChains)}
       ${renderWorkflowChainPrinciples()}

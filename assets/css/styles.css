@@ -1874,3 +1874,126 @@ tr:hover td {
   font-weight: 700;
   font-size: 1rem;
 }
+
+
+.section-jump-link {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 8px 12px;
+  border-radius: 999px;
+
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #475569;
+  text-decoration: none;
+
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.section-jump-link:hover {
+  color: #2563eb;
+  background: #eff6ff;
+  border-color: #bfdbfe;
+}
+
+.guide-section {
+  scroll-margin-top: 140px;
+}
+
+@media (max-width: 768px) {
+  .section-jump-nav {
+    position: static;
+  }
+}
+
+
+.jump-nav-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.jump-nav-link {
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  text-decoration: none;
+  
+}
+
+.jump-nav-link:hover {
+  background: var(--soft-bg);
+}
+
+.guide-section {
+  scroll-margin-top: 110px;
+}
+
+@media (max-width: 1400px) {
+  .jump-nav {
+    display: none;
+  }
+}
+
+.guide-layout-with-rail {
+  position: relative;
+}
+
+.section-jump-rail {
+  position: fixed;
+  top: 150px;
+  right: 28px;
+  width: 150px;
+  z-index: 20;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  padding: 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(203, 213, 225, 0.9);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+
+.section-jump-title {
+  padding: 0 6px 4px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #64748b;
+}
+
+.section-jump-rail-link {
+  display: block;
+  padding: 7px 9px;
+  border-radius: 999px;
+
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.25;
+
+  color: #475569;
+  text-decoration: none;
+}
+
+.section-jump-rail-link:hover {
+  color: #2563eb;
+  background: #eff6ff;
+}
+
+.guide-section {
+  scroll-margin-top: 120px;
+}
+
+/* Hide rail when there is not enough right-side space */
+@media (max-width: 1320px) {
+  .section-jump-rail {
+    display: none;
+  }
+}

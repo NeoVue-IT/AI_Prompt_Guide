@@ -5,14 +5,25 @@ import {
   renderCoreMessage,
   renderList,
   renderPromptBox,
-  renderPreviewSection
+  renderPreviewSection,
+  renderSectionJumpNav
 } from "./wrksAIRenderUtils.js";
+
+// const recommendedAgentsJumpLinks = [
+//   { id: "agents-overview", label: "개요" },
+//   { id: "agents-it", label: "IT" },
+//   { id: "agents-office", label: "사무" },
+//   { id: "agents-production", label: "생산" },
+//   { id: "agents-quality", label: "품질" },
+//   { id: "agents-summary", label: "요약" }
+// ];
 
 export function renderRecommendedAgents() {
   return `
     ${renderHero(recommendedAgents)}
 
-    <div class="guide-layout">  
+    <div class="guide-layout">
+        
       ${renderCoreMessage(recommendedAgents.coreMessage)}
       ${renderPreviewSection(recommendedAgents)}
       ${renderAgentPrinciples()}

@@ -6,14 +6,25 @@ import {
   renderList,
   renderPromptBox,
   renderBeforeAfter,
-  renderWorkflowSteps
+  renderWorkflowSteps,
+  renderSectionJumpNav
 } from "./wrksAIRenderUtils.js";
+
+// const advancedPromptingJumpLinks = [
+//   { id: "prompt-basics", label: "기본 구조" },
+//   { id: "prompt-patterns", label: "패턴" },
+//   { id: "prompt-examples", label: "예시" },
+//   { id: "prompt-review", label: "검토 요청" },
+//   { id: "prompt-summary", label: "요약" }
+// ];
+
 
 export function renderAdvancedPrompting() {
   return `
     ${renderHero(advancedPrompting)}
 
     <div class="guide-layout">
+
       ${renderCoreMessage(advancedPrompting.coreMessage)}
       ${renderAdvancedPrinciples()}
       ${renderPromptStructures()}

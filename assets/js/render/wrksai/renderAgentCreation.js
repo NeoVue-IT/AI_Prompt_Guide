@@ -6,14 +6,24 @@ import {
   renderList,
   renderPromptBox,
   renderPreviewSection,
-  renderWorkflowSteps
+  renderWorkflowSteps,
+  renderSectionJumpNav
 } from "./wrksAIRenderUtils.js";
+
+// const agentCreationJumpLinks = [
+//   { id: "agent-concept", label: "개념" },
+//   { id: "agent-structure", label: "구성" },
+//   { id: "agent-instructions", label: "지시문" },
+//   { id: "agent-examples", label: "예시" },
+//   { id: "agent-checklist", label: "체크리스트" }
+// ];
 
 export function renderAgentCreation() {
   return `
     ${renderHero(agentCreation)}
 
     <div class="guide-layout">
+
       ${renderCoreMessage(agentCreation.coreMessage)}
       ${renderPreviewSection(agentCreation)}
       ${renderAgentCreationPrinciples()}

@@ -5,14 +5,28 @@ import {
   renderCoreMessage,
   renderList,
   renderPromptBox,
-  renderWorkflowSteps
+  renderWorkflowSteps,
+  renderSectionJumpNav
 } from "./wrksAIRenderUtils.js";
+
+const usagePrinciplesJumpLinks = [
+  { id: "core-message", label: "핵심 기준" },
+  { id: "principle-cards", label: "사용 원칙" },
+  { id: "safe-use-rules", label: "안전 규칙" },
+  { id: "do-dont-table", label: "Do / Don't" },
+  { id: "workflow-steps", label: "진행 흐름" },
+  { id: "risk-cases", label: "위험 사례" },
+  { id: "usage-prompt-patterns", label: "프롬프트" },
+  { id: "usage-mistakes", label: "실수" },
+  { id: "usage-quick-rules", label: "요약" }
+];
 
 export function renderUsagePrinciples() {
   return `
     ${renderHero(usagePrinciples)}
 
     <div class="guide-layout">
+      ${renderSectionJumpNav(usagePrinciplesJumpLinks)}
       ${renderCoreMessage(usagePrinciples.coreMessage)}
       ${renderPrincipleCards()}
       ${renderSafeUseRules()}
@@ -28,7 +42,7 @@ export function renderUsagePrinciples() {
 
 function renderPrincipleCards() {
   return `
-    <section class="guide-section">
+    <section id="principle-cards" class="guide-section">
       <div class="section-card">
         <h2>Core Usage Principles</h2>
         <p>회사 업무에서 AI를 사용할 때 기본적으로 지켜야 하는 기준입니다.</p>
@@ -48,7 +62,7 @@ function renderPrincipleCards() {
 
 function renderSafeUseRules() {
   return `
-    <section class="guide-section">
+    <section id="safe-use-rules" class="guide-section">
       <div class="section-card">
         <h2>Safe Use Rules</h2>
         <p>입력 전, 출력 후 반드시 확인해야 하는 안전 사용 기준입니다.</p>
@@ -70,7 +84,7 @@ function renderSafeUseRules() {
 
 function renderDoDontTable() {
   return `
-    <section class="guide-section">
+    <section id="do-dont-table" class="guide-section">
       <div class="section-card">
         <h2>Do / Don't</h2>
         <p>업무자가 바로 참고할 수 있는 올바른 사용 방식과 피해야 할 방식입니다.</p>
@@ -123,7 +137,7 @@ function renderUsageWorkflow() {
 
 function renderRiskCases() {
   return `
-    <section class="guide-section">
+    <section id="risk-cases" class="guide-section">
       <div class="section-card">
         <h2>Risk Cases & Prevention</h2>
         <p>AI 사용 시 발생할 수 있는 주요 위험과 예방 기준입니다.</p>
@@ -155,7 +169,7 @@ function renderRiskCases() {
 
 function renderUsagePromptPatterns() {
   return `
-    <section class="guide-section">
+    <section id="usage-prompt-patterns" class="guide-section">
       <div class="section-card">
         <h2>Safe Prompt Patterns</h2>
         <p>안전한 업무용 AI 사용을 위해 반복적으로 사용할 수 있는 프롬프트입니다.</p>
@@ -175,7 +189,7 @@ function renderUsagePromptPatterns() {
 
 function renderUsageMistakes() {
   return `
-    <section class="guide-section">
+    <section id="usage-mistakes" class="guide-section">
       <div class="section-card">
         <h2>Common Mistakes</h2>
         <p>AI 사용 원칙을 지키지 않을 때 자주 발생하는 실수입니다.</p>
@@ -190,7 +204,7 @@ function renderUsageMistakes() {
 
 function renderUsageQuickRules() {
   return `
-    <section class="guide-section">
+    <section id="usage-quick-rules" class="guide-section">
       <div class="section-card">
         <h2>Quick Rules</h2>
         <p>모든 직원이 기억해야 할 기본 AI 사용 기준입니다.</p>

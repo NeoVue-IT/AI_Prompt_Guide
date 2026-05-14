@@ -6,14 +6,24 @@ import {
   renderList,
   renderPromptBox,
   renderFlowRow,
-  renderWorkflowSteps
+  renderWorkflowSteps,
+  renderSectionJumpNav
 } from "./wrksAIRenderUtils.js";
+
+// const enterpriseExamplesJumpLinks = [
+//   { id: "enterprise-overview", label: "개요" },
+//   { id: "enterprise-cases", label: "사례" },
+//   { id: "enterprise-before-after", label: "전후 비교" },
+//   { id: "enterprise-lessons", label: "시사점" },
+//   { id: "enterprise-summary", label: "요약" }
+// ];
 
 export function renderEnterpriseExamples() {
   return `
     ${renderHero(enterpriseExamples)}
 
     <div class="guide-layout">
+
       ${renderCoreMessage(enterpriseExamples.coreMessage)}
       ${renderEnterpriseExampleCards()}
       ${renderWorkflowSteps(enterpriseExamples.implementationSteps)}

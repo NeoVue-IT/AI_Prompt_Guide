@@ -145,3 +145,19 @@ export function renderWorkflowSteps(steps = []) {
     </section>
   `;
 }
+
+export function renderSectionJumpNav(items = []) {
+  if (!items.length) return "";
+
+  return `
+    <aside class="section-jump-rail" aria-label="Section navigation">
+      <div class="section-jump-title">바로가기</div>
+
+      ${items.map(item => `
+        <a href="#${escapeHtml(item.id)}" class="section-jump-rail-link">
+          ${escapeHtml(item.label)}
+        </a>
+      `).join("")}
+    </aside>
+  `;
+}

@@ -5,14 +5,24 @@ import {
   renderCoreMessage,
   renderList,
   renderPromptBox,
-  renderBeforeAfter
+  renderBeforeAfter,
+  renderSectionJumpNav
 } from "./wrksAIRenderUtils.js";
+
+// const failureCasesJumpLinks = [
+//   { id: "failure-overview", label: "개요" },
+//   { id: "failure-token", label: "토큰 낭비" },
+//   { id: "failure-model", label: "모델 선택" },
+//   { id: "failure-prompt", label: "프롬프트" },
+//   { id: "failure-fixes", label: "개선 방법" }
+// ];
 
 export function renderFailureCases() {
   return `
     ${renderHero(failureCases)}
 
     <div class="guide-layout">
+
       ${renderCoreMessage(failureCases.coreMessage)}
       ${renderFailureCategories()}
       ${renderFailurePatterns()}
@@ -126,7 +136,7 @@ function renderFailureReviewChecklist() {
 
 function renderFailurePromptPatterns() {
   return `
-    <section class="guide-section">
+    <section id="failure-prompt" class="guide-section">
       <div class="section-card">
         <h2>Failure Prevention Prompt Patterns</h2>
         <p>AI 실패를 줄이기 위해 사용할 수 있는 프롬프트 예시입니다.</p>
@@ -156,7 +166,7 @@ function renderFailureMistakes() {
         ${renderList(failureCases.mistakes)}
       </article>
     </section>
-  `;
+  `;w
 }
 
 function renderFailureQuickRules() {

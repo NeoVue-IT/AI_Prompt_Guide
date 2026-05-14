@@ -4,14 +4,24 @@ import {
   renderHero,
   renderCoreMessage,
   renderList,
-  renderWorkflowSteps
+  renderWorkflowSteps,
+  renderSectionJumpNav
 } from "./wrksAIRenderUtils.js";
+
+// const modelSelectionJumpLinks = [
+//   { id: "model-basics", label: "기본 기준" },
+//   { id: "model-cases", label: "업무별 선택" },
+//   { id: "model-comparison", label: "모델 비교" },
+//   { id: "model-mistakes", label: "주의사항" },
+//   { id: "model-summary", label: "요약" }
+// ];
 
 export function renderModelSelection() {
   return `
     ${renderHero(modelSelection)}
 
-    <div class="guide-layout">  
+    <div class="guide-layout">
+  
       ${renderCoreMessage(modelSelection.coreMessage)}
       ${renderModelCategories()}
       ${renderTaskMatrix()}
@@ -81,29 +91,6 @@ function renderTaskMatrix() {
             `).join("")}
           </tbody>
         </table>
-      </div>
-    </section>
-  `;
-}
-
-function renderWorkflow() {
-  return `
-    <section class="guide-section">
-      <div class="section-card">
-        <h2>Recommended Workflow Strategy</h2>
-        <p>처음부터 가장 강한 모델을 쓰기보다, 가벼운 모델에서 시작하고 필요할 때만 상위 모델로 전환합니다.</p>
-      </div>
-
-      <div class="content-stack">
-        ${modelSelection.workflow.map(item => `
-          <article class="guide-item">
-            <div class="guide-item-header">
-              <span class="badge badge-id">STEP ${escapeHtml(item.step)}</span>
-              <h3>${escapeHtml(item.title)}</h3>
-              <p>${escapeHtml(item.body)}</p>
-            </div>
-          </article>
-        `).join("")}
       </div>
     </section>
   `;

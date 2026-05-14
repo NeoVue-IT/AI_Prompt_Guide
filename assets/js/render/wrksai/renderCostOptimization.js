@@ -6,14 +6,24 @@ import {
   renderList,
   renderPromptBox,
   renderBeforeAfter,
-  renderWorkflowSteps
+  renderWorkflowSteps,
+  renderSectionJumpNav
 } from "./wrksAIRenderUtils.js";
+
+// const costOptimizationJumpLinks = [
+//   { id: "cost-basics", label: "비용 기준" },
+//   { id: "cost-models", label: "모델별 비용" },
+//   { id: "cost-workflows", label: "업무별 절감" },
+//   { id: "cost-rules", label: "관리 규칙" },
+//   { id: "cost-summary", label: "요약" }
+// ];
 
 export function renderCostOptimization() {
   return `
     ${renderHero(costOptimization)}
 
     <div class="guide-layout">
+
       ${renderCoreMessage(costOptimization.coreMessage)}
       ${renderCostPrinciples()}
       ${renderCostDrivers()}

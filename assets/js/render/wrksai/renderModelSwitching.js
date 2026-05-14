@@ -5,16 +5,26 @@ import {
   renderCoreMessage,
   renderList,
   renderPreviewSection,
-  renderWorkflowSteps
+  renderWorkflowSteps,
+  renderSectionJumpNav
 } from "./wrksAIRenderUtils.js";
 import { renderWorkflowChains } from "./renderWorkflowChains.js";
 
+
+// const modelSwitchingJumpLinks = [
+//   { id: "switching-concept", label: "개념" },
+//   { id: "switching-flow", label: "흐름" },
+//   { id: "switching-examples", label: "예시" },
+//   { id: "switching-rules", label: "규칙" },
+//   { id: "switching-summary", label: "요약" }
+// ];
 
 export function renderModelSwitching() {
   return `
     ${renderHero(modelSwitching)}
 
     <div class="guide-layout">
+
       ${renderCoreMessage(modelSwitching.coreMessage)}
       ${renderPreviewSection(modelSwitching)}
       ${renderWhySwitchingMatters()}

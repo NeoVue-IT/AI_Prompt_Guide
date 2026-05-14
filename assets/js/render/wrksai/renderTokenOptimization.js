@@ -6,8 +6,17 @@ import {
   renderList,
   renderPromptBox,
   renderPreviewSection,
-  renderWorkflowSteps
+  renderWorkflowSteps,
+  renderSectionJumpNav
 } from "./wrksAIRenderUtils.js";
+
+// const tokenOptimizationJumpLinks = [
+//   { id: "token-basics", label: "기본 원칙" },
+//   { id: "token-waste", label: "낭비 사례" },
+//   { id: "token-prompts", label: "절약 문장" },
+//   { id: "token-files", label: "파일 사용" },
+//   { id: "token-summary", label: "요약" }
+// ];
 
 
 export function renderTokenOptimization() {
@@ -15,6 +24,7 @@ export function renderTokenOptimization() {
     ${renderHero(tokenOptimization)}
 
     <div class="guide-layout">
+      
       ${renderCoreMessage(tokenOptimization.coreMessage)}
       ${renderPreviewSection(tokenOptimization)}
       ${renderTokenPrinciples()}
